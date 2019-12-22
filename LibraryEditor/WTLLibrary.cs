@@ -83,7 +83,7 @@ namespace LibraryEditor
 
         public void ToMLibrary()
         {
-            string fileName = Path.ChangeExtension(_fileName, ".Lib");
+            string fileName = Path.ChangeExtension(_fileName, ".Nex");
 
             if (File.Exists(fileName))
                 File.Delete(fileName);

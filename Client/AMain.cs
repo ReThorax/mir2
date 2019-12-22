@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using Client;
+using Mir.DiscordExtension;
 
 
 namespace Launcher
@@ -78,7 +79,7 @@ namespace Launcher
                 }
                 else
                 {
-                    MessageBox.Show(GameLanguage.PatchErr);
+                    MessageBox.Show("Could not get Patch Information.");
                     Completed = true;
                     return;
                 }
@@ -112,7 +113,7 @@ namespace Launcher
         
 
         private void BeginDownload()
-        {           
+        {
             if (DownloadList == null) return;
 
             if (DownloadList.Count == 0)
@@ -141,7 +142,7 @@ namespace Launcher
 
                 fileName = Path.GetFileName(fileNames[i]);
 
-                if (fileName == "Mir2Config.ini" || fileName == System.AppDomain.CurrentDomain.FriendlyName) continue;
+                if (fileName == "Configuration.ini" || fileName == System.AppDomain.CurrentDomain.FriendlyName) continue;
 
                 try
                 {
@@ -316,15 +317,13 @@ namespace Launcher
             if (File.Exists(Settings.P_Client + oldClientName)) File.Delete(Settings.P_Client + oldClientName);
 
             Launch_pb.Enabled = false;
-            ProgressCurrent_pb.Width = 5;
-            TotalProg_pb.Width = 5;
+            ProgressCurrent_pb.Width = 2;
+            TotalProg_pb.Width = 2;
             Version_label.Text = "Version " + Application.ProductVersion;
+            
+            //DiscordsApp.GetApp().UpdateStage(StatusType.GameState, GameState.Patching);
+            //DiscordsApp.GetApp().UpdateActivity();
 
-            if (Settings.P_ServerName != String.Empty)
-            {
-                Name_label.Visible = true;
-                Name_label.Text = Settings.P_ServerName;
-            }
             _workThread = new Thread(Start) { IsBackground = true };
             _workThread.Start();
         }
@@ -373,54 +372,47 @@ namespace Launcher
 
         private void Launch_pb_MouseEnter(object sender, EventArgs e)
         {
-            Launch_pb.Image = Client.Properties.Resources.Launch_Hover;
+            Launch_pb.Image = Client.Properties.Resources.Start_Hover;
         }
 
         private void Launch_pb_MouseLeave(object sender, EventArgs e)
         {
-            Launch_pb.Image = Client.Properties.Resources.Launch_Base1;
+            Launch_pb.Image = Client.Properties.Resources.Start_Normal;
         }
 
         private void Close_pb_MouseEnter(object sender, EventArgs e)
         {
-            Close_pb.Image = Client.Properties.Resources.Cross_Hover;
+            Close_pb.Image = Client.Properties.Resources.Close_Hover;
         }
 
         private void Close_pb_MouseLeave(object sender, EventArgs e)
         {
-            Close_pb.Image = Client.Properties.Resources.Cross_Base;
+            Close_pb.Image = Client.Properties.Resources.Close_Normal;
         }
 
         private void Launch_pb_MouseDown(object sender, MouseEventArgs e)
         {
-            Launch_pb.Image = Client.Properties.Resources.Launch_Pressed;
+            Launch_pb.Image = Client.Properties.Resources.Start_Clicked;
         }
 
         private void Launch_pb_MouseUp(object sender, MouseEventArgs e)
         {
-            Launch_pb.Image = Client.Properties.Resources.Launch_Base1;
+            Launch_pb.Image = Client.Properties.Resources.Start_Normal;
         }
 
         private void Close_pb_MouseDown(object sender, MouseEventArgs e)
         {
-            Close_pb.Image = Client.Properties.Resources.Cross_Pressed;
+            Close_pb.Image = Client.Properties.Resources.Close_Clicked;
         }
 
         private void Close_pb_MouseUp(object sender, MouseEventArgs e)
         {
-            Close_pb.Image = Client.Properties.Resources.Cross_Base;
-        }
-
-        private void ProgressCurrent_pb_SizeChanged(object sender, EventArgs e)
-        {
-            ProgEnd_pb.Location = new Point((ProgressCurrent_pb.Location.X + ProgressCurrent_pb.Width), 490);
-            if (ProgressCurrent_pb.Width == 0) ProgEnd_pb.Visible = false;
-            else ProgEnd_pb.Visible = true;
+            Close_pb.Image = Client.Properties.Resources.Close_Normal;
         }
 
         private void Config_pb_MouseDown(object sender, MouseEventArgs e)
         {
-            Config_pb.Image = Client.Properties.Resources.Config_Pressed;
+            Config_pb.Image = Client.Properties.Resources.Config_Clicked;
         }
 
         private void Config_pb_MouseEnter(object sender, EventArgs e)
@@ -430,31 +422,30 @@ namespace Launcher
 
         private void Config_pb_MouseLeave(object sender, EventArgs e)
         {
-            Config_pb.Image = Client.Properties.Resources.Config_Base;
+            Config_pb.Image = Client.Properties.Resources.Config_Normal;
         }
 
         private void Config_pb_MouseUp(object sender, MouseEventArgs e)
         {
-            Config_pb.Image = Client.Properties.Resources.Config_Base;
+            Config_pb.Image = Client.Properties.Resources.Config_Normal;
         }
 
         private void Config_pb_Click(object sender, EventArgs e)
         {
             if (ConfigForm.Visible) ConfigForm.Hide();
             else ConfigForm.Show(Program.PForm);
-            ConfigForm.Location = new Point(Location.X + Config_pb.Location.X - 183, Location.Y + 36);
+            ConfigForm.Location = new Point(Location.X - 13, Location.Y + 85);
         }
 
-        private void TotalProg_pb_SizeChanged(object sender, EventArgs e)
+        private void Version_label_Click(object sender, EventArgs e)
         {
-            ProgTotalEnd_pb.Location = new Point((TotalProg_pb.Location.X + TotalProg_pb.Width), 508);
-            if (TotalProg_pb.Width == 0) ProgTotalEnd_pb.Visible = false;
-            else ProgTotalEnd_pb.Visible = true;
+            if (Version_label.Text == "Version " + Application.ProductVersion) Version_label.Text = "Ooooh a Secret!";
+            else Version_label.Text = "Version " + Application.ProductVersion;
         }
 
         private void Main_browser_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
-            if (Main_browser.Url.AbsolutePath != "blank") Main_browser.Visible = true;
+            if (Main_browser.Url.AbsolutePath != "blank") Main_browser.Visible = true; IncorrectWebsite_Image.Visible = false;
         }
 
         private void InterfaceTimer_Tick(object sender, EventArgs e)
@@ -466,14 +457,9 @@ namespace Launcher
                     
                     ActionLabel.Text = "";
                     CurrentFile_label.Text = "Up to date.";
-                    SpeedLabel.Text = "";
-                    ProgressCurrent_pb.Width = 550;
-                    TotalProg_pb.Width = 550;
-                    CurrentFile_label.Visible = true;
-                    CurrentPercent_label.Visible = true;
-                    TotalPercent_label.Visible = true;
-                    CurrentPercent_label.Text = "100%";
-                    TotalPercent_label.Text = "100%";
+                    SpeedLabel.Text = " 0KB/s";
+                    ProgressCurrent_pb.Width = 250;
+                    TotalProg_pb.Width = 250;
                     InterfaceTimer.Enabled = false;
                     Launch_pb.Enabled = true;
                     if (ErrorFound) MessageBox.Show("One or more files failed to download, check Error.txt for details.", "Failed to Download.");
@@ -486,9 +472,9 @@ namespace Launcher
                     }
 
                     if (Restart)
+
                     {
                         Program.Restart = true;
-
                         MoveOldClientToCurrent();
 
                         Close();
@@ -504,8 +490,6 @@ namespace Launcher
                 ActionLabel.Visible = true;
                 SpeedLabel.Visible = true;
                 CurrentFile_label.Visible = true;
-                CurrentPercent_label.Visible = true;
-                TotalPercent_label.Visible = true;
 
                 if (LabelSwitch) ActionLabel.Text = string.Format("{0} Files Remaining", _fileCount - _currentCount);
                 else ActionLabel.Text = string.Format("{0:#,##0}MB Remaining",  ((_totalBytes) - (_completedBytes + _currentBytes)) / 1024 / 1024);
@@ -517,11 +501,9 @@ namespace Launcher
                     //FileLabel.Text = string.Format("{0}, ({1:#,##0} MB) / ({2:#,##0} MB)", _currentFile.FileName, _currentBytes / 1024 / 1024, _currentFile.Compressed / 1024 / 1024);
                     CurrentFile_label.Text = string.Format("{0}", _currentFile.FileName);
                     SpeedLabel.Text = (_currentBytes / 1024F / _stopwatch.Elapsed.TotalSeconds).ToString("#,##0.##") + "KB/s";
-                    CurrentPercent_label.Text = ((int)(100 * _currentBytes / _currentFile.Compressed)).ToString() + "%";
-                    ProgressCurrent_pb.Width = (int)( 5.5 * (100 * _currentBytes / _currentFile.Compressed));
+                    ProgressCurrent_pb.Width = (int)( 2.5 * (100 * _currentBytes / _currentFile.Compressed));
                 }
-                TotalPercent_label.Text = ((int)(100 * (_completedBytes + _currentBytes) / _totalBytes)).ToString() + "%";
-                TotalProg_pb.Width = (int)(5.5 * (100 * (_completedBytes + _currentBytes) / _totalBytes));
+                TotalProg_pb.Width = (int)(2.5 * (100 * (_completedBytes + _currentBytes) / _totalBytes));
             }
             catch
 
@@ -543,8 +525,8 @@ namespace Launcher
 
         private void Credit_label_Click(object sender, EventArgs e)
         {
-            if (Credit_label.Text == "Powered by Crystal M2") Credit_label.Text = "Designed by Breezer";
-            else Credit_label.Text = "Powered by Crystal M2";
+            if (Credit_label.Text == "Nexus Mir - Powered by Crystal M2") Credit_label.Text = "Designed by Valhalla";
+            else Credit_label.Text = "Nexus Mir - Powered by Crystal M2";
         }
 
         private void AMain_FormClosed(object sender, FormClosedEventArgs e)

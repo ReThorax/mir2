@@ -13,7 +13,7 @@ namespace LibraryEditor
 {
     public sealed class MLibrary
     {
-        public const int LibVersion = 1;
+        public const int LibVersion = 2;
         public static bool Load = true;
         public string FileName;
         
@@ -131,10 +131,9 @@ namespace LibraryEditor
 
         public void ToMLibrary()
         {
-            string fileName = Path.ChangeExtension(FileName, ".Lib");
+            string fileName = Path.ChangeExtension(FileName, ".Nex");
 
-            string file = Path.GetFileNameWithoutExtension(fileName);
-            fileName = fileName.Replace(file, file + "-converted");
+            fileName = fileName.Replace(".Nex", "-converted.Nex");
 
             if (File.Exists(fileName))
                 File.Delete(fileName);

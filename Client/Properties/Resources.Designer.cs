@@ -19,7 +19,7 @@ namespace Client.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -63,6 +63,16 @@ namespace Client.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Background {
+            get {
+                object obj = ResourceManager.GetObject("Background", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Blue_Progress {
             get {
                 object obj = ResourceManager.GetObject("Blue_Progress", resourceCulture);
@@ -96,6 +106,46 @@ namespace Client.Properties {
         internal static System.Drawing.Bitmap CheckF_Pressed {
             get {
                 object obj = ResourceManager.GetObject("CheckF_Pressed", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Close_Clicked {
+            get {
+                object obj = ResourceManager.GetObject("Close_Clicked", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Close_Hover {
+            get {
+                object obj = ResourceManager.GetObject("Close_Hover", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Close_Normal {
+            get {
+                object obj = ResourceManager.GetObject("Close_Normal", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Config {
+            get {
+                object obj = ResourceManager.GetObject("Config", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -143,9 +193,29 @@ namespace Client.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Config_Clicked {
+            get {
+                object obj = ResourceManager.GetObject("Config_Clicked", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Config_Hover {
             get {
                 object obj = ResourceManager.GetObject("Config_Hover", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Config_Normal {
+            get {
+                object obj = ResourceManager.GetObject("Config_Normal", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -203,9 +273,29 @@ namespace Client.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Current {
+            get {
+                object obj = ResourceManager.GetObject("Current", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Green_Progress {
             get {
                 object obj = ResourceManager.GetObject("Green_Progress", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Incorrect_website {
+            get {
+                object obj = ResourceManager.GetObject("Incorrect_website", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -255,7 +345,7 @@ namespace Client.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap NEW_Progress_End__Blue_ {
             get {
-                object obj = ResourceManager.GetObject("NEW_Progress_End_(Blue)", resourceCulture);
+                object obj = ResourceManager.GetObject("NEW_Progress_End__Blue_", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -265,7 +355,7 @@ namespace Client.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap NEW_Progress_End__Green_ {
             get {
-                object obj = ResourceManager.GetObject("NEW_Progress_End_(Green)", resourceCulture);
+                object obj = ResourceManager.GetObject("NEW_Progress_End__Green_", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -303,9 +393,49 @@ namespace Client.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Start_Clicked {
+            get {
+                object obj = ResourceManager.GetObject("Start_Clicked", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Start_Hover {
+            get {
+                object obj = ResourceManager.GetObject("Start_Hover", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Start_Normal {
+            get {
+                object obj = ResourceManager.GetObject("Start_Normal", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap textboxes {
             get {
                 object obj = ResourceManager.GetObject("textboxes", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Total {
+            get {
+                object obj = ResourceManager.GetObject("Total", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

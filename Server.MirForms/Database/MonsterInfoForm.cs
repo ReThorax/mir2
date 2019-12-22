@@ -106,7 +106,7 @@ namespace Server
 
             ImageComboBox.SelectedItem = null;
             ImageComboBox.SelectedItem = info.Image;
-            fileNameLabel.Text = ((int)info.Image).ToString() + ".Lib";
+            fileNameLabel.Text = ((int)info.Image).ToString() + ".Nex";
             AITextBox.Text = info.AI.ToString();
             EffectTextBox.Text = info.Effect.ToString();
             LevelTextBox.Text = info.Level.ToString();
@@ -647,7 +647,7 @@ namespace Server
             for (int i = 0; i < _selectedMonsterInfos.Count; i++)
             {
                 _selectedMonsterInfos[i].Image = (Monster)ImageComboBox.SelectedItem;
-                fileNameLabel.Text = ((int)((Monster)ImageComboBox.SelectedItem)).ToString() + ".Lib";
+                fileNameLabel.Text = ((int)((Monster)ImageComboBox.SelectedItem)).ToString() + ".Nex";
             }
         }
 

@@ -63,7 +63,7 @@ namespace LibraryViewer
             if (form.GetManualPrefix())
                 Prefix = form.GetPrefix();
             else
-                foreach (string file in Directory.EnumerateFiles(folderName, "*.lib"))
+                foreach (string file in Directory.EnumerateFiles(folderName, "*.Nex"))
                 {
                     Prefix = Path.GetFileNameWithoutExtension(file);
                     break;
@@ -77,11 +77,11 @@ namespace LibraryViewer
 
             
             Stopwatch sw = Stopwatch.StartNew();//Timing
-            int folderLength = Directory.GetFiles(folderName, "*.lib").Length;
+            int folderLength = Directory.GetFiles(folderName, "*.Nex").Length;
             for (int i = 0; i < folderLength; i++)
             {
                 string PathName = folderName+Path.DirectorySeparatorChar;
-                string flName = i.ToString(Prefix) + ".lib";
+                string flName = i.ToString(Prefix) + ".Nex";
                 string fullname = PathName + flName;
 
                 if (File.Exists(fullname))
@@ -108,7 +108,7 @@ namespace LibraryViewer
             if (ImageList.Images.Count < 1)
                 MessageBox.Show("No images seem to be found.\nMake sure you choose the right prefix!");
             else
-                MessageBox.Show("Folder processing finally finished.\nTime Taken: " + sw.Elapsed.TotalMilliseconds + "ms");
+                MessageBox.Show("Folder processing finally finished.\nTime Taken: " + sw.Elapsed.TotalSeconds + "s");
         }
 
         private void PreviewListView_SelectedIndexChanged(object sender, EventArgs e)
@@ -165,6 +165,14 @@ namespace LibraryViewer
                 case "CHair":
                 case "CHumEffect":
                 case "CWeapon":
+                    switch (e.ItemIndex)
+                    {
+                        default:
+                            if (showFrontSide) getImageIndex = 12;
+                            else getImageIndex = 12;
+                            break;
+                    }
+                    break;
                 case "Fishing":
                     switch (e.ItemIndex)
                     {
@@ -240,7 +248,7 @@ namespace LibraryViewer
                 Bitmap image = _LImageList[i];
                 string filename = _NameList[i];
 
-                string _newName = filename.Replace(".lib", ".bmp");
+                string _newName = filename.Replace(".Nex", ".bmp");
                 string _folder = Application.StartupPath + "\\Exported\\";
 
                 Bitmap blank = new Bitmap(1, 1);

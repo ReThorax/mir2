@@ -73,6 +73,16 @@ namespace Client
 
         private void CMain_Load(object sender, EventArgs e)
         {
+            if (Settings.Resolution <= 1024)
+            {
+                Settings.ScreenWidth = 1024;
+                Settings.Resolution = 1024;
+            }
+
+            else if (Settings.Resolution >= 1366)
+                Settings.ScreenWidth = 1366;
+
+
             this.Text = GameLanguage.GameName;
             try
             {
@@ -140,7 +150,7 @@ namespace Client
             {
                 SaveError(ex.ToString());
             }
-            if (e.KeyCode == Keys.F10)
+            if (e.KeyCode == Keys.F10 || e.KeyCode == Keys.C)
             {
                 e.Handled = true;
                 if (GameScene.Scene != null)
@@ -525,7 +535,7 @@ namespace Client
             location = new Point(-location.X, -location.Y);
 
             string text = string.Format("[{0} Server {1}] {2} {3:hh\\:mm\\:ss}", 
-                Settings.P_ServerName.Length > 0 ? Settings.P_ServerName : "Crystal", 
+                Settings.P_ServerName.Length > 0 ? Settings.P_ServerName : "Nexus", 
                 MapControl.User != null ? MapControl.User.Name : "", 
                 Now.ToShortDateString(), 
                 Now.TimeOfDay);

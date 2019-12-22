@@ -6,6 +6,8 @@ using System.Windows.Forms;
 using Launcher;
 using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
+using Mir.DiscordExtension;
+using Mir.DiscordExtension.SDK;
 
 namespace Client
 {
@@ -13,12 +15,23 @@ namespace Client
     {
         public static CMain Form;
         public static AMain PForm;
-
         public static bool Restart;
+
+        public static DiscordsApp discord => DiscordsApp.GetApp();
 
         [STAThread]
         private static void Main(string[] args)
         {
+            //var discord = DiscordsApp.GetApp();
+            discord.ClientId = 634555224123506698;
+            discord.StartFailure += DiscordOnStartFailure;
+            discord.Started += DiscordOnStarted;
+            discord.HasException += DiscordOnHasException;
+            discord.Stopped += DiscordOnStopped;
+            discord.StartApp();
+            //discord.UpdateActivity();
+            discord.StartLoop();
+
             if (args.Length > 0)
             {
                 foreach (var arg in args)
@@ -27,9 +40,9 @@ namespace Client
                 }
             }
 
-            #if DEBUG
+#if DEBUG
                 Settings.UseTestConfig = true;
-            #endif
+#endif
 
             try
             {
@@ -43,8 +56,18 @@ namespace Client
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
 
-                if (Settings.P_Patcher) Application.Run(PForm = new Launcher.AMain());
-                else Application.Run(Form = new CMain());
+                if (Settings.P_Patcher)
+                {
+                    discord.UpdateStage(StatusType.GameState, GameState.Patching);
+                    discord.UpdateActivity();
+                    Application.Run(PForm = new Launcher.AMain());
+                }
+                else
+                {
+                    discord.UpdateStage(StatusType.GameState, GameState.Launching);
+                    discord.UpdateActivity();
+                    Application.Run(Form = new CMain());
+                }
 
                 Settings.Save();
                 CMain.InputKeys.Save();
@@ -58,6 +81,31 @@ namespace Client
             {
                 CMain.SaveError(ex.ToString());
             }
+        }
+
+        private static void DiscordOnActivityCallBack(object sender, EventArgs e)
+        {
+            Console.WriteLine($"Call back Received ({(Result)sender})");
+        }
+
+        private static void DiscordOnStopped(object sender, EventArgs e)
+        {
+            Console.WriteLine("Discord Stopped");
+        }
+
+        private static void DiscordOnHasException(object sender, EventArgs e)
+        {
+            Console.WriteLine(((Exception)sender));
+        }
+
+        private static void DiscordOnStarted(object sender, EventArgs e)
+        {
+            Console.WriteLine("Discord Started");
+        }
+
+        private static void DiscordOnStartFailure(object sender, EventArgs e)
+        {
+            Console.WriteLine($"Discord Start failed with {(byte)sender}");
         }
 
         private static bool UpdatePatcher()
@@ -105,9 +153,14 @@ namespace Client
             catch (Exception ex)
             {
                 CMain.SaveError(ex.ToString());
-                
+
                 throw;
             }
+
+
+
+
+
         }
 
         public static class RuntimePolicyHelper

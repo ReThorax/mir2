@@ -48,6 +48,8 @@
             this.skinToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.ExportAllButton = new System.Windows.Forms.Button();
+            this.OffSetButton = new System.Windows.Forms.Button();
             this.nudJump = new System.Windows.Forms.NumericUpDown();
             this.checkBoxPreventAntiAliasing = new System.Windows.Forms.CheckBox();
             this.checkBoxQuality = new System.Windows.Forms.CheckBox();
@@ -80,6 +82,10 @@
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripProgressBar = new System.Windows.Forms.ToolStripProgressBar();
+            this.BRXtxtbox = new System.Windows.Forms.TextBox();
+            this.BRYtxtbox = new System.Windows.Forms.TextBox();
+            this.BRXLabel = new System.Windows.Forms.Label();
+            this.BRYLabel = new System.Windows.Forms.Label();
             this.MainMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -131,7 +137,7 @@
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
             this.newToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
             this.newToolStripMenuItem.Text = "New";
-            this.newToolStripMenuItem.ToolTipText = "New .Lib";
+            this.newToolStripMenuItem.ToolTipText = "New .Nex";
             this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
             // 
             // openToolStripMenuItem
@@ -154,7 +160,7 @@
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             this.saveToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
             this.saveToolStripMenuItem.Text = "Save";
-            this.saveToolStripMenuItem.ToolTipText = "Saves currently open .Lib";
+            this.saveToolStripMenuItem.ToolTipText = "Saves currently open .Nex";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // saveAsToolStripMenuItem
@@ -163,7 +169,7 @@
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
             this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
             this.saveAsToolStripMenuItem.Text = "Save As";
-            this.saveAsToolStripMenuItem.ToolTipText = ".Lib Only.";
+            this.saveAsToolStripMenuItem.ToolTipText = ".Nex Only.";
             this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
             // 
             // toolStripMenuItem2
@@ -198,7 +204,7 @@
             this.copyToToolStripMenuItem.Name = "copyToToolStripMenuItem";
             this.copyToToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.copyToToolStripMenuItem.Text = "Copy To..";
-            this.copyToToolStripMenuItem.ToolTipText = "Copy to a new .Lib or to the end of an exsisting one.";
+            this.copyToToolStripMenuItem.ToolTipText = "Copy to a new .Nex or to the end of an exsisting one.";
             this.copyToToolStripMenuItem.Click += new System.EventHandler(this.copyToToolStripMenuItem_Click);
             // 
             // countBlanksToolStripMenuItem
@@ -207,7 +213,7 @@
             this.countBlanksToolStripMenuItem.Name = "countBlanksToolStripMenuItem";
             this.countBlanksToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.countBlanksToolStripMenuItem.Text = "Count Blanks";
-            this.countBlanksToolStripMenuItem.ToolTipText = "Counts the blank images in the .Lib";
+            this.countBlanksToolStripMenuItem.ToolTipText = "Counts the blank images in the .Nex";
             this.countBlanksToolStripMenuItem.Click += new System.EventHandler(this.countBlanksToolStripMenuItem_Click);
             // 
             // removeBlanksToolStripMenuItem
@@ -236,7 +242,8 @@
             this.convertToolStripMenuItem.Name = "convertToolStripMenuItem";
             this.convertToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.convertToolStripMenuItem.Text = "Converter";
-            this.convertToolStripMenuItem.ToolTipText = "Convert Wil/Wzl/Miz to .Lib";
+            this.convertToolStripMenuItem.ToolTipText = "Convert Lib/Wil/Wzl/Miz to .Nex";
+            this.convertToolStripMenuItem.Visible = false;
             this.convertToolStripMenuItem.Click += new System.EventHandler(this.convertToolStripMenuItem_Click);
             // 
             // skinToolStripMenuItem
@@ -265,7 +272,7 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.PreviewListView);
             this.splitContainer1.Size = new System.Drawing.Size(1008, 684);
-            this.splitContainer1.SplitterDistance = 325;
+            this.splitContainer1.SplitterDistance = 471;
             this.splitContainer1.TabIndex = 1;
             // 
             // splitContainer2
@@ -279,6 +286,12 @@
             // 
             // splitContainer2.Panel1
             // 
+            this.splitContainer2.Panel1.Controls.Add(this.BRYLabel);
+            this.splitContainer2.Panel1.Controls.Add(this.BRXLabel);
+            this.splitContainer2.Panel1.Controls.Add(this.BRYtxtbox);
+            this.splitContainer2.Panel1.Controls.Add(this.BRXtxtbox);
+            this.splitContainer2.Panel1.Controls.Add(this.ExportAllButton);
+            this.splitContainer2.Panel1.Controls.Add(this.OffSetButton);
             this.splitContainer2.Panel1.Controls.Add(this.nudJump);
             this.splitContainer2.Panel1.Controls.Add(this.checkBoxPreventAntiAliasing);
             this.splitContainer2.Panel1.Controls.Add(this.checkBoxQuality);
@@ -305,13 +318,39 @@
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.panel);
-            this.splitContainer2.Size = new System.Drawing.Size(1008, 325);
+            this.splitContainer2.Size = new System.Drawing.Size(1008, 471);
             this.splitContainer2.SplitterDistance = 240;
             this.splitContainer2.TabIndex = 0;
             // 
+            // ExportAllButton
+            // 
+            this.ExportAllButton.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.ExportAllButton.Image = ((System.Drawing.Image)(resources.GetObject("ExportAllButton.Image")));
+            this.ExportAllButton.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.ExportAllButton.Location = new System.Drawing.Point(121, 175);
+            this.ExportAllButton.Name = "ExportAllButton";
+            this.ExportAllButton.Size = new System.Drawing.Size(107, 26);
+            this.ExportAllButton.TabIndex = 23;
+            this.ExportAllButton.Tag = "";
+            this.ExportAllButton.Text = "Export All";
+            this.ExportAllButton.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.ExportAllButton.UseVisualStyleBackColor = true;
+            this.ExportAllButton.Click += new System.EventHandler(this.ExportAllButton_Click);
+            // 
+            // OffSetButton
+            // 
+            this.OffSetButton.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.OffSetButton.Location = new System.Drawing.Point(11, 208);
+            this.OffSetButton.Name = "OffSetButton";
+            this.OffSetButton.Size = new System.Drawing.Size(107, 26);
+            this.OffSetButton.TabIndex = 22;
+            this.OffSetButton.Text = "Normalize Offsets";
+            this.OffSetButton.UseVisualStyleBackColor = true;
+            this.OffSetButton.Click += new System.EventHandler(this.OffSetButton_Click);
+            // 
             // nudJump
             // 
-            this.nudJump.Location = new System.Drawing.Point(77, 219);
+            this.nudJump.Location = new System.Drawing.Point(76, 254);
             this.nudJump.Maximum = new decimal(new int[] {
             650000,
             0,
@@ -326,7 +365,7 @@
             // checkBoxPreventAntiAliasing
             // 
             this.checkBoxPreventAntiAliasing.AutoSize = true;
-            this.checkBoxPreventAntiAliasing.Location = new System.Drawing.Point(95, 299);
+            this.checkBoxPreventAntiAliasing.Location = new System.Drawing.Point(94, 334);
             this.checkBoxPreventAntiAliasing.Name = "checkBoxPreventAntiAliasing";
             this.checkBoxPreventAntiAliasing.Size = new System.Drawing.Size(99, 17);
             this.checkBoxPreventAntiAliasing.TabIndex = 20;
@@ -337,7 +376,7 @@
             // checkBoxQuality
             // 
             this.checkBoxQuality.AutoSize = true;
-            this.checkBoxQuality.Location = new System.Drawing.Point(11, 299);
+            this.checkBoxQuality.Location = new System.Drawing.Point(10, 334);
             this.checkBoxQuality.Name = "checkBoxQuality";
             this.checkBoxQuality.Size = new System.Drawing.Size(78, 17);
             this.checkBoxQuality.TabIndex = 19;
@@ -349,7 +388,7 @@
             // 
             this.buttonSkipPrevious.ForeColor = System.Drawing.SystemColors.ControlText;
             this.buttonSkipPrevious.Image = ((System.Drawing.Image)(resources.GetObject("buttonSkipPrevious.Image")));
-            this.buttonSkipPrevious.Location = new System.Drawing.Point(42, 216);
+            this.buttonSkipPrevious.Location = new System.Drawing.Point(41, 251);
             this.buttonSkipPrevious.Name = "buttonSkipPrevious";
             this.buttonSkipPrevious.Size = new System.Drawing.Size(30, 26);
             this.buttonSkipPrevious.TabIndex = 17;
@@ -362,7 +401,7 @@
             // 
             this.buttonSkipNext.ForeColor = System.Drawing.SystemColors.ControlText;
             this.buttonSkipNext.Image = ((System.Drawing.Image)(resources.GetObject("buttonSkipNext.Image")));
-            this.buttonSkipNext.Location = new System.Drawing.Point(159, 216);
+            this.buttonSkipNext.Location = new System.Drawing.Point(158, 251);
             this.buttonSkipNext.Name = "buttonSkipNext";
             this.buttonSkipNext.Size = new System.Drawing.Size(30, 26);
             this.buttonSkipNext.TabIndex = 16;
@@ -378,7 +417,7 @@
             this.buttonReplace.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.buttonReplace.Location = new System.Drawing.Point(10, 144);
             this.buttonReplace.Name = "buttonReplace";
-            this.buttonReplace.Size = new System.Drawing.Size(105, 26);
+            this.buttonReplace.Size = new System.Drawing.Size(107, 26);
             this.buttonReplace.TabIndex = 15;
             this.buttonReplace.Tag = "";
             this.buttonReplace.Text = "Replace Image";
@@ -401,7 +440,7 @@
             // ZoomTrackBar
             // 
             this.ZoomTrackBar.LargeChange = 1;
-            this.ZoomTrackBar.Location = new System.Drawing.Point(42, 248);
+            this.ZoomTrackBar.Location = new System.Drawing.Point(41, 283);
             this.ZoomTrackBar.Minimum = 1;
             this.ZoomTrackBar.Name = "ZoomTrackBar";
             this.ZoomTrackBar.Size = new System.Drawing.Size(147, 45);
@@ -415,12 +454,12 @@
             this.ExportButton.ForeColor = System.Drawing.SystemColors.ControlText;
             this.ExportButton.Image = ((System.Drawing.Image)(resources.GetObject("ExportButton.Image")));
             this.ExportButton.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.ExportButton.Location = new System.Drawing.Point(121, 176);
+            this.ExportButton.Location = new System.Drawing.Point(10, 175);
             this.ExportButton.Name = "ExportButton";
-            this.ExportButton.Size = new System.Drawing.Size(105, 26);
+            this.ExportButton.Size = new System.Drawing.Size(107, 26);
             this.ExportButton.TabIndex = 3;
             this.ExportButton.Tag = "";
-            this.ExportButton.Text = "Export Images";
+            this.ExportButton.Text = "Export Selected";
             this.ExportButton.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.ExportButton.UseVisualStyleBackColor = true;
             this.ExportButton.Click += new System.EventHandler(this.ExportButton_Click);
@@ -432,7 +471,7 @@
             this.InsertImageButton.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.InsertImageButton.Location = new System.Drawing.Point(121, 144);
             this.InsertImageButton.Name = "InsertImageButton";
-            this.InsertImageButton.Size = new System.Drawing.Size(105, 26);
+            this.InsertImageButton.Size = new System.Drawing.Size(107, 26);
             this.InsertImageButton.TabIndex = 1;
             this.InsertImageButton.Tag = "";
             this.InsertImageButton.Text = "Insert Images";
@@ -463,7 +502,7 @@
             this.DeleteButton.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.DeleteButton.Location = new System.Drawing.Point(121, 112);
             this.DeleteButton.Name = "DeleteButton";
-            this.DeleteButton.Size = new System.Drawing.Size(105, 26);
+            this.DeleteButton.Size = new System.Drawing.Size(107, 26);
             this.DeleteButton.TabIndex = 2;
             this.DeleteButton.Tag = "";
             this.DeleteButton.Text = "Delete Images";
@@ -478,7 +517,7 @@
             this.AddButton.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.AddButton.Location = new System.Drawing.Point(10, 112);
             this.AddButton.Name = "AddButton";
-            this.AddButton.Size = new System.Drawing.Size(105, 26);
+            this.AddButton.Size = new System.Drawing.Size(107, 26);
             this.AddButton.TabIndex = 0;
             this.AddButton.Tag = "";
             this.AddButton.Text = "Add Images";
@@ -555,13 +594,13 @@
             this.panel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel.Location = new System.Drawing.Point(0, 0);
             this.panel.Name = "panel";
-            this.panel.Size = new System.Drawing.Size(762, 323);
+            this.panel.Size = new System.Drawing.Size(762, 469);
             this.panel.TabIndex = 1;
             // 
             // ImageBox
             // 
             this.ImageBox.BackColor = System.Drawing.Color.Transparent;
-            this.ImageBox.Location = new System.Drawing.Point(0, 0);
+            this.ImageBox.Location = new System.Drawing.Point(492, 173);
             this.ImageBox.Name = "ImageBox";
             this.ImageBox.Size = new System.Drawing.Size(64, 64);
             this.ImageBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -578,7 +617,7 @@
             this.PreviewListView.LargeImageList = this.ImageList;
             this.PreviewListView.Location = new System.Drawing.Point(0, 0);
             this.PreviewListView.Name = "PreviewListView";
-            this.PreviewListView.Size = new System.Drawing.Size(1006, 353);
+            this.PreviewListView.Size = new System.Drawing.Size(1006, 207);
             this.PreviewListView.TabIndex = 0;
             this.PreviewListView.UseCompatibleStateImageBehavior = false;
             this.PreviewListView.VirtualMode = true;
@@ -594,11 +633,11 @@
             // 
             // OpenLibraryDialog
             // 
-            this.OpenLibraryDialog.Filter = "Library|*.Lib";
+            this.OpenLibraryDialog.Filter = "Nexus Image Library |*.Nex";
             // 
             // SaveLibraryDialog
             // 
-            this.SaveLibraryDialog.Filter = "Library|*.Lib";
+            this.SaveLibraryDialog.Filter = "Nexus Image Library|*.Nex";
             // 
             // ImportImageDialog
             // 
@@ -607,7 +646,7 @@
             // 
             // OpenWeMadeDialog
             // 
-            this.OpenWeMadeDialog.Filter = "WeMade|*.Wil;*.Wtl|Shanda|*.Wzl;*.Miz|Lib|*.Lib";
+            this.OpenWeMadeDialog.Filter = "WeMade|*.Wil;*.Wtl|Shanda|*.Wzl;*.Miz|Lib|*.Lib|Nexus Image Library|*.Nex";
             this.OpenWeMadeDialog.Multiselect = true;
             // 
             // statusStrip
@@ -636,6 +675,40 @@
             this.toolStripProgressBar.Step = 1;
             this.toolStripProgressBar.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
             // 
+            // BRXtxtbox
+            // 
+            this.BRXtxtbox.Location = new System.Drawing.Point(107, 369);
+            this.BRXtxtbox.Name = "BRXtxtbox";
+            this.BRXtxtbox.Size = new System.Drawing.Size(100, 20);
+            this.BRXtxtbox.TabIndex = 24;
+            this.BRXtxtbox.TextChanged += new System.EventHandler(this.BRXtxtbox_TextChanged);
+            // 
+            // BRYtxtbox
+            // 
+            this.BRYtxtbox.Location = new System.Drawing.Point(107, 395);
+            this.BRYtxtbox.Name = "BRYtxtbox";
+            this.BRYtxtbox.Size = new System.Drawing.Size(100, 20);
+            this.BRYtxtbox.TabIndex = 25;
+            this.BRYtxtbox.TextChanged += new System.EventHandler(this.BRYtxtbox_TextChanged);
+            // 
+            // BRXLabel
+            // 
+            this.BRXLabel.AutoSize = true;
+            this.BRXLabel.Location = new System.Drawing.Point(11, 372);
+            this.BRXLabel.Name = "BRXLabel";
+            this.BRXLabel.Size = new System.Drawing.Size(90, 13);
+            this.BRXLabel.TabIndex = 26;
+            this.BRXLabel.Text = "RemoveBlank X :";
+            // 
+            // BRYLabel
+            // 
+            this.BRYLabel.AutoSize = true;
+            this.BRYLabel.Location = new System.Drawing.Point(11, 398);
+            this.BRYLabel.Name = "BRYLabel";
+            this.BRYLabel.Size = new System.Drawing.Size(90, 13);
+            this.BRYLabel.TabIndex = 28;
+            this.BRYLabel.Text = "RemoveBlank Y :";
+            // 
             // LMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -650,7 +723,9 @@
             this.MinimumSize = new System.Drawing.Size(650, 450);
             this.Name = "LMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Legend of Mir Library Editor";
+            this.Text = "Nexus Mir | Library Editor";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.LMain_Load);
             this.Resize += new System.EventHandler(this.LMain_Resize);
             this.MainMenu.ResumeLayout(false);
             this.MainMenu.PerformLayout();
@@ -728,7 +803,12 @@
         private System.Windows.Forms.CheckBox checkBoxQuality;
         private System.Windows.Forms.CheckBox checkBoxPreventAntiAliasing;
         private System.Windows.Forms.NumericUpDown nudJump;
-
+        private System.Windows.Forms.Button OffSetButton;
+        private System.Windows.Forms.Button ExportAllButton;
+        private System.Windows.Forms.TextBox BRYtxtbox;
+        private System.Windows.Forms.TextBox BRXtxtbox;
+        private System.Windows.Forms.Label BRYLabel;
+        private System.Windows.Forms.Label BRXLabel;
     }
 }
 

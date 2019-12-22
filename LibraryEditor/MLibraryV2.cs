@@ -242,17 +242,20 @@ namespace LibraryEditor
             return true;
         }
 
-        public void RemoveBlanks(bool safe = false)
+        public void RemoveBlanks(uint X, uint Y, bool safe = false)
         {
             for (int i = Count - 1; i >= 0; i--)
             {
-                if (Images[i].FBytes == null || Images[i].FBytes.Length <= 24)
+                if (Images[i].FBytes == null || Images[i].FBytes.Length <= 48)
                 {
-                    if (!safe)
-                        RemoveImage(i);
-                    else if (Images[i].X == 0 && Images[i].Y == 0)
+                    if (safe)
+                        if (Images[i].Width == X && Images[i].Height == Y)
+                            RemoveImage(i);
+                        else { }
+                    else
                         RemoveImage(i);
                 }
+                
             }
         }
 

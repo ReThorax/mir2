@@ -15,6 +15,10 @@ namespace Client.MirGraphics
 
         public static readonly MLibrary
             ChrSel = new MLibrary(Settings.DataPath + "ChrSel"),
+            SelectScene = new MLibrary(Settings.DataPath + "SelectScene"),
+            LoginScene = new MLibrary(Settings.DataPath + "LoginScene"),
+            GUIGame = new MLibrary(Settings.DataPath + "GUIGame"),
+            GameScene = new MLibrary(Settings.DataPath + "GameScene"),
             Prguse = new MLibrary(Settings.DataPath + "Prguse"),
             Prguse2 = new MLibrary(Settings.DataPath + "Prguse2"),
             Prguse3 = new MLibrary(Settings.DataPath + "Prguse3"),
@@ -474,7 +478,7 @@ namespace Client.MirGraphics
 
     public sealed class MLibrary
     {
-        private const string Extention = ".Lib";
+        private const string Extention = ".Nex";
         public const int LibVersion = 2;
 
         private readonly string _fileName;

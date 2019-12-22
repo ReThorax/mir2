@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("LibraryViewer")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Library Viewer")]
+[assembly: AssemblyDescription("Used to view Nexus Mir's Library files")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Microsoft")]
+[assembly: AssemblyCompany("Nexus Mir")]
 [assembly: AssemblyProduct("LibraryViewer")]
-[assembly: AssemblyCopyright("Copyright © Microsoft 2015")]
+[assembly: AssemblyCopyright("Copyright © NexusOnline 2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

@@ -14,7 +14,8 @@ namespace LibraryEditor
                              WzxExtention = ".Wzx",
                              MizExtention = ".Miz",
                              MixExtention = ".Mix",
-                             LibExtention = ".Lib";
+                             LibExtention = ".Lib",
+                             NexExtention = ".Nex";
 
         public WeMadeImage[] Images;
 
@@ -30,7 +31,7 @@ namespace LibraryEditor
         private string _IndexExtention = WixExtention;
 
         private bool _initialized;
-        public byte _nType = 0; //0 = .wil //1 = .wzl //2 = .wil new wemade design //3 = .wil mir3 //4 = .miz shanda mir3
+        public byte _nType = 0; //0 = .wil //1 = .wzl //2 = .wil new wemade design //3 = .wil mir3 //4 = .miz shanda mir3 //5= .Lib CrystalM2
         private byte[] ImageStructureSize = { 8, 16, 16, 17, 16 };//base size of an image structure
 
         public WeMadeLibrary(string name)
@@ -154,7 +155,7 @@ namespace LibraryEditor
 
         public void ToMLibrary()
         {
-            string fileName = Path.ChangeExtension(_fileName, ".Lib");
+            string fileName = Path.ChangeExtension(_fileName, ".Nex");
 
             if (File.Exists(fileName))
                 File.Delete(fileName);

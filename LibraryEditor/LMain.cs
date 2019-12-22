@@ -17,6 +17,9 @@ namespace LibraryEditor
         private MLibraryV2.MImage _selectedImage, _exportImage;
         private Image _originalImage;
 
+        uint X = 0;
+        uint Y = 0;
+
         [DllImport("user32.dll")]
         private static extern int SendMessage(IntPtr hWnd, int msg, int wParam, int lParam);
 
@@ -50,7 +53,9 @@ namespace LibraryEditor
         {
             string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
 
-            if (Path.GetExtension(files[0]).ToUpper() == ".WIL" ||
+            if (Path.GetExtension(files[0]).ToUpper() == ".Nex" ||
+                Path.GetExtension(files[0]).ToUpper() == ".NEX" ||
+                Path.GetExtension(files[0]).ToUpper() == ".WIL" ||
                 Path.GetExtension(files[0]).ToUpper() == ".WZL" ||
                 Path.GetExtension(files[0]).ToUpper() == ".MIZ")
             {
@@ -84,7 +89,7 @@ namespace LibraryEditor
                     (OpenWeMadeDialog.FileNames.Length).ToString(),
                     (OpenWeMadeDialog.FileNames.Length > 1) ? "libraries" : "library"));
             }
-            else if (Path.GetExtension(files[0]).ToUpper() == ".LIB")
+            else if (Path.GetExtension(files[0]).ToUpper() == ".NEX")
             {
                 ClearInterface();
                 ImageList.Images.Clear();
@@ -146,6 +151,7 @@ namespace LibraryEditor
             OffSetXTextBox.Text = _selectedImage.X.ToString();
             OffSetYTextBox.Text = _selectedImage.Y.ToString();
 
+            ImageBox.Location = new Point(_selectedImage.X + 492, _selectedImage.Y + 173);
             ImageBox.Image = _selectedImage.Image;
 
             // Keep track of what image/s are selected.
@@ -326,7 +332,7 @@ namespace LibraryEditor
                                     WTLLibrary WTLlib = new WTLLibrary(OpenWeMadeDialog.FileNames[i]);
                                     WTLlib.ToMLibrary();
                                 }
-                                else if (Path.GetExtension(OpenWeMadeDialog.FileNames[i]) == ".Lib")
+                                else if (Path.GetExtension(OpenWeMadeDialog.FileNames[i]) == ".Nex")
                                 {
                                     MLibrary v1Lib = new MLibrary(OpenWeMadeDialog.FileNames[i]);
                                     v1Lib.ToMLibrary();
@@ -380,7 +386,7 @@ namespace LibraryEditor
                 "Remove Blanks",
                 MessageBoxButtons.YesNo) != DialogResult.Yes) return;
 
-            _library.RemoveBlanks();
+            _library.RemoveBlanks(0, 0, false);
             ImageList.Images.Clear();
             _indexList.Clear();
             PreviewListView.VirtualListSize = _library.Count;
@@ -440,6 +446,7 @@ namespace LibraryEditor
                 MLibraryV2.MImage image = _library.GetMImage(PreviewListView.SelectedIndices[i]);
                 image.X = temp;
             }
+            ImageBox.Location = new Point(_selectedImage.X + 492, _selectedImage.Y + 173);
         }
 
         private void OffSetYTextBox_TextChanged(object sender, EventArgs e)
@@ -463,6 +470,7 @@ namespace LibraryEditor
                 MLibraryV2.MImage image = _library.GetMImage(PreviewListView.SelectedIndices[i]);
                 image.Y = temp;
             }
+            ImageBox.Location = new Point(_selectedImage.X + 492, _selectedImage.Y + 173);
         }
 
         private void InsertImageButton_Click(object sender, EventArgs e)
@@ -526,10 +534,16 @@ namespace LibraryEditor
 
         private void safeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Are you sure you want to remove the blank images?",
-                "Remove Blanks", MessageBoxButtons.YesNo) != DialogResult.Yes) return;
+            safeRemoveBlanks();
+        }
 
-            _library.RemoveBlanks(true);
+        public void safeRemoveBlanks()
+        {
+            if (MessageBox.Show("Are you sure you want to images with a Width of " + X + " and a Height of " + Y,
+                "Remove Blanks",
+                MessageBoxButtons.YesNo) != DialogResult.Yes) return;
+
+            _library.RemoveBlanks(X, Y, true);
             ImageList.Images.Clear();
             _indexList.Clear();
             PreviewListView.VirtualListSize = _library.Count;
@@ -881,6 +895,122 @@ namespace LibraryEditor
                 PreviewListView.Items[(int)nudJump.Value].Selected = true;
                 PreviewListView.Items[(int)nudJump.Value].EnsureVisible();
             }
+        }
+
+        private void OffSetButton_Click(object sender, EventArgs e)
+        {
+            
+
+            DialogResult result = MessageBox.Show("Are you sure you would like to Normalize the offsets? \r \nThis option is usually only used for Armours, Weapons, Helmets, and Shields on the Character/Inspect Dialogs \r \nClicking 'Yes' will take 58 from the current X OffSet and 23 from the current Y OffSet", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+            if (result == DialogResult.Yes)
+            {
+
+
+                for (int i = 0; i < PreviewListView.SelectedIndices.Count; i++)
+                {
+                    MLibraryV2.MImage image = _library.GetMImage(PreviewListView.SelectedIndices[i]);
+                    
+                    image.X = image.X -= 58;
+                    image.Y = image.Y -= 23;
+
+                    OffSetXTextBox.Text = (image.X.ToString(""));
+                    OffSetYTextBox.Text = (image.Y.ToString(""));
+                }
+            }
+            else
+            {
+                //Do nothing
+            }
+        }
+
+        private void ExportAllButton_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("This may take a couple minutes, Duration of export depends on two factors:\r\n1. Number of Images being exported\r\n2.Your PC's specifications", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+            if (result == DialogResult.Yes)
+            {
+                if (_library == null) return;
+                if (_library.FileName == null) return;
+
+                for (int i = 0; i < PreviewListView.Items.Count; i++)
+                {
+                    PreviewListView.Items[i].Selected = true;
+                }
+
+                if (PreviewListView.SelectedIndices.Count == 0) return;
+
+                string _fileName = Path.GetFileName(OpenLibraryDialog.FileName);
+                string _newName = _fileName.Remove(_fileName.IndexOf('.'));
+                string _folder = Application.StartupPath + "\\Exported\\" + _newName + "\\";
+
+                Bitmap blank = new Bitmap(1, 1);
+
+                // Create the folder if it doesn't exist.
+                (new FileInfo(_folder)).Directory.Create();
+
+                ListView.SelectedIndexCollection _col = PreviewListView.SelectedIndices;
+
+                toolStripProgressBar.Value = 0;
+                toolStripProgressBar.Maximum = _col.Count;
+
+                for (int i = _col[0]; i < (_col[0] + _col.Count); i++)
+                {
+                    _exportImage = _library.GetMImage(i);
+                    if (_exportImage.Image == null)
+                    {
+                        blank.Save(_folder + i.ToString() + ".bmp", ImageFormat.Bmp);
+                    }
+                    else
+                    {
+                        _exportImage.Image.Save(_folder + i.ToString() + ".bmp", ImageFormat.Bmp);
+                    }
+
+                    toolStripProgressBar.Value++;
+
+                    if (!Directory.Exists(_folder + "/Placements/"))
+                        Directory.CreateDirectory(_folder + "/Placements/");
+
+                    File.WriteAllLines(_folder + "/Placements/" + i.ToString() + ".txt", new string[] { _exportImage.X.ToString(), _exportImage.Y.ToString() });
+                }
+
+                toolStripProgressBar.Value = 0;
+                MessageBox.Show("Saving to " + _folder + "...", "Image Saved", MessageBoxButtons.OK);
+            }
+        }
+
+        private void LMain_Load(object sender, EventArgs e)
+        {
+            BRXtxtbox.Text = "0";
+            BRYtxtbox.Text = "0";
+        }
+
+        private void BRXtxtbox_TextChanged(object sender, EventArgs e)
+        {
+            uint x;
+
+            if (!uint.TryParse(BRXtxtbox.Text, out x))
+            {
+                BRXtxtbox.BackColor = Color.Red;
+                return;
+            }
+            BRXtxtbox.BackColor = SystemColors.Window;
+
+            X = x;
+        }
+
+        private void BRYtxtbox_TextChanged(object sender, EventArgs e)
+        {
+            uint y;
+
+            if (!uint.TryParse(BRYtxtbox.Text, out y))
+            {
+                BRYtxtbox.BackColor = Color.Red;
+                return;
+            }
+            BRYtxtbox.BackColor = SystemColors.Window;
+
+            Y = y;
         }
 
         private void nudJump_KeyDown(object sender, KeyEventArgs e)

@@ -21,15 +21,12 @@ namespace Launcher
 
         private void Config_Load(object sender, EventArgs e)
         {
-            this.label10.Text = GameLanguage.Resolution;
-            this.AutoStart_label.Text = GameLanguage.Autostart;
-            this.ID_l.Text = GameLanguage.Usrname;
-            this.Password_l.Text = GameLanguage.Password;
+
         }
 
         private void Res1_pb_Click(object sender, EventArgs e)
         {
-            resolutionChoice(800);
+            resolutionChoice(1024);
         }
 
         public void resolutionChoice(int res)
@@ -37,12 +34,10 @@ namespace Launcher
             Res1_pb.Image = Client.Properties.Resources.Radio_Unactive;
             Res2_pb.Image = Client.Properties.Resources.Radio_Unactive;
             Res3_pb.Image = Client.Properties.Resources.Radio_Unactive;
-            Res4_pb.Image = Client.Properties.Resources.Radio_Unactive;
 
-            if (res == 800) Res1_pb.Image = Client.Properties.Resources.Config_Radio_On;
-            else if (res == 1024) Res2_pb.Image = Client.Properties.Resources.Config_Radio_On;
-            else if (res == 1366) Res3_pb.Image = Client.Properties.Resources.Config_Radio_On;
-            else if (res == 1280) Res4_pb.Image = Client.Properties.Resources.Config_Radio_On;
+            if (res == 1024) Res1_pb.Image = Client.Properties.Resources.Config_Radio_On;
+            else if (res == 1366) Res2_pb.Image = Client.Properties.Resources.Config_Radio_On;
+            else if (res == 1920) Res3_pb.Image = Client.Properties.Resources.Config_Radio_On;
 
             Settings.Resolution = res;
 
@@ -51,12 +46,12 @@ namespace Launcher
 
         private void Res2_pb_Click(object sender, EventArgs e)
         {
-            resolutionChoice(1024);
+            resolutionChoice(1366);
         }
 
         private void Res3_pb_Click(object sender, EventArgs e)
         {
-            resolutionChoice(1366);
+            resolutionChoice(1920);
         }
 
         private void Config_VisibleChanged(object sender, EventArgs e)
@@ -180,11 +175,5 @@ namespace Launcher
             Program.PForm._workThread = new Thread(Program.PForm.Start) { IsBackground = true };
             Program.PForm._workThread.Start();
         }
-
-        private void Res4_pb_Click(object sender, EventArgs e)
-        {
-            resolutionChoice(1280);
-        }
-
     }
 }
