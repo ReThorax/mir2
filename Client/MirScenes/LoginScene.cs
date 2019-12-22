@@ -16,6 +16,7 @@ using System.Linq;
 using Client.MirScenes.Dialogs;
 using Mir.DiscordExtension;
 
+
 namespace Client.MirScenes
 {
     public sealed class LoginScene : MirScene
@@ -27,6 +28,9 @@ namespace Client.MirScenes
         private LoginDialog _login;
         private NewAccountDialog _account;
         private ChangePasswordDialog _password;
+        private bool RequestedRankings;
+
+        public RankingDialog RankingDialog;
 
         private MirMessageBox _connectBox;
 
@@ -58,6 +62,13 @@ namespace Client.MirScenes
                 Parent = _background,
             };
 
+            RankingDialog = new RankingDialog { Parent = _background, Visible = false };
+            RankingDialog.CloseButton.Click += (o, e) =>
+            {   
+                RankingDialog.Visible = false;
+                _login.Visible = true;
+            };
+
             _login = new LoginDialog {Parent = _background, Visible = false};
             _login.AccountButton.Click += (o, e) =>
                 {
@@ -72,6 +83,21 @@ namespace Client.MirScenes
                     _password.Disposing += (o1, e1) => _login.Show();
                 };
 
+            _login.RankButton.Click += (o, e) =>
+            {
+                if (RequestedRankings)
+                {
+                    RankingDialog.Visible = true;
+                    _login.Hide();
+                }
+                else
+                {
+                    Network.Enqueue(new C.GetRanking { RankIndex = 0 });
+                    RequestedRankings = true;
+                    _login.Hide();
+                }
+            };
+
             Version = new MirLabel
                 {
                     AutoSize = true,
@@ -83,7 +109,6 @@ namespace Client.MirScenes
                     Text = string.Format("Nexus Mir - Powered by CrystalM2 - Version: {0}", Application.ProductVersion),
                 };
 
-            
             _connectBox = new MirMessageBox("Attempting to connect to the server.", MirMessageBoxButtons.Cancel);
             _connectBox.CancelButton.Click += (o, e) => Program.Form.Close();
             Shown += (sender, args) =>
@@ -133,8 +158,65 @@ namespace Client.MirScenes
                 case (short)ServerPacketIds.LoginSuccess:
                     Login((S.LoginSuccess) p);
                     break;
+                case (short)ServerPacketIds.Rankings:
+                    Rankings((S.Rankings)p);
+                    break;
+                case (short)ServerPacketIds.StartGame:
+                    StartGame((S.StartGame)p);
+                    break;
+                case (short)ServerPacketIds.StatusMessage:
+                    StatusMessage((S.StatusMessage)p);
+                    break;
                 default:
                     base.ProcessPacket(p);
+                    break;
+            }
+        }
+
+        public void StatusMessage(S.StatusMessage p)
+        {
+            MirMessageBox.Show(p.Message, false);
+        }
+
+        public void StartGame(S.StartGame p)
+        {
+
+            if (p.Resolution < Settings.Resolution || Settings.Resolution == 0) Settings.Resolution = p.Resolution;
+
+            if (p.Resolution < 1024 || Settings.Resolution < 1024) Settings.Resolution = 800;
+            else if (p.Resolution < 1366 || Settings.Resolution < 1280) Settings.Resolution = 1024;
+            else if (p.Resolution < 1366 || Settings.Resolution < 1366) Settings.Resolution = 1280;//not adding an extra setting for 1280 on server cause well it just depends on the aspect ratio of your screen
+            else if (p.Resolution >= 1366 && Settings.Resolution >= 1366) Settings.Resolution = 1366;
+
+            switch (p.Result)
+            {
+                case 0:
+                    MirMessageBox.Show("Starting the game is currently disabled.");
+                    break;
+                case 1:
+                    MirMessageBox.Show("You are not logged in.");
+                    break;
+                case 2:
+                    MirMessageBox.Show("Your character could not be found.");
+                    break;
+                case 3:
+                    MirMessageBox.Show("No active map and/or start point found.");
+                    break;
+                case 4:
+                    if (Settings.Resolution == 1024)
+                        CMain.SetResolution(1024, 768);
+                    else if (Settings.Resolution == 1280)
+                        CMain.SetResolution(1280, 800);
+                    else if (Settings.Resolution == 1366)
+                        CMain.SetResolution(1366, 768);
+                    ActiveScene = new GameScene();
+
+                    GameScene.Scene.MainDialog.Hide();
+                    GameScene.Scene.BeltDialog.Hide();
+                    GameScene.Scene.CharacterDuraPanel.Hide();
+                    GameScene.Scene.DuraStatusPanel.Hide();
+
+                    Dispose();
                     break;
             }
         }
@@ -263,6 +345,11 @@ namespace Client.MirScenes
             MirMessageBox.Show(string.Format("This account is banned.\n\nReason: {0}\nExpiryDate: {1}\nDuration: {2:#,##0} Hours, {3} Minutes, {4} Seconds", p.Reason,
                                              p.ExpiryDate, Math.Floor(d.TotalHours), d.Minutes, d.Seconds ));
         }
+        public void Rankings(S.Rankings p)
+        {
+            RankingDialog.RecieveRanks(p.Listings, p.RankType, p.MyRank);
+            RankingDialog.Show();
+        }
         private void Login(S.Login p)
         {
             _login.OKButton.Enabled = true;
@@ -315,10 +402,11 @@ namespace Client.MirScenes
 
         public sealed class LoginDialog : MirImageControl
         {
-            public MirButton AccountButton, CloseButton, OKButton, PassButton;
+            public MirImageControl TitleLabel, AccountIDLabel, PassLabel;
+            public MirButton AccountButton, CloseButton, OKButton, RankButton, PassButton, ViewKeyButton;
             public MirTextBox AccountIDTextBox, PasswordTextBox;
             private bool _accountIDValid, _passwordValid;
-            public MirLabel LoginLabel, AccountLabel, ChangeLabel, ExitLabel;
+            public MirLabel LoginLabel, AccountLabel, ChangeLabel, ExitLabel, RankLabel;
 
             public LoginDialog()
             {
@@ -370,6 +458,17 @@ namespace Client.MirScenes
                     DrawFormat = TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter,
                     Text = "New Account",
                     NotControl = true,
+                };
+
+                RankButton = new MirButton
+                {
+                    Enabled = true,
+                    HoverIndex = 803,
+                    Index = 802,
+                    Library = Libraries.Title,
+                    Location = new Point(235, 176),
+                    Parent = this,
+                    PressedIndex = 804
                 };
 
                 PassButton = new MirButton

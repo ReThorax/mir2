@@ -224,6 +224,9 @@ namespace Server
         public static uint GoodsBuyBackTime = 60;
         public static uint GoodsBuyBackMaxStored = 20;
 
+        //Gem Settings
+        public static bool ObserveEnabled = true;
+        public static byte ObserveEXPBoost = 0;
 
         //character settings
         private static String[] BaseStatClassNames = { "Warrior", "Wizard", "Taoist", "Assassin", "Archer" };
@@ -497,6 +500,7 @@ namespace Server
             LoadGem();
             //Languahe
             GameLanguage.LoadServerLanguage(Path.Combine(ConfigPath, "Language.ini"));
+            LoadObserver();
         }
         public static void Save()
         {
@@ -1360,6 +1364,26 @@ namespace Server
             reader.Write("Goods", "MaxStored", GoodsMaxStored);
             reader.Write("Goods", "BuyBackTime", GoodsBuyBackTime);
             reader.Write("Goods", "BuyBackMaxStored", GoodsBuyBackMaxStored);
+        }
+
+        public static void LoadObserver()
+        {
+            if (!File.Exists(ConfigPath + @".\ObserveSystem.ini"))
+            {
+                SaveObserver();
+                return;
+            }
+            InIReader reader = new InIReader(ConfigPath + @".\ObserveSystem.ini");
+            ObserveEnabled = reader.ReadBoolean("Config", "Enabled", ObserveEnabled);
+            ObserveEXPBoost = reader.ReadByte("Config", "EXPBoost", ObserveEXPBoost);
+
+        }
+        public static void SaveObserver()
+        {
+            File.Delete(ConfigPath + @".\ObserverSystem.ini");
+            InIReader reader = new InIReader(ConfigPath + @".\ObserveSystem.ini");
+            reader.Write("Config", "Enabled", ObserveEnabled);
+            reader.Write("Config", "EXPBoost", ObserveEXPBoost);
         }
 
     }

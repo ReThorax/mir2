@@ -11,7 +11,7 @@ using System.Linq;
 
 namespace Server.MirNetwork
 {
-    public enum GameStage { None, Login, Select, Game, Disconnected }
+    public enum GameStage { None, Login, Select, Game, Disconnected, Observing }
 
     public class MirConnection
     {
@@ -50,10 +50,13 @@ namespace Server.MirNetwork
         public readonly long TimeConnected;
         public long TimeDisconnected, TimeOutTime;
 
+        private long[] LastRankRequest = new long[6];
+
         byte[] _rawData = new byte[0];
 
         public AccountInfo Account;
         public PlayerObject Player;
+        public ObserverObject Observer;
         public List<ItemInfo> SentItemInfo = new List<ItemInfo>();
         public List<QuestInfo> SentQuestInfo = new List<QuestInfo>();
         public List<RecipeInfo> SentRecipeInfo = new List<RecipeInfo>();
@@ -223,6 +226,8 @@ namespace Server.MirNetwork
         private void ProcessPacket(Packet p)
         {
             if (p == null || Disconnecting) return;
+
+            
 
             switch (p.Index)
             {
@@ -628,6 +633,21 @@ namespace Server.MirNetwork
                 case (short)ClientPacketIds.ConfirmItemRental:
                     ConfirmItemRental();
                     break;
+                case (short)ClientPacketIds.ObserveMove:
+                    ObserveMove((C.ObserveMove)p);
+                    break;
+                case (short)ClientPacketIds.ObserveLock:
+                    ObserveLock((C.ObserveLock)p);
+                    break;
+                case (short)ClientPacketIds.StartObserve:
+                    StartObserve((C.StartObserve)p);
+                    break;
+                case (short)ClientPacketIds.ChangeObserve:
+                    ChangeObserve((C.ChangeObserve)p);
+                    break;
+                case (short)ClientPacketIds.EndObserver:
+                    EndObserver((C.EndObserver)p);
+                    break;
                 default:
                     MessageQueue.Enqueue(string.Format("Invalid packet received. Index : {0}", p.Index));
                     break;
@@ -643,6 +663,9 @@ namespace Server.MirNetwork
             {
                 if (Player != null)
                     Player.StopGame(reason);
+
+                if (Observer != null)
+                    Observer.StopGame(reason);
 
                 if (Account != null && Account.Connection == this)
                     Account.Connection = null;
@@ -665,6 +688,9 @@ namespace Server.MirNetwork
             {
                 if (Player != null)
                     Player.StopGame(reason);
+
+                if (Observer != null)
+                    Observer.StopGame(reason);
 
                 if (Account != null && Account.Connection == this)
                     Account.Connection = null;
@@ -723,6 +749,23 @@ namespace Server.MirNetwork
             Enqueue(new S.ClientVersion { Result = 1 });
 
             Stage = GameStage.Login;
+        }
+
+        private void SendRankings(byte RankType)
+        {
+            if (RankType > 6) return;
+            if ((LastRankRequest[RankType] != 0) && ((LastRankRequest[RankType] + 300 * 1000) > SMain.Envir.Time)) return;
+            LastRankRequest[RankType] = SMain.Envir.Time;
+
+            if (RankType == 0)
+            {
+                Enqueue(new S.Rankings { Listings = SMain.Envir.RankTop, RankType = RankType, MyRank = 0 });
+            }
+            else
+            {
+                Enqueue(new S.Rankings { Listings = SMain.Envir.RankClass[RankType - 1], RankType = RankType, MyRank = 0 });
+            }
+
         }
         private void ClientKeepAlive(C.KeepAlive p)
         {
@@ -790,9 +833,10 @@ namespace Server.MirNetwork
             Envir.RemoveRank(temp);
             Enqueue(new S.DeleteCharacterSuccess { CharacterIndex = temp.Index });
         }
-        private void StartGame(C.StartGame p)
+        public void StartGame(C.StartGame p)
         {
-            if (Stage != GameStage.Select) return;
+            if (Stage != GameStage.Select & Stage!= GameStage.Observing) return;
+            Observer = null;
 
             if (!Settings.AllowStartGame && (Account == null || (Account != null && !Account.AdminAccount)))
             {
@@ -849,6 +893,7 @@ namespace Server.MirNetwork
 
         public void LogOut()
         {
+            if (Stage == GameStage.Observing) ObserverLogout();
             if (Stage != GameStage.Game) return;
 
             if (Envir.Time < Player.LogTime)
@@ -863,6 +908,18 @@ namespace Server.MirNetwork
             Player = null;
 
             Enqueue(new S.LogOutSuccess { Characters = Account.GetSelectInfo() });
+        }
+
+        public void ObserverLogout()
+        {
+            if (Stage != GameStage.Observing) return;
+
+            Observer.StopGame(24);
+
+            Stage = GameStage.Login;
+            Observer = null;
+
+            Enqueue(new S.EndObserving { });
         }
 
         private void Turn(C.Turn p)
@@ -901,9 +958,10 @@ namespace Server.MirNetwork
                 return;
             }
 
-            if (Stage != GameStage.Game) return;
-
-            Player.Chat(p.Message);
+            if (Stage == GameStage.Game)
+                Player.Chat(p.Message);
+            else if (Stage == GameStage.Observing)
+                Observer.Chat(p.Message);
         }
 
         private void MoveItem(C.MoveItem p)
@@ -1036,12 +1094,20 @@ namespace Server.MirNetwork
         }
         private void Inspect(C.Inspect p)
         {
-            if (Stage != GameStage.Game) return;
+            if (Stage == GameStage.Game)
+            {
+                if (p.Ranking)
+                    Player.Inspect((int)p.ObjectID);
+                else
+                    Player.Inspect(p.ObjectID);
+            }
+            else if (Stage == GameStage.Observing)
+            {
+                Observer.Inspect();
+            }
 
-            if (p.Ranking)
-                Player.Inspect((int)p.ObjectID);
-            else
-                Player.Inspect(p.ObjectID);
+           
+
         }
         private void ChangeAMode(C.ChangeAMode p)
         {
@@ -1708,8 +1774,14 @@ namespace Server.MirNetwork
         }
         private void GetRanking(C.GetRanking p)
         {
-            if (Stage != GameStage.Game) return;
-            Player.GetRanking(p.RankIndex);
+            if (Stage == GameStage.Game)
+            {
+                Player.GetRanking(p.RankIndex);
+            }
+            else if (Stage == GameStage.Login)
+            {
+                SendRankings(p.RankIndex);
+            }
         }
 
         private void Opendoor(C.Opendoor p)
@@ -1797,5 +1869,63 @@ namespace Server.MirNetwork
 
             Player.ConfirmItemRental();
         }
+
+        private void ObserveMove(C.ObserveMove p)
+        {
+            if (Stage != GameStage.Observing) return;
+
+            if (Observer.ActionTime > SMain.Envir.Time)
+                _retryList.Enqueue(p);
+            else
+                Observer.ObserveMove(p.Direction);
+        }
+        private void ObserveLock(C.ObserveLock p)
+        {
+            if (Stage != GameStage.Observing) return;
+
+            if (Observer.ActionTime > SMain.Envir.Time)
+                _retryList.Enqueue(p);
+            else
+                Observer.ObserveLock(p.ObjectID);
+        }
+
+        public void StartObserve(C.StartObserve p)
+        {
+            if (Stage == GameStage.Login)
+            {
+                PlayerObject play = SMain.Envir.GetPlayer(p.ObjectID);
+
+                if (play == null || !play.AllowObserve)
+                {
+                    Enqueue(new S.StatusMessage { Message = "This player is no longer available for observing." });
+                }
+                else
+                {
+                    Enqueue(new S.StartGame { Result = 4, Resolution = Settings.AllowedResolution });
+                    SafeZoneInfo szi = SMain.Envir.StartPoints[SMain.Envir.Random.Next(SMain.Envir.StartPoints.Count)];
+                    Observer = new ObserverObject(szi.Location, szi.Info.Index, SMain.Envir.GetMap(szi.Info.Index), this, false, play.ObjectID, 0);
+                }
+            }
+            else if (Stage == GameStage.Game)
+            {
+                Player.StartObserveMode(p.ObjectID);
+
+            }
+        }
+
+        public void ChangeObserve(C.ChangeObserve p)
+        {
+            if (Stage != GameStage.Game) return;
+
+            Player.ObserveChange(p.Allow);
+        }
+
+        public void EndObserver(C.EndObserver p)
+        {
+            if (Stage != GameStage.Observing) return;
+            
+            Observer.ObserverEnd(false);
+        }
+
     }
 }
