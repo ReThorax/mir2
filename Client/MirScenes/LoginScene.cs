@@ -463,12 +463,22 @@ namespace Client.MirScenes
                 RankButton = new MirButton
                 {
                     Enabled = true,
-                    HoverIndex = 803,
-                    Index = 802,
-                    Library = Libraries.Title,
-                    Location = new Point(235, 176),
+                    HoverIndex = 24,
+                    Index = 23,
+                    Library = Libraries.LoginScene,
+                    Location = new Point(266, 151),
                     Parent = this,
-                    PressedIndex = 804
+                    PressedIndex = 25,
+                };
+
+                RankLabel = new MirLabel
+                {
+                    Location = new Point(0, -2),
+                    Parent = RankButton,
+                    Size = new Size(78, 20),
+                    DrawFormat = TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter,
+                    Text = "Ranking",
+                    NotControl = true,
                 };
 
                 PassButton = new MirButton

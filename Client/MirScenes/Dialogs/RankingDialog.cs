@@ -28,7 +28,7 @@ namespace Client.MirScenes.Dialogs
 
         public RankingDialog()
         {
-            Index = 1329;
+            Index = 1330;
             Library = Libraries.Prguse2;
             //Size = new Size(288, 324);
             Movable = true;
@@ -309,9 +309,9 @@ namespace Client.MirScenes.Dialogs
 
                 ViewButton = new MirButton
                 {
-                    Index = 805,
-                    HoverIndex = 806,
-                    PressedIndex = 807,
+                    Index = 781,
+                    HoverIndex = 782,
+                    PressedIndex = 783,
                     Library = Libraries.Title,
                     Location = new Point(280, 3),
                     Parent = this,

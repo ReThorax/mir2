@@ -145,7 +145,7 @@ namespace Client.MirScenes
         public static bool PickedUpGold;
         public MirControl ItemLabel, MailLabel, MemoLabel, GuildBuffLabel;
         public MirButton EndObserve, InspectObserve, StatusObserve;
-        public MirLabel ObserverCount;
+        public MirLabel ObserverCount, EndObserveLabel, InspectObserveLabel, StatusObserveLabel;
         public static long UseItemTime, PickUpTime, DropViewTime, TargetDeadTime;
         public static uint Gold, Credit;
         public static long InspectTime;
@@ -289,10 +289,10 @@ namespace Client.MirScenes
 
             EndObserve = new MirButton
             {
-                Index = 808,
-                HoverIndex = 809,
-                PressedIndex = 810,
-                Library = Libraries.Title,
+                Index = 228,
+                HoverIndex = 229,
+                PressedIndex = 230,
+                Library = Libraries.GameScene,
                 Location = new Point(20, 20),
                 Parent = this,
                 Sound = SoundList.ButtonA,
@@ -300,12 +300,22 @@ namespace Client.MirScenes
             };
             EndObserve.Click += (o, e) => EndObserverMode();
 
+            EndObserveLabel = new MirLabel
+            {
+                Location = new Point(0, -2),
+                Parent = EndObserve,
+                Size = new Size(78, 20),
+                DrawFormat = TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter,
+                Text = "End Observe",
+                NotControl = true,
+            };
+
             InspectObserve = new MirButton
             {
-                Index = 811,
-                HoverIndex = 812,
-                PressedIndex = 813,
-                Library = Libraries.Title,
+                Index = 228,
+                HoverIndex = 229,
+                PressedIndex = 230,
+                Library = Libraries.GameScene,
                 Location = new Point(20, 20),
                 Parent = this,
                 Sound = SoundList.ButtonA,
@@ -313,13 +323,33 @@ namespace Client.MirScenes
             };
             InspectObserve.Click += (o, e) => InspectObserverMode();
 
+            InspectObserveLabel = new MirLabel
+            {
+                Location = new Point(0, -2),
+                Parent = InspectObserve,
+                Size = new Size(78, 20),
+                DrawFormat = TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter,
+                Text = "Inspect Char",
+                NotControl = true,
+            };
+
             StatusObserve = new MirButton
             {
-                Index = 814,
-                Library = Libraries.Title,
+                Index = 228,
+                Library = Libraries.GameScene,
                 Location = new Point(20, 20),
                 Parent = this,
                 Visible = false,
+            };
+
+            StatusObserveLabel = new MirLabel
+            {
+                Location = new Point(0, -2),
+                Parent = StatusObserve,
+                Size = new Size(78, 20),
+                DrawFormat = TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter,
+                Text = "Locked",
+                NotControl = true,
             };
         }
 
@@ -1860,6 +1890,7 @@ namespace Client.MirScenes
                     break;
                 case (short)ServerPacketIds.OpenBrowser:                  
                     OpenBrowser((S.OpenBrowser)p);
+                    break;
                 case (short)ServerPacketIds.EndObserving:
                     EndObserving((S.EndObserving)p);
                     break;
@@ -2835,8 +2866,8 @@ namespace Client.MirScenes
                 SoundManager.StopSound(20000 + 126 * 10 + 5 + i);
 
             Observer = null;
-            if (Settings.Resolution != 800)
-                CMain.SetResolution(800, 600);
+            if (Settings.Resolution != 1024)
+                CMain.SetResolution(1024, 758);
             ActiveScene = new LoginScene();
 
             if (MapControl != null && !MapControl.IsDisposed)

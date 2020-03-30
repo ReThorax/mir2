@@ -1182,7 +1182,7 @@ namespace Server.MirObjects
 
             uint count = 1;
 
-            SMain.EnqueueChat(string.Format("{0}: {1}", Name, message));
+            MessageQueue.EnqueueChat(string.Format("{0}: {1}", Name, message));
 
             if (ChatBanned)
             {
@@ -1396,7 +1396,7 @@ namespace Server.MirObjects
                         data.Deleted = false;
 
                         ReceiveChat(string.Format("Player {0} has been restored by", data.Name), ChatType.System);
-                        SMain.Enqueue(string.Format("Player {0} has been restored by {1}", data.Name, Name));
+                        MessageQueue.Enqueue(string.Format("Player {0} has been restored by {1}", data.Name, Name));
 
                         break;
 
@@ -1420,7 +1420,7 @@ namespace Server.MirObjects
                         }
                         
                         ReceiveChat(string.Format("Player {0} has been changed to {1}", data.Name, data.Gender), ChatType.System);
-                        SMain.Enqueue(string.Format("Player {0} has been changed to {1} by {2}", data.Name, data.Gender, Name));
+                        MessageQueue.Enqueue(string.Format("Player {0} has been changed to {1} by {2}", data.Name, data.Gender, Name));
                         
                         if (data.Player != null)
                             data.Player.Connection.LogOut();
@@ -1446,7 +1446,7 @@ namespace Server.MirObjects
                                 player.LevelUp();
                         
                                 ReceiveChat(string.Format("Player {0} has been Leveled {1} -> {2}.", player.Name, old, player.Level), ChatType.System);
-                                SMain.Enqueue(string.Format("Player {0} has been Leveled {1} -> {2} by {3}", player.Name, old, player.Level, Name));
+                                MessageQueue.Enqueue(string.Format("Player {0} has been Leveled {1} -> {2} by {3}", player.Name, old, player.Level, Name));
                                 return;
                             }
                         }
@@ -1616,7 +1616,7 @@ namespace Server.MirObjects
                                 count = uint.MaxValue - player.Account.Gold;
 
                             player.GainGold(count);
-                            SMain.Enqueue(string.Format("Player {0} has been given {1} gold", player.Name, count));
+                            MessageQueue.Enqueue(string.Format("Player {0} has been given {1} gold", player.Name, count));
                         }
 
                         break;
@@ -1646,7 +1646,7 @@ namespace Server.MirObjects
                             count = uint.MaxValue - player.Account.Credit;
 
                         player.GainCredit(count);
-                        SMain.Enqueue(string.Format("Player {0} has been given {1} credit", player.Name, count));
+                        MessageQueue.Enqueue(string.Format("Player {0} has been given {1} credit", player.Name, count));
                         break;
                     case "GIVESKILL":
                         if ((!IsGM && !Settings.TestServer) || parts.Length < 4) return;
@@ -1741,7 +1741,7 @@ namespace Server.MirObjects
 
                         if (instanceID < 1) instanceID = 1;
 
-                        var map = SMain.Envir.GetMapByNameAndInstance(parts[1], instanceID);
+                        var map = Envir.GetMapByNameAndInstance(parts[1], instanceID);
                         if (map == null)
                         {
                             ReceiveChat((string.Format("Map {0}:[{1}] could not be found", parts[1], instanceID)), ChatType.System);
@@ -1980,7 +1980,7 @@ namespace Server.MirObjects
         {
             get
             {
-                return SMain.Envir.DefaultNPC;
+                return Envir.DefaultNPC;
             }
         }
     }

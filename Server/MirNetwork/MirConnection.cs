@@ -754,16 +754,16 @@ namespace Server.MirNetwork
         private void SendRankings(byte RankType)
         {
             if (RankType > 6) return;
-            if ((LastRankRequest[RankType] != 0) && ((LastRankRequest[RankType] + 300 * 1000) > SMain.Envir.Time)) return;
-            LastRankRequest[RankType] = SMain.Envir.Time;
+            if ((LastRankRequest[RankType] != 0) && ((LastRankRequest[RankType] + 300 * 1000) > Envir.Time)) return;
+            LastRankRequest[RankType] = Envir.Time;
 
             if (RankType == 0)
             {
-                Enqueue(new S.Rankings { Listings = SMain.Envir.RankTop, RankType = RankType, MyRank = 0 });
+                Enqueue(new S.Rankings { Listings = Envir.RankTop, RankType = RankType, MyRank = 0 });
             }
             else
             {
-                Enqueue(new S.Rankings { Listings = SMain.Envir.RankClass[RankType - 1], RankType = RankType, MyRank = 0 });
+                Enqueue(new S.Rankings { Listings = Envir.RankClass[RankType - 1], RankType = RankType, MyRank = 0 });
             }
 
         }
@@ -1874,7 +1874,7 @@ namespace Server.MirNetwork
         {
             if (Stage != GameStage.Observing) return;
 
-            if (Observer.ActionTime > SMain.Envir.Time)
+            if (Observer.ActionTime > Envir.Time)
                 _retryList.Enqueue(p);
             else
                 Observer.ObserveMove(p.Direction);
@@ -1883,7 +1883,7 @@ namespace Server.MirNetwork
         {
             if (Stage != GameStage.Observing) return;
 
-            if (Observer.ActionTime > SMain.Envir.Time)
+            if (Observer.ActionTime > Envir.Time)
                 _retryList.Enqueue(p);
             else
                 Observer.ObserveLock(p.ObjectID);
@@ -1893,7 +1893,7 @@ namespace Server.MirNetwork
         {
             if (Stage == GameStage.Login)
             {
-                PlayerObject play = SMain.Envir.GetPlayer(p.ObjectID);
+                PlayerObject play = Envir.GetPlayer(p.ObjectID);
 
                 if (play == null || !play.AllowObserve)
                 {
@@ -1902,8 +1902,8 @@ namespace Server.MirNetwork
                 else
                 {
                     Enqueue(new S.StartGame { Result = 4, Resolution = Settings.AllowedResolution });
-                    SafeZoneInfo szi = SMain.Envir.StartPoints[SMain.Envir.Random.Next(SMain.Envir.StartPoints.Count)];
-                    Observer = new ObserverObject(szi.Location, szi.Info.Index, SMain.Envir.GetMap(szi.Info.Index), this, false, play.ObjectID, 0);
+                    SafeZoneInfo szi = Envir.StartPoints[Envir.Random.Next(Envir.StartPoints.Count)];
+                    Observer = new ObserverObject(szi.Location, szi.Info.Index, Envir.GetMap(szi.Info.Index), this, false, play.ObjectID, 0);
                 }
             }
             else if (Stage == GameStage.Game)
