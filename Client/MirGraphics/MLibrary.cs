@@ -50,7 +50,9 @@ namespace Client.MirGraphics
         public static readonly MLibrary
             Items = new MLibrary(Settings.DataPath + "Items"),
             StateItems = new MLibrary(Settings.DataPath + "StateItem"),
-            FloorItems = new MLibrary(Settings.DataPath + "DNItems");
+            FloorItems = new MLibrary(Settings.DataPath + "DNItems"),
+            StateEffect = new MLibrary(Settings.DataPath + "StateEffect"),
+            GlowEffect = new MLibrary(Settings.DataPath + "ItemGlow");
 
         //Deco
         public static readonly MLibrary

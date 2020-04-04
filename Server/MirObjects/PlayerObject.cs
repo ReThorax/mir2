@@ -13323,7 +13323,8 @@ namespace Server.MirObjects
                     if (item.Info.Type != ItemType.Ring)
                         return false;
                     break;
-                case EquipmentSlot.Amulet:
+                case EquipmentSlot.AmuletL:
+                case EquipmentSlot.AmuletR:
                     if (item.Info.Type != ItemType.Amulet)// || item.Info.Shape == 0
                         return false;
                     break;
@@ -13342,6 +13343,27 @@ namespace Server.MirObjects
                 case EquipmentSlot.Mount:
                     if (item.Info.Type != ItemType.Mount)
                         return false;
+                    break;
+                case EquipmentSlot.Charm:
+                    if (item.Info.Type != ItemType.Charm)
+                        return false;
+                    break;
+                case EquipmentSlot.Medal:
+                    if (item.Info.Type != ItemType.Medal)
+                        return false;
+                    break;
+                case EquipmentSlot.RewardStone:
+                    if (item.Info.Type != ItemType.RewardStone)
+                        return false;
+                    break;
+                case EquipmentSlot.Shield:
+                    if (item.Info.Type != ItemType.Shield)
+                        return false;
+                    break;
+                case EquipmentSlot.ShoulderPad:
+                    if (item.Info.Type != ItemType.ShoulderPad)
+                        return false;
+                    break;
                     break;
                 default:
                     return false;

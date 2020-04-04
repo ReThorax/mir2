@@ -810,6 +810,11 @@ public enum ItemType : byte
 	Awakening = 35,
     Pets = 36,
     Transform = 37,
+    Charm = 38,
+    Medal = 39,
+    RewardStone = 40,
+    Shield = 41,
+    ShoulderPad = 42,
 }
 
 public enum MirGridType : byte
@@ -847,11 +852,17 @@ public enum EquipmentSlot : byte
     BraceletR = 6,
     RingL = 7,
     RingR = 8,
-    Amulet = 9,
+    AmuletL = 9,
     Belt = 10,
     Boots = 11,
     Stone = 12,
-    Mount = 13
+    Mount = 13,
+    Charm = 14,
+    Medal = 15,
+    RewardStone = 16,
+    Shield = 17,
+    AmuletR = 18,
+    ShoulderPad = 19,
 }
 
 public enum MountSlot : byte
@@ -3346,20 +3357,20 @@ public class UserItem
                         switch (Info.Shape)
                         {
                             case 0: //Amulet
-                                if (Count >= 300) return 3662;
-                                if (Count >= 200) return 3661;
-                                if (Count >= 100) return 3660;
-                                return 3660;
+                                if (Count >= 300) return 226;
+                                if (Count >= 200) return 225;
+                                if (Count >= 100) return 224;
+                                return 224;
                             case 1: //Grey Poison
-                                if (Count >= 150) return 3675;
-                                if (Count >= 100) return 2960;
-                                if (Count >= 50) return 3674;
-                                return 3673;
+                                if (Count >= 150) return 232;
+                                if (Count >= 100) return 231;
+                                if (Count >= 50) return 230;
+                                return 230;
                             case 2: //Yellow Poison
-                                if (Count >= 150) return 3672;
-                                if (Count >= 100) return 2961;
-                                if (Count >= 50) return 3671;
-                                return 3670;
+                                if (Count >= 150) return 236;
+                                if (Count >= 100) return 235;
+                                if (Count >= 50) return 234;
+                                return 234;
                         }
                     }
                     break;

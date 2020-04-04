@@ -1325,13 +1325,37 @@ namespace Server.MirObjects
                     newValue = player.Info.Equipment[(int)EquipmentSlot.Helmet] != null ?
                         player.Info.Equipment[(int)EquipmentSlot.Helmet].Info.Name : "No Helmet";
                     break;
-                case "AMULET":
-                    newValue = player.Info.Equipment[(int)EquipmentSlot.Amulet] != null ?
-                        player.Info.Equipment[(int)EquipmentSlot.Amulet].Info.Name : "No Amulet";
+                case "AMULETL":
+                    newValue = player.Info.Equipment[(int)EquipmentSlot.AmuletL] != null ?
+                        player.Info.Equipment[(int)EquipmentSlot.AmuletL].Info.Name : "No Left Amulet";
+                    break;
+                case "AMULETR":
+                    newValue = player.Info.Equipment[(int)EquipmentSlot.AmuletR] != null ?
+                        player.Info.Equipment[(int)EquipmentSlot.AmuletR].Info.Name : "No Right Amulet";
                     break;
                 case "STONE":
                     newValue = player.Info.Equipment[(int)EquipmentSlot.Stone] != null ?
                         player.Info.Equipment[(int)EquipmentSlot.Stone].Info.Name : "No Stone";
+                    break;
+                case "Charm":
+                    newValue = player.Info.Equipment[(int)EquipmentSlot.Charm] != null ?
+                        player.Info.Equipment[(int)EquipmentSlot.Charm].Info.Name : "No Charm";
+                    break;
+                case "Medal":
+                    newValue = player.Info.Equipment[(int)EquipmentSlot.Medal] != null ?
+                        player.Info.Equipment[(int)EquipmentSlot.Medal].Info.Name : "No Medal";
+                    break;
+                case "RewardStone":
+                    newValue = player.Info.Equipment[(int)EquipmentSlot.RewardStone] != null ?
+                        player.Info.Equipment[(int)EquipmentSlot.RewardStone].Info.Name : "No RewardStone";
+                    break;
+                case "Shield":
+                    newValue = player.Info.Equipment[(int)EquipmentSlot.Shield] != null ?
+                        player.Info.Equipment[(int)EquipmentSlot.Shield].Info.Name : "No Shield";
+                    break;
+                case "ShoulderPad":
+                    newValue = player.Info.Equipment[(int)EquipmentSlot.ShoulderPad] != null ?
+                        player.Info.Equipment[(int)EquipmentSlot.ShoulderPad].Info.Name : "No ShoulderPad";
                     break;
                 case "TORCH":
                     newValue = player.Info.Equipment[(int)EquipmentSlot.Torch] != null ?
