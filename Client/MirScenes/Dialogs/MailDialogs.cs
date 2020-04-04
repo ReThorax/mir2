@@ -31,36 +31,36 @@ namespace Client.MirScenes.Dialogs
 
         public MailListDialog()
         {
-            Index = 670;
-            Library = Libraries.Title;
-            Size = new Size(312, 444);
+            Index = 276;
+            Library = Libraries.GameScene;
+            Size = new Size(333, 500);
             Movable = true;
             Sort = true;
             Location = new Point((Settings.ScreenWidth - Size.Width) - 150, 5);
 
             CloseButton = new MirButton
             {
-                HoverIndex = 361,
-                Index = 360,
-                Location = new Point(Size.Width - 27, 3),
-                Library = Libraries.Prguse2,
+                HoverIndex = 186,
+                Index = 185,
+                Location = new Point(285, 24),
+                Library = Libraries.GameScene,
                 Parent = this,
-                PressedIndex = 362,
+                PressedIndex = 187,
                 Sound = SoundList.ButtonA,
             };
             CloseButton.Click += (o, e) => Hide();
 
-            HelpButton = new MirButton
-            {
-                Index = 257,
-                HoverIndex = 258,
-                PressedIndex = 259,
-                Library = Libraries.Prguse2,
-                Parent = this,
-                Location = new Point(Size.Width - 50, 3),
-                Sound = SoundList.ButtonA,
-            };
-            HelpButton.Click += (o, e) => GameScene.Scene.HelpDialog.DisplayPage("");
+            //HelpButton = new MirButton
+            //{
+            //    Index = 257,
+            //    HoverIndex = 258,
+            //    PressedIndex = 259,
+            //    Library = Libraries.Prguse2,
+            //    Parent = this,
+            //    Location = new Point(Size.Width - 50, 3),
+            //    Sound = SoundList.ButtonA,
+            //};
+            //HelpButton.Click += (o, e) => GameScene.Scene.HelpDialog.DisplayPage("");
 
             PreviousButton = new MirButton
             {
@@ -69,7 +69,7 @@ namespace Client.MirScenes.Dialogs
                 PressedIndex = 242,
                 Library = Libraries.Prguse2,
                 Parent = this,
-                Location = new Point(102, Size.Height - 55),
+                Location = new Point(131, 409),
                 Sound = SoundList.ButtonA,
             };
             PreviousButton.Click += (o, e) =>
@@ -89,7 +89,7 @@ namespace Client.MirScenes.Dialogs
             {
                 Text = "",
                 Parent = this,
-                Location = new Point(120, Size.Height - 55),
+                Location = new Point(131, 408),
                 Size = new Size(67, 15),
                 DrawFormat = TextFormatFlags.VerticalCenter | TextFormatFlags.HorizontalCenter,
             };
@@ -101,7 +101,7 @@ namespace Client.MirScenes.Dialogs
                 PressedIndex = 245,
                 Library = Libraries.Prguse2,
                 Parent = this,
-                Location = new Point(192, Size.Height - 55),
+                Location = new Point(185, 409),
                 Sound = SoundList.ButtonA,
             };
             NextButton.Click += (o, e) =>
@@ -124,13 +124,13 @@ namespace Client.MirScenes.Dialogs
                 PressedIndex = 565,
                 Library = Libraries.Prguse,
                 Parent = this,
-                Location = new Point(75, 414),
+                Location = new Point(85, 431),
                 Sound = SoundList.ButtonA,
-                Hint = GameLanguage.Send
+                Hint = "Send"
             };
             SendButton.Click += (o, e) =>
                 {
-                    MirInputBox inputBox = new MirInputBox(GameLanguage.EnterMailToName);
+                    MirInputBox inputBox = new MirInputBox("Please enter the name of the person you would like to mail.");
 
                     inputBox.OKButton.Click += (o1, e1) =>
                     {
@@ -150,9 +150,9 @@ namespace Client.MirScenes.Dialogs
                 PressedIndex = 571,
                 Library = Libraries.Prguse,
                 Parent = this,
-                Location = new Point(102, 414),
+                Location = new Point(119, 431),
                 Sound = SoundList.ButtonA,
-                Hint = GameLanguage.Reply
+                Hint = "Reply"
             };
             ReplyButton.Click += (o, e) =>
             {
@@ -168,9 +168,9 @@ namespace Client.MirScenes.Dialogs
                 PressedIndex = 574,
                 Library = Libraries.Prguse,
                 Parent = this,
-                Location = new Point(129, 414),
+                Location = new Point(153, 431),
                 Sound = SoundList.ButtonA,
-                Hint = GameLanguage.Read
+                Hint = "Read"
             };
             ReadButton.Click += (o, e) =>
             {
@@ -193,9 +193,9 @@ namespace Client.MirScenes.Dialogs
                 PressedIndex = 559,
                 Library = Libraries.Prguse,
                 Parent = this,
-                Location = new Point(156, 414),
+                Location = new Point(187, 431),
                 Sound = SoundList.ButtonA,
-                Hint = GameLanguage.Delete
+                Hint = "Delete"
             };
             DeleteButton.Click += (o, e) =>
             {
@@ -227,22 +227,22 @@ namespace Client.MirScenes.Dialogs
                 PressedIndex = 522,
                 Library = Libraries.Prguse,
                 Parent = this,
-                Location = new Point(183, 414),
+                Location = new Point(221, 431),
                 Sound = SoundList.ButtonA,
-                Hint = GameLanguage.BlockList
+                Hint = "Block List"
             };
 
-            BugReportButton = new MirButton
-            {
-                Index = 523,
-                HoverIndex = 524,
-                PressedIndex = 525,
-                Library = Libraries.Prguse,
-                Parent = this,
-                Location = new Point(210, 414),
-                Sound = SoundList.ButtonA,
-                Hint = "Report Bug"
-            };
+            //BugReportButton = new MirButton
+            //{
+            //    Index = 523,
+            //    HoverIndex = 524,
+            //    PressedIndex = 525,
+            //    Library = Libraries.Prguse,
+            //    Parent = this,
+            //    Location = new Point(210, 414),
+            //    Sound = SoundList.ButtonA,
+            //    Hint = "Report Bug"
+            //};
             #endregion
 
             
@@ -277,7 +277,7 @@ namespace Client.MirScenes.Dialogs
                 Rows[i] = new MailItemRow
                 {
                     Mail = GameScene.User.Mail[i + StartIndex],
-                    Location = new Point(10, 55 + i * 33),
+                    Location = new Point(21, 74 + i * 33),
                     Parent = this
                 };
 
@@ -557,27 +557,27 @@ namespace Client.MirScenes.Dialogs
 
     public class MailComposeLetterDialog : MirImageControl
     {
-        MirLabel RecipientNameLabel;
+        MirLabel RecipientNameLabel, CancelLabel, SendLabel;
         MirTextBox MessageTextBox;
         MirButton SendButton, CancelButton, CloseButton;
 
         public MailComposeLetterDialog()
         {
-            Index = 671;
-            Library = Libraries.Title;
-            Size = new Size(236, 300);
+            Index = 278;
+            Library = Libraries.GameScene;
+            Size = new Size(275, 344);
             Movable = true;
             Sort = true;
             Location = new Point(100, 100);
 
             CloseButton = new MirButton
             {
-                HoverIndex = 361,
-                Index = 360,
-                Location = new Point(Size.Width - 27, 3),
-                Library = Libraries.Prguse2,
+                HoverIndex = 186,
+                Index = 185,
+                Location = new Point(228, 24),
+                Library = Libraries.GameScene,
                 Parent = this,
-                PressedIndex = 362,
+                PressedIndex = 187,
                 Sound = SoundList.ButtonA,
             };
             CloseButton.Click += (o, e) => Hide();
@@ -589,7 +589,7 @@ namespace Client.MirScenes.Dialogs
                 Parent = this,
                 Font = new Font(Settings.FontName, 8F),
                 ForeColour = Color.White,
-                Location = new Point(70, 35),
+                Location = new Point(95, 67),
                 Size = new Size(150, 15),
                 NotControl = true,
             };
@@ -599,7 +599,7 @@ namespace Client.MirScenes.Dialogs
                 ForeColour = Color.White,
                 Parent = this,
                 Font = new Font(Settings.FontName, 8F),
-                Location = new Point(15, 92),
+                Location = new Point(34, 122),
                 Size = new Size(202, 165),
             };
 
@@ -607,13 +607,13 @@ namespace Client.MirScenes.Dialogs
 
             SendButton = new MirButton
             {
-                Index = 607,
-                HoverIndex = 608,
-                PressedIndex = 609,
+                Index = 228,
+                HoverIndex = 229,
+                PressedIndex = 230,
+                Location = new Point(54, 307),
+                Library = Libraries.GameScene,
                 Parent = this,
-                Library = Libraries.Title,
                 Sound = SoundList.ButtonA,
-                Location = new Point(30, 265)
             };
             SendButton.Click += (o, e) =>
             {
@@ -621,17 +621,37 @@ namespace Client.MirScenes.Dialogs
                 Hide();
             };
 
+            SendLabel = new MirLabel
+            {
+                Location = new Point(0, -2),
+                Parent = SendButton,
+                Size = new Size(78, 20),
+                DrawFormat = TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter,
+                Text = "Send",
+                NotControl = true,
+            };
+
             CancelButton = new MirButton
             {
-                Index = 193,
-                HoverIndex = 194,
-                PressedIndex = 195,
+                Index = 228,
+                HoverIndex = 229,
+                PressedIndex = 230,
+                Location = new Point(143, 307),
+                Library = Libraries.GameScene,
                 Parent = this,
-                Library = Libraries.Title,
                 Sound = SoundList.ButtonA,
-                Location = new Point(135, 265)
             };
             CancelButton.Click += (o, e) => Hide();
+
+            CancelLabel = new MirLabel
+            {
+                Location = new Point(0, -2),
+                Parent = CancelButton,
+                Size = new Size(78, 20),
+                DrawFormat = TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter,
+                Text = "Cancel",
+                NotControl = true,
+            };
         }
 
         public void Hide()
@@ -946,7 +966,7 @@ namespace Client.MirScenes.Dialogs
 
     public class MailReadLetterDialog : MirImageControl
     {
-        MirLabel SenderNameLabel, DateSentLabel, MessageLabel;
+        MirLabel SenderNameLabel, DateSentLabel, MessageLabel, DeleteLabel, CancelLabel;
 
         MirButton DeleteButton, LockButton, CancelButton, CloseButton;
 
@@ -954,21 +974,21 @@ namespace Client.MirScenes.Dialogs
 
         public MailReadLetterDialog()
         {
-            Index = 672;
-            Library = Libraries.Title;
-            Size = new Size(236, 300);
+            Index = 277;
+            Library = Libraries.GameScene;
+            Size = new Size(275, 344);
             Movable = true;
             Sort = true;
             Location = new Point(100, 100);
 
             CloseButton = new MirButton
             {
-                HoverIndex = 361,
-                Index = 360,
-                Location = new Point(Size.Width - 27, 3),
-                Library = Libraries.Prguse2,
+                HoverIndex = 186,
+                Index = 185,
+                Location = new Point(228, 24),
+                Library = Libraries.GameScene,
                 Parent = this,
-                PressedIndex = 362,
+                PressedIndex = 187,
                 Sound = SoundList.ButtonA,
             };
             CloseButton.Click += (o, e) => Hide();
@@ -978,7 +998,7 @@ namespace Client.MirScenes.Dialogs
                 Parent = this,
                 Font = new Font(Settings.FontName, 8F),
                 ForeColour = Color.White,
-                Location = new Point(70, 35),
+                Location = new Point(95, 67),
                 Size = new Size(150, 15),
                 NotControl = true,
             };
@@ -988,7 +1008,7 @@ namespace Client.MirScenes.Dialogs
                 Parent = this,
                 Font = new Font(Settings.FontName, 8F),
                 ForeColour = Color.White,
-                Location = new Point(70, 56),
+                Location = new Point(95, 88),
                 Size = new Size(150, 15),
                 NotControl = true,
             };
@@ -998,19 +1018,19 @@ namespace Client.MirScenes.Dialogs
                 ForeColour = Color.White,
                 Parent = this,
                 Font = new Font(Settings.FontName, 8F),
-                Location = new Point(15, 92),
+                Location = new Point(34, 122),
                 Size = new Size(202, 165),
             };
 
             DeleteButton = new MirButton
             {
-                Index = 540,
-                HoverIndex = 541,
-                PressedIndex = 542,
+                Index = 228,
+                HoverIndex = 229,
+                PressedIndex = 230,
+                Location = new Point(54, 307),
+                Library = Libraries.GameScene,
                 Parent = this,
-                Library = Libraries.Title,
                 Sound = SoundList.ButtonA,
-                Location = new Point(12, 265)
             };
             DeleteButton.Click += (o, e) =>
             {
@@ -1023,36 +1043,56 @@ namespace Client.MirScenes.Dialogs
                 Hide();
             };
 
-            LockButton = new MirButton
+            DeleteLabel = new MirLabel
             {
-                Index = 686,
-                HoverIndex = 687,
-                PressedIndex = 688,
-                Parent = this,
-                Library = Libraries.Title,
-                Sound = SoundList.ButtonA,
-                Location = new Point(81, 265)
+                Location = new Point(0, -2),
+                Parent = DeleteButton,
+                Size = new Size(78, 20),
+                DrawFormat = TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter,
+                Text = "Delete",
+                NotControl = true,
             };
-            LockButton.Click += (o, e) =>
-            {
-                Mail.Locked = !Mail.Locked;
 
-                //GameScene.Scene.MailListDialog.SelectedMail = null;
+            //LockButton = new MirButton
+            //{
+            //    Index = 686,
+            //    HoverIndex = 687,
+            //    PressedIndex = 688,
+            //    Parent = this,
+            //    Library = Libraries.Title,
+            //    Sound = SoundList.ButtonA,
+            //    Location = new Point(81, 265)
+            //};
+            //LockButton.Click += (o, e) =>
+            //{
+            //    Mail.Locked = !Mail.Locked;
 
-                Network.Enqueue(new C.LockMail { MailID = Mail.MailID, Lock = Mail.Locked });
-            };
+            //    //GameScene.Scene.MailListDialog.SelectedMail = null;
+
+            //    Network.Enqueue(new C.LockMail { MailID = Mail.MailID, Lock = Mail.Locked });
+            //};
 
             CancelButton = new MirButton
             {
-                Index = 193,
-                HoverIndex = 194,
-                PressedIndex = 195,
+                Index = 228,
+                HoverIndex = 229,
+                PressedIndex = 230,
+                Location = new Point(143, 307),
+                Library = Libraries.GameScene,
                 Parent = this,
-                Library = Libraries.Title,
                 Sound = SoundList.ButtonA,
-                Location = new Point(154, 265)
             };
             CancelButton.Click += (o, e) => Hide();
+
+            CancelLabel = new MirLabel
+            {
+                Location = new Point(0, -2),
+                Parent = CancelButton,
+                Size = new Size(78, 20),
+                DrawFormat = TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter,
+                Text = "Cancel",
+                NotControl = true,
+            };
         }
 
         public void ReadMail(ClientMail mail)

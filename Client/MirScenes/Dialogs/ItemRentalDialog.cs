@@ -16,37 +16,38 @@ namespace Client.MirScenes.Dialogs
     {
         private readonly ItemRow[] _itemRows = new ItemRow[3];
         private DateTime _lastRequestTime = DateTime.Now;
+        public MirLabel RentLabel;
 
         public ItemRentalDialog()
         {
-            Index = 1;
-            Library = Libraries.Prguse3;
+            Index = 267;
+            Library = Libraries.GameScene;
             Movable = true;
-            Size = new Size(400, 174);
+            Size = new Size(422, 220);
             Location = new Point((Settings.ScreenWidth - Size.Width) / 2, (Settings.ScreenHeight - Size.Height) / 2);
             Sort = true;
 
             // Title
 
-            var windowTitle = new MirImageControl
-            {
-                Index = 0,
-                Library = Libraries.Prguse3,
-                Location = new Point(22, 8),
-                Parent = this
-            };
+            //var windowTitle = new MirImageControl
+            //{
+            //    Index = 0,
+            //    Library = Libraries.Prguse3,
+            //    Location = new Point(22, 8),
+            //    Parent = this
+            //};
 
             // Rented Tab
 
             var rentedTabButton = new MirButton
             {
-                Index = 2,
-                HoverIndex = 2,
-                Location = new Point(8, 32),
-                Size = new Size(72, 23),
-                Library = Libraries.Prguse3,
+                Index = 227,
+                HoverIndex = 227,
+                Location = new Point(20, 51),
+                Size = new Size(82, 21),
+                Library = Libraries.GameScene,
                 Parent = this,
-                PressedIndex = 2,
+                PressedIndex = 227,
                 Sound = SoundList.ButtonA,
                 Enabled = false
             };
@@ -61,20 +62,21 @@ namespace Client.MirScenes.Dialogs
                 Library = Libraries.Prguse3,
                 Parent = this,
                 Sound = SoundList.ButtonA,
-                Enabled = false
+                Enabled = false,
+                Visible = false
             };
 
             // Rent Item Button
 
             var rentItemButton = new MirButton
             {
-                Index = 4,
-                HoverIndex = 5,
-                Location = new Point(295, 144),
-                Size = new Size(85, 29),
-                Library = Libraries.Prguse3,
+                Index = 228,
+                HoverIndex = 229,
+                Location = new Point(307, 173),
+                Size = new Size(78, 20),
+                Library = Libraries.GameScene,
                 Parent = this,
-                PressedIndex = 6,
+                PressedIndex = 230,
                 Sound = SoundList.ButtonA,
             };
             rentItemButton.Click += (o, e) =>
@@ -82,16 +84,26 @@ namespace Client.MirScenes.Dialogs
                 Network.Enqueue(new C.ItemRentalRequest());
             };
 
+            RentLabel = new MirLabel
+            {
+                Location = new Point(0, -2),
+                Parent = rentItemButton,
+                Size = new Size(78, 20),
+                DrawFormat = TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter,
+                Text = "Rent",
+                NotControl = true,
+            };
+
             // Close Button
 
             var closeButton = new MirButton
             {
-                HoverIndex = 361,
-                Index = 360,
-                Location = new Point(375, 3),
-                Library = Libraries.Prguse2,
+                HoverIndex = 186,
+                Index = 185,
+                Location = new Point(375, 24),
+                Library = Libraries.GameScene,
                 Parent = this,
-                PressedIndex = 362,
+                PressedIndex = 187,
                 Sound = SoundList.ButtonA,
             };
             closeButton.Click += (o, e) => Toggle();
@@ -103,7 +115,7 @@ namespace Client.MirScenes.Dialogs
                 _itemRows[i] = new ItemRow
                 {
                     Parent = this,
-                    Location = new Point(0, 78 + i * 21),
+                    Location = new Point(0, 110 + i * 21),
                     Size = new Size(383, 21)
                 };
             }
@@ -148,7 +160,7 @@ namespace Client.MirScenes.Dialogs
                 _itemNameLabel = new MirLabel
                 {
                     Size = new Size(128, 20),
-                    Location = new Point(5, 0),
+                    Location = new Point(0, 0),
                     DrawFormat = TextFormatFlags.HorizontalCenter,
                     Parent = this,
                     NotControl = true,
@@ -157,7 +169,7 @@ namespace Client.MirScenes.Dialogs
                 _rentingPlayerLabel = new MirLabel
                 {
                     Size = new Size(128, 20),
-                    Location = new Point(137, 0),
+                    Location = new Point(147, 0),
                     DrawFormat = TextFormatFlags.HorizontalCenter,
                     Parent = this,
                     NotControl = true,
@@ -166,7 +178,7 @@ namespace Client.MirScenes.Dialogs
                 _returnDateLabel = new MirLabel
                 {
                     Size = new Size(128, 20),
-                    Location = new Point(264, 0),
+                    Location = new Point(275, 0),
                     DrawFormat = TextFormatFlags.HorizontalCenter,
                     Parent = this,
                     NotControl = true,

@@ -16,28 +16,27 @@ namespace Client.MirScenes.Dialogs
     public sealed class TradeDialog : MirImageControl
     {
         public MirItemCell[] Grid;
-        public MirLabel NameLabel, GoldLabel;
+        public MirLabel NameLabel, GoldLabel, ConfirmLabel;
         public MirButton ConfirmButton, CloseButton;
 
         public TradeDialog()
         {
-            Index = 389;
-            Library = Libraries.Prguse;
+            Index = 98;
+            Library = Libraries.GameScene;
             Movable = true;
-            Size = new Size(204, 152);
+            Size = new Size(244, 200);
             Location = new Point((Settings.ScreenWidth / 2) - Size.Width - 10, Settings.ScreenHeight - 350);
             Sort = true;
 
             #region Buttons
             ConfirmButton = new MirButton
             {
-                Index = 520,
-                HoverIndex = 521,
-                Location = new Point(135, 120),
-                Size = new Size(48, 25),
-                Library = Libraries.Title,
+                Index = 228,
+                HoverIndex = 229,
+                PressedIndex = 230,
+                Location = new Point(141, 140),
+                Library = Libraries.GameScene,
                 Parent = this,
-                PressedIndex = 522,
                 Sound = SoundList.ButtonA,
             };
             ConfirmButton.Click += (o, e) => 
@@ -46,14 +45,24 @@ namespace Client.MirScenes.Dialogs
                 Network.Enqueue(new C.TradeConfirm { Locked = GameScene.User.TradeLocked });
             };
 
+            ConfirmLabel = new MirLabel
+            {
+                Location = new Point(0, -2),
+                Parent = ConfirmButton,
+                Size = new Size(78, 20),
+                DrawFormat = TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter,
+                Text = "Confirm",
+                NotControl = true,
+            };
+
             CloseButton = new MirButton
             {
-                HoverIndex = 361,
-                Index = 360,
-                Location = new Point(Size.Width - 23, 3),
-                Library = Libraries.Prguse2,
+                HoverIndex = 186,
+                Index = 185,
+                Location = new Point(197, 24),
+                Library = Libraries.GameScene,
                 Parent = this,
-                PressedIndex = 362,
+                PressedIndex = 187,
                 Sound = SoundList.ButtonA,
             };
             CloseButton.Click += (o, e) =>
@@ -69,8 +78,8 @@ namespace Client.MirScenes.Dialogs
             NameLabel = new MirLabel
             {
                 Parent = this,
-                Location = new Point(20, 10),
-                Size = new Size(150, 14),
+                Location = new Point(21, 23),
+                Size = new Size(170, 23),
                 DrawFormat = TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter,
                 NotControl = true,
             };
@@ -79,9 +88,9 @@ namespace Client.MirScenes.Dialogs
             {
                 DrawFormat = TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter,
                 Font = new Font(Settings.FontName, 8F),
-                Location = new Point(35, 123),
+                Location = new Point(28, 143),
                 Parent = this,
-                Size = new Size(90, 15),
+                Size = new Size(90, 14),
                 Sound = SoundList.Gold,
             };
             GoldLabel.Click += (o, e) =>
@@ -119,7 +128,7 @@ namespace Client.MirScenes.Dialogs
                         ItemSlot = 2 * x + y,
                         GridType = MirGridType.Trade,
                         Parent = this,
-                        Location = new Point(x * 36 + 10 + x, y * 32 + 39 + y),
+                        Location = new Point(x * 36 + 32 + x, y * 36 + 63 + y),
                     };
                 }
             }
@@ -132,11 +141,11 @@ namespace Client.MirScenes.Dialogs
 
             if (GameScene.User.TradeLocked)
             {
-                ConfirmButton.Index = 521;
+                ConfirmButton.Index = 229;
             }
             else
             {
-                ConfirmButton.Index = 520;
+                ConfirmButton.Index = 228;
             }
 
             //if (!cancelled)
@@ -221,10 +230,10 @@ namespace Client.MirScenes.Dialogs
 
         public GuestTradeDialog()
         {
-            Index = 390;
-            Library = Libraries.Prguse;
+            Index = 98;
+            Library = Libraries.GameScene;
             Movable = true;
-            Size = new Size(204, 152);
+            Size = new Size(244, 200);
             Location = new Point((Settings.ScreenWidth / 2) + 10, Settings.ScreenHeight - 350);
             Sort = true;
 
@@ -232,8 +241,8 @@ namespace Client.MirScenes.Dialogs
             GuestNameLabel = new MirLabel
             {
                 Parent = this,
-                Location = new Point(0, 10),
-                Size = new Size(204, 14),
+                Location = new Point(21, 23),
+                Size = new Size(170, 23),
                 DrawFormat = TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter,
                 NotControl = true,
             };
@@ -242,11 +251,10 @@ namespace Client.MirScenes.Dialogs
             {
                 DrawFormat = TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter,
                 Font = new Font(Settings.FontName, 8F),
-                Location = new Point(35, 123),
+                Location = new Point(28, 143),
                 Parent = this,
-                Size = new Size(90, 15),
+                Size = new Size(90, 14),
                 Sound = SoundList.Gold,
-                NotControl = true,
             };
             #endregion
 
@@ -262,7 +270,7 @@ namespace Client.MirScenes.Dialogs
                         ItemSlot = 2 * x + y,
                         GridType = MirGridType.GuestTrade,
                         Parent = this,
-                        Location = new Point(x * 36 + 10 + x, y * 32 + 39 + y),
+                        Location = new Point(x * 36 + 32 + x, y * 36 + 63 + y),
                     };
                 }
             }

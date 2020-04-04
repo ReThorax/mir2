@@ -28,28 +28,28 @@ namespace Client.MirScenes.Dialogs
 
         public RelationshipDialog()
         {
-            Index = 583;
-            Library = Libraries.Prguse;
+            Index = 261;
+            Library = Libraries.GameScene;
             Movable = true;
             Sort = true;
             Location = Center;
 
-            TitleLabel = new MirImageControl
-            {
-                Index = 52,
-                Library = Libraries.Title,
-                Location = new Point(18, 8),
-                Parent = this
-            };
+            //TitleLabel = new MirImageControl
+            //{
+            //    Index = 52,
+            //    Library = Libraries.Title,
+            //    Location = new Point(18, 8),
+            //    Parent = this
+            //};
 
             CloseButton = new MirButton
             {
-                HoverIndex = 361,
-                Index = 360,
-                Location = new Point(260, 3),
-                Library = Libraries.Prguse2,
+                HoverIndex = 186,
+                Index = 185,
+                Location = new Point(203, 25),
+                Library = Libraries.GameScene,
                 Parent = this,
-                PressedIndex = 362,
+                PressedIndex = 187,
                 Sound = SoundList.ButtonA,
             };
             CloseButton.Click += (o, e) => Hide();
@@ -58,12 +58,12 @@ namespace Client.MirScenes.Dialogs
             {
                 HoverIndex = 611,
                 Index = 610,
-                Location = new Point(50, 164),
+                Location = new Point(52, 177),
                 Library = Libraries.Prguse,
                 Parent = this,
                 PressedIndex = 612,
                 Sound = SoundList.ButtonA,
-                Hint = GameLanguage.SwitchMarriage
+                Hint = "Allow/Block Marriage"
             };
             AllowButton.Click += (o, e) => Network.Enqueue(new C.ChangeMarriage());
 
@@ -71,12 +71,12 @@ namespace Client.MirScenes.Dialogs
             {
                 HoverIndex = 601,
                 Index = 600,
-                Location = new Point(85, 164),
+                Location = new Point(83, 177),
                 Library = Libraries.Prguse,
                 Parent = this,
                 PressedIndex = 602,
                 Sound = SoundList.ButtonA,
-                Hint = GameLanguage.RequestMarriage
+                Hint = "Request Marriage"
             };
             RequestButton.Click += (o, e) =>
             {
@@ -93,12 +93,12 @@ namespace Client.MirScenes.Dialogs
             {
                 HoverIndex = 617,
                 Index = 616,
-                Location = new Point(120, 164),
+                Location = new Point(114, 177),
                 Library = Libraries.Prguse,
                 Parent = this,
                 PressedIndex = 618,
                 Sound = SoundList.ButtonA,
-                Hint = GameLanguage.RequestDivorce
+                Hint = "Request Divorce"
             };
             DivorceButton.Click += (o, e) =>
             {
@@ -115,12 +115,12 @@ namespace Client.MirScenes.Dialogs
             {
                 HoverIndex = 438,
                 Index = 437,
-                Location = new Point(155, 164),
+                Location = new Point(145, 177),
                 Library = Libraries.Prguse,
                 Parent = this,
                 PressedIndex = 439,
                 Sound = SoundList.ButtonA,
-                Hint = GameLanguage.MailLover
+                Hint = "Mail Lover"
             };
             MailButton.Click += (o, e) =>
             {
@@ -137,12 +137,12 @@ namespace Client.MirScenes.Dialogs
             {
                 HoverIndex = 567,
                 Index = 566,
-                Location = new Point(190, 164),
+                Location = new Point(176, 177),
                 Library = Libraries.Prguse,
                 Parent = this,
                 PressedIndex = 568,
                 Sound = SoundList.ButtonA,
-                Hint = GameLanguage.WhisperLover
+                Hint = "Whisper Lover"
             };
             WhisperButton.Click += (o, e) =>
             {
@@ -166,7 +166,7 @@ namespace Client.MirScenes.Dialogs
 
             LoverNameLabel = new MirLabel
             {
-                Location = new Point(30, 40),
+                Location = new Point(30, 55),
                 Size = new Size(200, 30),
                 BackColour = Color.Empty,
                 ForeColour = Color.LightGray,
@@ -178,7 +178,7 @@ namespace Client.MirScenes.Dialogs
 
             LoverDateLabel = new MirLabel
             {
-                Location = new Point(30, 65),
+                Location = new Point(30, 80),
                 Size = new Size(200, 30),
                 BackColour = Color.Empty,
                 ForeColour = Color.LightGray,
@@ -190,7 +190,7 @@ namespace Client.MirScenes.Dialogs
 
             LoverLengthLabel = new MirLabel
             {
-                Location = new Point(30, 90),
+                Location = new Point(30, 105),
                 Size = new Size(200, 30),
                 BackColour = Color.Empty,
                 ForeColour = Color.LightGray,
@@ -202,7 +202,7 @@ namespace Client.MirScenes.Dialogs
 
             LoverOnlineLabel = new MirLabel
             {
-                Location = new Point(30, 115),
+                Location = new Point(30, 130),
                 Size = new Size(200, 30),
                 BackColour = Color.Empty,
                 ForeColour = Color.LightGray,
@@ -251,7 +251,7 @@ namespace Client.MirScenes.Dialogs
 
 
                 LoverOnlineLabel.Text = "Location: ";
-                AllowButton.Hint = GameLanguage.SwitchMarriage;
+                AllowButton.Hint = "Allow/Block Marriage";
             }
             else
             {

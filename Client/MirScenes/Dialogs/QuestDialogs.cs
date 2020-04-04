@@ -19,7 +19,7 @@ namespace Client.MirScenes.Dialogs
     public sealed class QuestListDialog : MirImageControl
     {
         private readonly MirButton _acceptButton, _finishButton;
-        private MirLabel _availableQuestLabel;
+        private MirLabel _availableQuestLabel, LeaveLabel, FinishLabel, AcceptLabel;
 
         public List<ClientQuestProgress> Quests = new List<ClientQuestProgress>();
 
@@ -37,19 +37,19 @@ namespace Client.MirScenes.Dialogs
 
         public QuestListDialog()
         {
-            Index = 950;
-            Library = Libraries.Prguse;
+            Index = 273;
+            Library = Libraries.GameScene;
             Movable = true;
             Sort = true;
             Location = new Point(GameScene.Scene.NPCDialog.Size.Width + 47, 0);
 
-            MirImageControl TitleLabel = new MirImageControl
-            {
-                Index = 14,
-                Library = Libraries.Title,
-                Location = new Point(18, 9), //Y = 9
-                Parent = this
-            };
+            //MirImageControl TitleLabel = new MirImageControl
+            //{
+            //    Index = 14,
+            //    Library = Libraries.Title,
+            //    Location = new Point(18, 9), //Y = 9
+            //    Parent = this
+            //};
 
             #region QuestSelection
 
@@ -60,7 +60,7 @@ namespace Client.MirScenes.Dialogs
                 PressedIndex = 953,
                 Library = Libraries.Prguse,
                 Parent = this,
-                Location = new Point(291, 35),
+                Location = new Point(300, 50),
                 Sound = SoundList.ButtonA,
             };
             upQuestButton.Click += (o, e) =>
@@ -85,7 +85,7 @@ namespace Client.MirScenes.Dialogs
                 PressedIndex = 959,
                 Library = Libraries.Prguse,
                 Parent = this,
-                Location = new Point(291, 83),
+                Location = new Point(300, 99),
                 Sound = SoundList.ButtonA,
             };
             downQuestButton.Click += (o, e) =>
@@ -108,12 +108,12 @@ namespace Client.MirScenes.Dialogs
 
             _acceptButton = new MirButton
             {
-                Index = 270,
-                HoverIndex = 271,
-                PressedIndex = 272,
-                Library = Libraries.Title,
+                Index = 228,
+                Location = new Point(39, 461),
+                Library = Libraries.GameScene,
                 Parent = this,
-                Location = new Point(40, 436),
+                PressedIndex = 230,
+                HoverIndex = 229,
                 Sound = SoundList.ButtonA,
             };
             _acceptButton.Click += (o, e) =>
@@ -124,14 +124,25 @@ namespace Client.MirScenes.Dialogs
                 //Hide();
             };
 
+            AcceptLabel = new MirLabel
+            {
+                Size = new Size(78, 20),
+                Parent = _acceptButton,
+                Location = new Point(0, -2),
+                NotControl = true,
+                Text = "Accept",
+                DrawFormat = TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter,
+                Visible = false,
+            };
+
             _finishButton = new MirButton
             {
-                Index = 273,
-                HoverIndex = 274,
-                PressedIndex = 275,
-                Library = Libraries.Title,
+                Index = 228,
+                Location = new Point(128, 461),
+                Library = Libraries.GameScene,
                 Parent = this,
-                Location = new Point(40, 436),
+                PressedIndex = 230,
+                HoverIndex = 229,
                 Sound = SoundList.ButtonA,
                 Visible = false
             };
@@ -150,17 +161,38 @@ namespace Client.MirScenes.Dialogs
                 //Hide();
             };
 
+            FinishLabel = new MirLabel
+            {
+                Size = new Size(78, 20),
+                Parent = _finishButton,
+                Location = new Point(0, -2),
+                NotControl = true,
+                Text = "Finish",
+                DrawFormat = TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter,
+                Visible = false,
+            };
+
             MirButton leaveButton = new MirButton
             {
-                Index = 276,
-                HoverIndex = 277,
-                PressedIndex = 278,
-                Library = Libraries.Title,
+                Index = 228,
+                Location = new Point(217, 461),
+                Library = Libraries.GameScene,
                 Parent = this,
-                Location = new Point(205, 436),
+                PressedIndex = 230,
+                HoverIndex = 229,
                 Sound = SoundList.ButtonA,
             };
             leaveButton.Click += (o, e) => Hide();
+
+            LeaveLabel = new MirLabel
+            {
+                Size = new Size(78, 20),
+                Parent = leaveButton,
+                Location = new Point(0, -2),
+                NotControl = true,
+                Text = "Close",
+                DrawFormat = TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter
+            };
 
             #endregion
 
@@ -174,7 +206,7 @@ namespace Client.MirScenes.Dialogs
                 Library = Libraries.Prguse2,
                 Parent = this,
                 Size = new Size(16, 14),
-                Location = new Point(292, 136),
+                Location = new Point(301, 152),
                 Sound = SoundList.ButtonA,
                 Visible = true
             };
@@ -187,7 +219,7 @@ namespace Client.MirScenes.Dialogs
                 PressedIndex = 209,
                 Parent = this,
                 Size = new Size(16, 14),
-                Location = new Point(292, 282),
+                Location = new Point(301, 298),
                 Sound = SoundList.ButtonA,
                 Visible = true
             };
@@ -198,7 +230,7 @@ namespace Client.MirScenes.Dialogs
                 HoverIndex = 206,
                 PressedIndex = 206,
                 Library = Libraries.Prguse2,
-                Location = new Point(292, 149),
+                Location = new Point(301, 167),
                 Parent = this,
                 Movable = true,
                 Sound = SoundList.None,
@@ -210,9 +242,9 @@ namespace Client.MirScenes.Dialogs
                 Font = new Font(Settings.FontName, 9F),
                 Parent = this,
                 Size = new Size(280, 160),
-                Location = new Point(10, 135),
-                PosMinY = 149,
-                PosMaxY = 263
+                Location = new Point(26, 156),
+                PosMinY = 167,
+                PosMaxY = 278
             };
 
             #endregion
@@ -224,7 +256,7 @@ namespace Client.MirScenes.Dialogs
                 Parent = this,
                 Visible = false,
                 Size = new Size(313, 130),
-                Location = new Point(5, 307)
+                Location = new Point(15, 322)
             };
 
             #endregion
@@ -234,32 +266,33 @@ namespace Client.MirScenes.Dialogs
                 Font = new Font(Settings.FontName, 8F),
                 Parent = this,
                 AutoSize = true,
-                Location = new Point(210, 8)
+                Location = new Point(230, 27)
             };
 
             MirButton closeButton = new MirButton
             {
-                Index = 360,
-                HoverIndex = 361,
-                PressedIndex = 362,
-                Library = Libraries.Prguse2,
+                HoverIndex = 186,
+                Index = 185,
+                Location = new Point(286, 24),
+
+                Library = Libraries.GameScene,
                 Parent = this,
-                Location = new Point(289, 3),
+                PressedIndex = 187,
                 Sound = SoundList.ButtonA,
             };
             closeButton.Click += (o, e) => Hide();
 
-            MirButton helpButton = new MirButton
-            {
-                Index = 257,
-                HoverIndex = 258,
-                PressedIndex = 259,
-                Library = Libraries.Prguse2,
-                Parent = this,
-                Location = new Point(266, 3),
-                Sound = SoundList.ButtonA,
-            };
-            helpButton.Click += (o, e) => GameScene.Scene.HelpDialog.DisplayPage("Quests");
+            //MirButton helpButton = new MirButton
+            //{
+            //    Index = 257,
+            //    HoverIndex = 258,
+            //    PressedIndex = 259,
+            //    Library = Libraries.Prguse2,
+            //    Parent = this,
+            //    Location = new Point(266, 3),
+            //    Sound = SoundList.ButtonA,
+            //};
+            //helpButton.Click += (o, e) => GameScene.Scene.HelpDialog.DisplayPage("Quests");
 
         }
 
@@ -349,7 +382,7 @@ namespace Client.MirScenes.Dialogs
                 Rows[i] = new QuestRow
                 {
                     Quest = Quests[i + StartIndex],
-                    Location = new Point(9, 36 + i * 19),
+                    Location = new Point(20, 52 + i * 19),
                     Parent = this,
                 };
                 Rows[i].Click += (o, e) =>
@@ -413,7 +446,9 @@ namespace Client.MirScenes.Dialogs
         public void ReDisplayButtons()
         {
             _acceptButton.Visible = false;
+            AcceptLabel.Visible = false;
             _finishButton.Visible = false;
+            FinishLabel.Visible = false;
 
             if (Reward != null)
             {
@@ -424,10 +459,17 @@ namespace Client.MirScenes.Dialogs
             if (SelectedQuest != null)
             {
                 if (!SelectedQuest.Taken && MapControl.User.CurrentQuests.Count < Globals.MaxConcurrentQuests)
+                {
                     _acceptButton.Visible = true;
+                    AcceptLabel.Visible = true;
+                    
+                }
 
                 if (SelectedQuest.Completed && Reward != null)
+                {
                     _finishButton.Visible = true;
+                    FinishLabel.Visible = true;
+                }
             }
         }
 
@@ -471,22 +513,23 @@ namespace Client.MirScenes.Dialogs
         public ClientQuestProgress Quest;
         public QuestMessage Message;
         public QuestRewards Reward;
+        public MirLabel CancelLabel, ShareLabel, PauseLabel;
 
         public QuestDetailDialog()
         {
-            Index = 960;
-            Library = Libraries.Prguse;
+            Index = 274;
+            Library = Libraries.GameScene;
             Movable = true;
             Sort = true;
             Location = new Point(Settings.ScreenWidth / 2 + 20, 60);
 
-            MirImageControl TitleLabel = new MirImageControl
-            {
-                Index = 16,
-                Library = Libraries.Title,
-                Location = new Point(18, 9),
-                Parent = this
-            };
+            //MirImageControl TitleLabel = new MirImageControl
+            //{
+            //    Index = 16,
+            //    Library = Libraries.Title,
+            //    Location = new Point(18, 9),
+            //    Parent = this
+            //};
 
             #region Message Area
 
@@ -498,7 +541,7 @@ namespace Client.MirScenes.Dialogs
                 Library = Libraries.Prguse2,
                 Parent = this,
                 Size = new Size(16, 14),
-                Location = new Point(293, 33),
+                Location = new Point(301, 51),
                 Sound = SoundList.ButtonA,
                 Visible = true
             };
@@ -511,7 +554,7 @@ namespace Client.MirScenes.Dialogs
                 PressedIndex = 209,
                 Parent = this,
                 Size = new Size(16, 14),
-                Location = new Point(293, 280),
+                Location = new Point(301, 298),
                 Sound = SoundList.ButtonA,
                 Visible = true
             };
@@ -522,7 +565,7 @@ namespace Client.MirScenes.Dialogs
                 HoverIndex = 206,
                 PressedIndex = 206,
                 Library = Libraries.Prguse2,
-                Location = new Point(293, 48),
+                Location = new Point(301, 65),
                 Parent = this,
                 Movable = true,
                 Sound = SoundList.None,
@@ -534,9 +577,9 @@ namespace Client.MirScenes.Dialogs
                 Font = new Font(Settings.FontName, 9F),
                 Parent = this,
                 Size = new Size(280, 320),
-                Location = new Point(10, 35),
-                PosMinY = 46,
-                PosMaxY = 261
+                Location = new Point(20, 54),
+                PosMinY = 65,
+                PosMaxY = 277
             };
 
             #endregion
@@ -546,8 +589,8 @@ namespace Client.MirScenes.Dialogs
             Reward = new QuestRewards
             {
                 Parent = this,
-                Size = new Size(315, 130),
-                Location = new Point(5, 307)
+                Size = new Size(313, 130),
+                Location = new Point(15, 322)
             };
 
             #endregion
@@ -556,39 +599,59 @@ namespace Client.MirScenes.Dialogs
 
             _shareButton = new MirButton
             {
-                Index = 616,
-                HoverIndex = 617,
-                PressedIndex = 618,
-                Library = Libraries.Title,
+                Index = 228,
+                Location = new Point(39, 461),
+                Library = Libraries.GameScene,
                 Parent = this,
-                Location = new Point(40, 436),
-                Sound = SoundList.ButtonA
+                PressedIndex = 230,
+                HoverIndex = 229,
+                Sound = SoundList.ButtonA,
             };
             _shareButton.Click += (o, e) =>
             {
                 Network.Enqueue(new C.ShareQuest { QuestIndex = Quest.Id });
             };
 
+            ShareLabel = new MirLabel
+            {
+                Size = new Size(78, 20),
+                Parent = _shareButton,
+                Location = new Point(0, -2),
+                NotControl = true,
+                Text = "Share",
+                DrawFormat = TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter
+            };
+
             _pauseButton = new MirButton
             {
-                Index = 270,
-                HoverIndex = 271,
-                PressedIndex = 272,
-                Library = Libraries.Title,
+                Index = 228,
+                Location = new Point(128, 461),
+                Library = Libraries.GameScene,
                 Parent = this,
-                Location = new Point(120, 436),
+                PressedIndex = 230,
+                HoverIndex = 229,
                 Sound = SoundList.ButtonA,
                 Visible = false
             };
 
+            PauseLabel = new MirLabel
+            {
+                Size = new Size(78, 20),
+                Parent = _pauseButton,
+                Location = new Point(0, -2),
+                NotControl = true,
+                Text = "Pause",
+                DrawFormat = TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter
+            };
+
             _cancelButton = new MirButton
             {
-                Index = 203,
-                HoverIndex = 204,
-                PressedIndex = 205,
-                Library = Libraries.Title,
+                Index = 228,
+                Location = new Point(217, 461),
+                Library = Libraries.GameScene,
                 Parent = this,
-                Location = new Point(200, 436),
+                PressedIndex = 230,
+                HoverIndex = 229,
                 Sound = SoundList.ButtonA,
             };
             _cancelButton.Click += (o, e) =>
@@ -603,16 +666,27 @@ namespace Client.MirScenes.Dialogs
                 messageBox.Show();
             };
 
+            CancelLabel = new MirLabel
+            {
+                Size = new Size(78, 20),
+                Parent = _cancelButton,
+                Location = new Point(0, -2),
+                NotControl = true,
+                Text = "Cancel",
+                DrawFormat = TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter
+            };
+
             #endregion
 
             MirButton closeButton = new MirButton
             {
-                Index = 360,
-                HoverIndex = 361,
-                PressedIndex = 362,
-                Library = Libraries.Prguse2,
+                HoverIndex = 186,
+                Index = 185,
+                Location = new Point(286, 24),
+
+                Library = Libraries.GameScene,
                 Parent = this,
-                Location = new Point(289, 3),
+                PressedIndex = 187,
                 Sound = SoundList.ButtonA,
             };
             closeButton.Click += (o, e) => Hide();
@@ -662,52 +736,62 @@ namespace Client.MirScenes.Dialogs
         public List<string> ExpandedGroups = new List<string>();
 
         private MirButton _closeButton;
-        private MirLabel _takenQuestsLabel;
+        private MirLabel _takenQuestsLabel, CloseLabel, AcceptLabel;
 
         public QuestDiaryDialog()
         {
-            Index = 961;
-            Library = Libraries.Prguse;
+            Index = 272;
+            Library = Libraries.GameScene;
             Movable = true;
             Sort = true;
             Location = new Point(Settings.ScreenWidth / 2 - 300 - 20, 60);
 
-            MirImageControl TitleLabel = new MirImageControl
-            {
-                Index = 15,
-                Library = Libraries.Title,
-                Location = new Point(18, 9),
-                Parent = this
-            };
+            //MirImageControl TitleLabel = new MirImageControl
+            //{
+            //    Index = 15,
+            //    Library = Libraries.Title,
+            //    Location = new Point(18, 9),
+            //    Parent = this
+            //};
 
             _takenQuestsLabel = new MirLabel
             {
                 Font = new Font(Settings.FontName, 8F),
                 Parent = this,
                 AutoSize = true,
-                Location = new Point(210, 7)
+                Location = new Point(230, 27)
             };
 
             _closeButton = new MirButton
             {
-                Index = 193,
-                HoverIndex = 194,
-                PressedIndex = 195,
-                Library = Libraries.Title,
+                Index = 228,
+                Location = new Point(213, 464),
+                Library = Libraries.GameScene,
                 Parent = this,
-                Location = new Point(200, 436),
+                PressedIndex = 230,
+                HoverIndex = 229,
                 Sound = SoundList.ButtonA,
             };
             _closeButton.Click += (o, e) => Hide();
 
+            CloseLabel = new MirLabel
+            {
+                Size = new Size(78, 20),
+                Parent = _closeButton,
+                Location = new Point(0, -2),
+                NotControl = true,
+                Text = "Close",
+                DrawFormat = TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter
+            };
+
             MirButton closeButton = new MirButton
             {
-                Index = 360,
-                HoverIndex = 361,
-                PressedIndex = 362,
-                Library = Libraries.Prguse2,
+                HoverIndex = 186,
+                Index = 185,
+                Location = new Point(286, 24),
+                Library = Libraries.GameScene,
                 Parent = this,
-                Location = new Point(289, 3),
+                PressedIndex = 187,
                 Sound = SoundList.ButtonA,
             };
             closeButton.Click += (o, e) => Hide();
@@ -724,7 +808,7 @@ namespace Client.MirScenes.Dialogs
 
             var groupedQuests = Quests.GroupBy(d => d.QuestInfo.Group).ToList();
 
-            int nextY = 40;
+            int nextY = 60;
 
             foreach (var group in groupedQuests)
             {
@@ -736,15 +820,15 @@ namespace Client.MirScenes.Dialogs
                 {
                     Parent = this,
                     Visible = true,
-                    Location = new Point(15, nextY),
+                    Location = new Point(25, nextY),
                 };
                 groupQuest.ExpandedChanged += (o, e) =>
                 {
-                    nextY = 40;
+                    nextY = 60;
 
                     foreach (QuestGroupQuestItem task in TaskGroups)
                     {
-                        task.Location = new Point(15, nextY);
+                        task.Location = new Point(25, nextY);
                         nextY += task.SizeY;
 
                         if (task.Expanded)

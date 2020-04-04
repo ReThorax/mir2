@@ -28,20 +28,20 @@ namespace Client.MirScenes.Dialogs
 
         public HelpDialog()
         {
-            Index = 920;
-            Library = Libraries.Prguse;
+            Index = 265;
+            Library = Libraries.GameScene;
             Movable = true;
             Sort = true;
 
             Location = Center;
 
-            MirImageControl TitleLabel = new MirImageControl
-            {
-                Index = 57,
-                Library = Libraries.Title,
-                Location = new Point(18, 9),
-                Parent = this
-            };
+            //MirImageControl TitleLabel = new MirImageControl
+            //{
+            //    Index = 57,
+            //    Library = Libraries.Title,
+            //    Location = new Point(18, 9),
+            //    Parent = this
+            //};
 
             PreviousButton = new MirButton
             {
@@ -51,7 +51,7 @@ namespace Client.MirScenes.Dialogs
                 Library = Libraries.Prguse2,
                 Parent = this,
                 Size = new Size(16, 16),
-                Location = new Point(210, 485),
+                Location = new Point(210, 487),
                 Sound = SoundList.ButtonA,
             };
             PreviousButton.Click += (o, e) =>
@@ -71,7 +71,7 @@ namespace Client.MirScenes.Dialogs
                 Library = Libraries.Prguse2,
                 Parent = this,
                 Size = new Size(16, 16),
-                Location = new Point(310, 485),
+                Location = new Point(310, 487),
                 Sound = SoundList.ButtonA,
             };
             NextButton.Click += (o, e) =>
@@ -90,18 +90,18 @@ namespace Client.MirScenes.Dialogs
                 DrawFormat = TextFormatFlags.VerticalCenter | TextFormatFlags.HorizontalCenter,
                 Parent = this,
                 NotControl = true,
-                Location = new Point(230, 480),
+                Location = new Point(230, 482),
                 Size = new Size(80, 20)
             };
 
             CloseButton = new MirButton
             {
-                HoverIndex = 361,
-                Index = 360,
-                Location = new Point(509, 3),
-                Library = Libraries.Prguse2,
+                HoverIndex = 186,
+                Index = 185,
+                Location = new Point(508, 25),
+                Library = Libraries.GameScene,
                 Parent = this,
-                PressedIndex = 362,
+                PressedIndex = 187,
                 Sound = SoundList.ButtonA,
             };
             CloseButton.Click += (o, e) => Hide();
@@ -113,7 +113,7 @@ namespace Client.MirScenes.Dialogs
 
         private void LoadImagePages()
         {
-            Point location = new Point(12, 35);
+            Point location = new Point(0, 0);
 
             Dictionary<string, string> keybinds = new Dictionary<string, string>();
 
@@ -316,7 +316,7 @@ namespace Client.MirScenes.Dialogs
                 Font = new Font(Settings.FontName, 10F),
                 Parent = this,
                 AutoSize = true,
-                Location = new Point(13, 75),
+                Location = new Point(24, 95),
                 Size = new Size(100, 30)
             };
 
@@ -328,7 +328,7 @@ namespace Client.MirScenes.Dialogs
                 Font = new Font(Settings.FontName, 10F),
                 Parent = this,
                 AutoSize = true,
-                Location = new Point(114, 75),
+                Location = new Point(125, 95),
                 Size = new Size(405, 30)
             };
         }
@@ -347,7 +347,7 @@ namespace Client.MirScenes.Dialogs
                     Font = new Font(Settings.FontName, 9F),
                     Parent = this,
                     AutoSize = true,
-                    Location = new Point(18, 107 + (20 * i)),
+                    Location = new Point(26, 125 + (20 * i)),
                     Size = new Size(95, 23),
                 };
 
@@ -359,7 +359,7 @@ namespace Client.MirScenes.Dialogs
                     Font = new Font(Settings.FontName, 9F),
                     Parent = this,
                     AutoSize = true,
-                    Location = new Point(119, 107 + (20 * i)),
+                    Location = new Point(125, 125 + (20 * i)),
                     Size = new Size(400, 23),
                 };
             }  
@@ -392,7 +392,7 @@ namespace Client.MirScenes.Dialogs
                 DrawFormat = TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter,
                 Parent = this,
                 Size = new System.Drawing.Size(242, 30),
-                Location = new Point(135, 4)
+                Location = new Point(157, 57)
             };
         }
 
@@ -400,7 +400,7 @@ namespace Client.MirScenes.Dialogs
         {
             if (ImageID < 0) return;
 
-            Libraries.Help.Draw(ImageID, new Point(DisplayLocation.X, DisplayLocation.Y + 40), Color.White, false);
+            Libraries.Help.Draw(ImageID, new Point(DisplayLocation.X + 23, DisplayLocation.Y + 92), Color.White, false);
         }
     }
 }

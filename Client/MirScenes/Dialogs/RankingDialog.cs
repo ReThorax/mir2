@@ -28,8 +28,8 @@ namespace Client.MirScenes.Dialogs
 
         public RankingDialog()
         {
-            Index = 1330;
-            Library = Libraries.Prguse2;
+            Index = 263;
+            Library = Libraries.GameScene;
             //Size = new Size(288, 324);
             Movable = true;
             Sort = true;
@@ -37,12 +37,12 @@ namespace Client.MirScenes.Dialogs
 
             CloseButton = new MirButton
             {
-                HoverIndex = 361,
-                Index = 360,
-                Location = new Point(365, 3),
-                Library = Libraries.Prguse2,
+                HoverIndex = 186,
+                Index = 185,
+                Location = new Point(370, 24),
+                Library = Libraries.GameScene,
                 Parent = this,
-                PressedIndex = 362,
+                PressedIndex = 187,
                 Sound = SoundList.ButtonA,
             };
             CloseButton.Click += (o, e) => Hide();
@@ -54,7 +54,7 @@ namespace Client.MirScenes.Dialogs
                 HoverIndex = 753,
                 Library = Libraries.Title,
                 Hint = "Overall TOP 20",
-                Location = new Point(10, 38),
+                Location = new Point(26, 59),
                 Parent = this,
                 Sound = SoundList.ButtonA,
 
@@ -67,7 +67,7 @@ namespace Client.MirScenes.Dialogs
                 HoverIndex = 762,
                 Library = Libraries.Title,
                 Hint = "TOP 20 Taoists",
-                Location = new Point(40, 38),
+                Location = new Point(98, 61),
                 Parent = this,
                 Sound = SoundList.ButtonA,
             };
@@ -79,7 +79,7 @@ namespace Client.MirScenes.Dialogs
                 HoverIndex = 756,
                 Library = Libraries.Title,
                 Hint = "TOP 20 Warriors",
-                Location = new Point(60, 38),
+                Location = new Point(54, 61),
                 Parent = this,
                 Sound = SoundList.ButtonA,
             };
@@ -91,7 +91,7 @@ namespace Client.MirScenes.Dialogs
                 HoverIndex = 765,
                 Library = Libraries.Title,
                 Hint = "TOP 20 Wizards",
-                Location = new Point(80, 38),
+                Location = new Point(78, 61),
                 Parent = this,
                 Sound = SoundList.ButtonA,
             };
@@ -103,7 +103,7 @@ namespace Client.MirScenes.Dialogs
                 HoverIndex = 759,
                 Library = Libraries.Title,
                 Hint = "TOP 20 Assasins",
-                Location = new Point(100, 38),
+                Location = new Point(122, 61),
                 Parent = this,
                 Sound = SoundList.ButtonA,
             };
@@ -115,7 +115,7 @@ namespace Client.MirScenes.Dialogs
                 HoverIndex = 768,
                 Library = Libraries.Title,
                 Hint = "TOP 20 Archers",
-                Location = new Point(120, 38),
+                Location = new Point(146, 61),
                 Parent = this,
                 Sound = SoundList.ButtonA,
             };
@@ -127,7 +127,7 @@ namespace Client.MirScenes.Dialogs
                 HoverIndex = 208,
                 PressedIndex = 209,
                 Library = Libraries.Prguse2,
-                Location = new Point(361, 386),
+                Location = new Point(376, 416),
                 Parent = this,
                 Sound = SoundList.ButtonA,
             };
@@ -139,7 +139,7 @@ namespace Client.MirScenes.Dialogs
                 HoverIndex = 198,
                 PressedIndex = 199,
                 Library = Libraries.Prguse2,
-                Location = new Point(361, 100),
+                Location = new Point(376, 130),
                 Parent = this,
                 Sound = SoundList.ButtonA,
             };
@@ -151,7 +151,7 @@ namespace Client.MirScenes.Dialogs
                 Parent = this,
                 Font = new Font(Settings.FontName, 10F, FontStyle.Bold),
                 ForeColour = Color.BurlyWood,
-                Location = new Point(229, 36),
+                Location = new Point(246, 62),
                 Size = new Size(82,22),
                 DrawFormat = TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter,
                 //AutoSize = true
@@ -164,7 +164,7 @@ namespace Client.MirScenes.Dialogs
                 Rows[i] = new RankingRow() 
                 { 
                     Parent = this, 
-                    Location = new Point(32, 98 + i * 15),
+                    Location = new Point(48, 128 + i * 15),
                     Size = new Size(315,15),
                 };
             }
@@ -262,7 +262,7 @@ namespace Client.MirScenes.Dialogs
         {
             public Rank_Character_Info Listing;
             public MirLabel RankLabel, NameLabel, LevelLabel, ClassLabel;
-            public MirButton ViewButton;
+            public MirLabel ViewButton;
             public long Index;
 
             public RankingRow()
@@ -307,15 +307,14 @@ namespace Client.MirScenes.Dialogs
                     NotControl = true,
                 };
 
-                ViewButton = new MirButton
+                ViewButton = new MirLabel
                 {
-                    Index = 781,
-                    HoverIndex = 782,
-                    PressedIndex = 783,
-                    Library = Libraries.Title,
-                    Location = new Point(280, 3),
+                    Location = new Point(220, 0),
+                    AutoSize = true,
+                    DrawFormat = TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter,
                     Parent = this,
-                    Sound = SoundList.ButtonA,
+                    NotControl = false,
+                    Text = "View",
                 };
                 ViewButton.Click += (o, e) => Observe();
             }

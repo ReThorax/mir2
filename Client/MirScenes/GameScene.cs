@@ -21,6 +21,8 @@ using Client.MirScenes.Dialogs;
 using System.Drawing.Imaging;
 using Client.Utils;
 
+using Mir.DiscordExtension;
+
 namespace Client.MirScenes
 {
     public sealed class GameScene : MirScene
@@ -65,7 +67,7 @@ namespace Client.MirScenes
         public MiniMapDialog MiniMapDialog;
         public InspectDialog InspectDialog;
         public OptionDialog OptionDialog;
-        public MenuDialog MenuDialog;
+        //public MenuDialog MenuDialog;
         public NPCDialog NPCDialog;
         public NPCGoodsDialog NPCGoodsDialog;
         public NPCDropDialog NPCDropDialog;
@@ -209,7 +211,7 @@ namespace Client.MirScenes
             MiniMapDialog = new MiniMapDialog { Parent = this };
             InspectDialog = new InspectDialog { Parent = this, Visible = false };
             OptionDialog = new OptionDialog { Parent = this, Visible = false };
-            MenuDialog = new MenuDialog { Parent = this, Visible = false };
+            //MenuDialog = new MenuDialog { Parent = this, Visible = false };
             NPCDialog = new NPCDialog { Parent = this, Visible = false };
             NPCGoodsDialog = new NPCGoodsDialog { Parent = this, Visible = false };
             NPCDropDialog = new NPCDropDialog { Parent = this, Visible = false };
@@ -815,7 +817,7 @@ namespace Client.MirScenes
             InventoryDialog.Hide();
             CharacterDialog.Hide();
             OptionDialog.Hide();
-            MenuDialog.Hide();
+            //MenuDialog.Hide();
             if (NPCDialog.Visible) NPCDialog.Hide();
             HelpDialog.Hide();
             KeyboardLayoutDialog.Hide();
@@ -1197,7 +1199,33 @@ namespace Client.MirScenes
             DialogProcess();
 
             ProcessOuput();
+
+            if (DateTime.UtcNow >= _nextDiscordProcess)
+            {
+                if (GroupDialog.GroupList.Count < 1)
+                {
+                    //Process every 10 seconds
+                    _nextDiscordProcess = DateTime.UtcNow + TimeSpan.FromSeconds(10);
+                    Program.discord.UpdateStage(StatusType.GameState, GameState.Playing);
+                    Program.discord.UpdateStage(StatusType.PlayerClass, User.Class.ToString());
+                    Program.discord.UpdateStage(StatusType.PlayerName, User.Name);
+                    Program.discord.UpdateStage(StatusType.PlayerLevel, (int)User.Level);
+                    Program.discord.UpdateActivity();
+                }
+                else
+                {
+                    _nextDiscordProcess = DateTime.UtcNow + TimeSpan.FromSeconds(10);
+                    Program.discord.UpdateStage(StatusType.GameState, GameState.PlayingGroup);
+                    Program.discord.UpdateStage(StatusType.Party, GroupDialog.GroupList.Count, Globals.MaxGroup);
+                    Program.discord.UpdateStage(StatusType.PlayerClass, User.Class.ToString());
+                    Program.discord.UpdateStage(StatusType.PlayerName, User.Name);
+                    Program.discord.UpdateStage(StatusType.PlayerLevel, (int)User.Level);
+                    Program.discord.UpdateActivity();
+                }
+            }
         }
+
+        private DateTime _nextDiscordProcess;
 
         public void DialogProcess()
         {
@@ -8824,7 +8852,7 @@ namespace Client.MirScenes
                 MiniMapDialog = null;
                 InspectDialog = null;
                 OptionDialog = null;
-                MenuDialog = null;
+                //MenuDialog = null;
                 NPCDialog = null;
                 QuestDetailDialog = null;
                 QuestListDialog = null;

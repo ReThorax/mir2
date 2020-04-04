@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using C = ClientPackets;
+using Mir.DiscordExtension;
 
 namespace Client.MirScenes.Dialogs
 {
@@ -22,11 +23,12 @@ namespace Client.MirScenes.Dialogs
         public MirImageControl TitleLabel;
         public MirButton SwitchButton, CloseButton, AddButton, DelButton;
         public MirLabel[] GroupMembers;
+        public MirLabel AddLabel, DelLabel;
 
         public GroupDialog()
         {
-            Index = 120;
-            Library = Libraries.Prguse;
+            Index = 244;
+            Library = Libraries.GameScene;
             Movable = true;
             Sort = true;
             Location = Center;
@@ -36,7 +38,7 @@ namespace Client.MirScenes.Dialogs
             GroupMembers[0] = new MirLabel
             {
                 AutoSize = true,
-                Location = new Point(16, 33),
+                Location = new Point(35, 66),
                 Parent = this,
                 NotControl = true,
             };
@@ -46,30 +48,20 @@ namespace Client.MirScenes.Dialogs
                 GroupMembers[i] = new MirLabel
                 {
                     AutoSize = true,
-                    Location = new Point(((i + 1) % 2) * 100 + 16, 55 + ((i - 1) / 2) * 20),
+                    Location = new Point(((i + 1) % 2) * 100 + 135, 66 + ((i - 1) / 2) * 20),
                     Parent = this,
                     NotControl = true,
                 };
             }
 
-
-
-            TitleLabel = new MirImageControl
-            {
-                Index = 5,
-                Library = Libraries.Title,
-                Location = new Point(18, 8),
-                Parent = this
-            };
-
             CloseButton = new MirButton
             {
-                HoverIndex = 361,
-                Index = 360,
-                Location = new Point(206, 3),
-                Library = Libraries.Prguse2,
+                HoverIndex = 186,
+                Index = 185,
+                Location = new Point(203, 25),
+                Library = Libraries.GameScene,
                 Parent = this,
-                PressedIndex = 362,
+                PressedIndex = 187,
                 Sound = SoundList.ButtonA,
             };
             CloseButton.Click += (o, e) => Hide();
@@ -78,40 +70,58 @@ namespace Client.MirScenes.Dialogs
             {
                 HoverIndex = 115,
                 Index = 114,
-                Location = new Point(25, 219),
+                Location = new Point(26, 256),
                 Library = Libraries.Prguse,
                 Parent = this,
                 PressedIndex = 116,
                 Sound = SoundList.ButtonA,
-                Hint = GameLanguage.GroupSwitch
+                Hint = "Enable/Dislable group invites.",
             };
             SwitchButton.Click += (o, e) => Network.Enqueue(new C.SwitchGroup { AllowGroup = !AllowGroup });
 
             AddButton = new MirButton
             {
-                HoverIndex = 134,
-                Index = 133,
-                Location = new Point(70, 219),
-                Library = Libraries.Title,
+                Index = 228,
+                HoverIndex = 229,
+                PressedIndex = 230,
+                Location = new Point(59, 261),
+                Library = Libraries.GameScene,
                 Parent = this,
-                PressedIndex = 135,
                 Sound = SoundList.ButtonA,
-                Hint = GameLanguage.GroupAdd
             };
             AddButton.Click += (o, e) => AddMember();
 
+            AddLabel = new MirLabel
+            {
+                Location = new Point(0, -2),
+                Parent = AddButton,
+                Size = new Size(78, 20),
+                DrawFormat = TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter,
+                Text = "Add Mem",
+                NotControl = true,
+            };
+
             DelButton = new MirButton
             {
-                HoverIndex = 137,
-                Index = 136,
-                Location = new Point(140, 219),
-                Library = Libraries.Title,
+                Index = 228,
+                HoverIndex = 229,
+                PressedIndex = 230,
+                Location = new Point(145, 261),
+                Library = Libraries.GameScene,
                 Parent = this,
-                PressedIndex = 138,
                 Sound = SoundList.ButtonA,
-                Hint = GameLanguage.GroupRemove
             };
             DelButton.Click += (o, e) => DelMember();
+
+            DelLabel = new MirLabel
+            {
+                Location = new Point(0, -2),
+                Parent = DelButton,
+                Size = new Size(78, 20),
+                DrawFormat = TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter,
+                Text = "Del Mem",
+                NotControl = true,
+            };
 
             BeforeDraw += GroupPanel_BeforeDraw;
 
@@ -122,15 +132,11 @@ namespace Client.MirScenes.Dialogs
         {
             if (GroupList.Count == 0)
             {
-                AddButton.Index = 130;
-                AddButton.HoverIndex = 131;
-                AddButton.PressedIndex = 132;
+                AddLabel.Text = "Create";
             }
             else
             {
-                AddButton.Index = 133;
-                AddButton.HoverIndex = 134;
-                AddButton.PressedIndex = 135;
+                AddLabel.Text = "Add Mem";
             }
             if (GroupList.Count > 0 && GroupList[0] != MapObject.User.Name)
             {
@@ -172,7 +178,6 @@ namespace Client.MirScenes.Dialogs
                 GameScene.Scene.ChatDialog.ReceiveChat("You are not the leader of your group.", ChatType.System);
                 return;
             }
-
             Network.Enqueue(new C.AddMember { Name = name });
         }
 
@@ -190,7 +195,7 @@ namespace Client.MirScenes.Dialogs
                 return;
             }
 
-            MirInputBox inputBox = new MirInputBox(GameLanguage.GroupAddEnterName);
+            MirInputBox inputBox = new MirInputBox("Please enter the name of the person you wish to group.");
 
             inputBox.OKButton.Click += (o, e) =>
             {
@@ -208,7 +213,7 @@ namespace Client.MirScenes.Dialogs
                 return;
             }
 
-            MirInputBox inputBox = new MirInputBox(GameLanguage.GroupRemoveEnterName);
+            MirInputBox inputBox = new MirInputBox("Please enter the name of the person you wish to remove.");
 
             inputBox.OKButton.Click += (o, e) =>
             {

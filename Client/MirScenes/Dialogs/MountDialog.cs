@@ -17,7 +17,7 @@ namespace Client.MirScenes.Dialogs
     public sealed class MountDialog : MirImageControl
     {
         public MirLabel MountName, MountLoyalty;
-        public MirButton CloseButton, MountButton, HelpButton;
+        public MirButton CloseButton, MountButton;
         private MirAnimatedControl MountImage;
         public MirItemCell[] Grid;
 
@@ -25,24 +25,24 @@ namespace Client.MirScenes.Dialogs
 
         public MountDialog()
         {
-            Index = 167;
-            Library = Libraries.Prguse;
+            Index = 260;
+            Library = Libraries.GameScene;
             Movable = true;
             Sort = true;
-            Location = new Point(10, 30);
+            Location = new Point(0, 0);
             BeforeDraw += MountDialog_BeforeDraw;
 
             MountName = new MirLabel
             {
-                Location = new Point(30, 10),
-                DrawFormat = TextFormatFlags.VerticalCenter | TextFormatFlags.HorizontalCenter,
+                Location = new Point(104, 275),
+                DrawFormat = TextFormatFlags.VerticalCenter | TextFormatFlags.Left,
                 Parent = this,
                 NotControl = true,
             };
             MountLoyalty = new MirLabel
             {
-                Location = new Point(30, 30),
-                DrawFormat = TextFormatFlags.VerticalCenter | TextFormatFlags.HorizontalCenter,
+                Location = new Point(227, 275),
+                DrawFormat = TextFormatFlags.VerticalCenter | TextFormatFlags.Right,
                 Parent = this,
                 NotControl = true,
             };
@@ -64,25 +64,14 @@ namespace Client.MirScenes.Dialogs
 
             CloseButton = new MirButton
             {
-                HoverIndex = 361,
-                Index = 360,
-                Library = Libraries.Prguse2,
+                HoverIndex = 186,
+                Index = 185,
+                Library = Libraries.GameScene,
                 Parent = this,
-                PressedIndex = 362,
+                PressedIndex = 187,
                 Sound = SoundList.ButtonA,
             };
             CloseButton.Click += (o, e) => Hide();
-
-            HelpButton = new MirButton
-            {
-                Index = 257,
-                HoverIndex = 258,
-                PressedIndex = 259,
-                Library = Libraries.Prguse2,
-                Parent = this,
-                Sound = SoundList.ButtonA,
-            };
-            HelpButton.Click += (o, e) => GameScene.Scene.HelpDialog.DisplayPage("Mounts");
 
             MountImage = new MirAnimatedControl
             {
@@ -104,7 +93,6 @@ namespace Client.MirScenes.Dialogs
                 ItemSlot = (int)MountSlot.Reins,
                 GridType = MirGridType.Mount,
                 Parent = this,
-                Size = new Size(34, 30)
 
             };
             Grid[(int)MountSlot.Bells] = new MirItemCell
@@ -112,7 +100,6 @@ namespace Client.MirScenes.Dialogs
                 ItemSlot = (int)MountSlot.Bells,
                 GridType = MirGridType.Mount,
                 Parent = this,
-                Size = new Size(34, 30)
             };
 
             Grid[(int)MountSlot.Saddle] = new MirItemCell
@@ -120,7 +107,6 @@ namespace Client.MirScenes.Dialogs
                 ItemSlot = (int)MountSlot.Saddle,
                 GridType = MirGridType.Mount,
                 Parent = this,
-                Size = new Size(34, 30)
             };
 
             Grid[(int)MountSlot.Ribbon] = new MirItemCell
@@ -128,7 +114,6 @@ namespace Client.MirScenes.Dialogs
                 ItemSlot = (int)MountSlot.Ribbon,
                 GridType = MirGridType.Mount,
                 Parent = this,
-                Size = new Size(34, 30)
             };
 
 
@@ -137,7 +122,6 @@ namespace Client.MirScenes.Dialogs
                 ItemSlot = (int)MountSlot.Mask,
                 GridType = MirGridType.Mount,
                 Parent = this,
-                Size = new Size(34, 30)
             };
 
         }
@@ -165,47 +149,49 @@ namespace Client.MirScenes.Dialogs
 
             if (MountSlots == null) return;
 
-            int x = 0, y = 0;
-
             switch (MountSlots.Length)
             {
                 case 4:
-                    Index = 160;
+                    Index = 264;
                     StartIndex = 1170;
-                    MountName.Size = new Size(208, 15);
-                    MountLoyalty.Size = new Size(208, 15);
-                    MountImage.Location = new Point(110, 250);
+                    MountName.Size = new Size(122, 16);
+                    MountLoyalty.Size = new Size(121, 16);
+                    MountImage.Location = new Point(201, 206);
                     MountButton.Index = 164;
                     MountButton.HoverIndex = 165;
                     MountButton.PressedIndex = 166;
-                    MountButton.Location = new Point(210, 70);
-                    CloseButton.Location = new Point(245, 3);
-                    HelpButton.Location = new Point(221, 3);
+                    MountButton.Location = new Point(29, 63);
+                    CloseButton.Location = new Point(404, 24);
                     Grid[(int)MountSlot.Mask].Visible = false;
-                    x = 1; y = 1;
+
+                    Grid[(int)MountSlot.Reins].Location = new Point(132, 307);
+                    Grid[(int)MountSlot.Ribbon].Location = new Point(184, 307);
+                    Grid[(int)MountSlot.Bells].Location = new Point(236, 307);
+                    Grid[(int)MountSlot.Saddle].Location = new Point(288, 307);
+
+
+                    Grid[(int)MountSlot.Mask].Location = new Point(158, 307);
                     break;
                 case 5:
-                    Index = 167;
+                    Index = 260;
                     StartIndex = 1330;
-                    MountName.Size = new Size(260, 15);
-                    MountLoyalty.Size = new Size(260, 15);
-                    MountImage.Location = new Point(0, 70);
+                    MountName.Size = new Size(122, 16);
+                    MountLoyalty.Size = new Size(121, 16);
+                    MountImage.Location = new Point(78, 32);
                     MountButton.Index = 155;
                     MountButton.HoverIndex = 156;
                     MountButton.PressedIndex = 157;
-                    MountButton.Location = new Point(262, 70);
-                    CloseButton.Location = new Point(297, 3);
-                    HelpButton.Location = new Point(274, 3);
+                    MountButton.Location = new Point(29, 63);
+                    CloseButton.Location = new Point(404, 24);
                     Grid[(int)MountSlot.Mask].Visible = true;
-                    x = 0; y = 0;
+
+                    Grid[(int)MountSlot.Reins].Location = new Point(106, 307);
+                    Grid[(int)MountSlot.Ribbon].Location = new Point(210, 307);
+                    Grid[(int)MountSlot.Bells].Location = new Point(262, 307);
+                    Grid[(int)MountSlot.Saddle].Location = new Point(314, 307);
+                    Grid[(int)MountSlot.Mask].Location = new Point(158, 307);
                     break;
             }
-
-            Grid[(int)MountSlot.Reins].Location = new Point(36 + x, 323 + y);
-            Grid[(int)MountSlot.Bells].Location = new Point(90 + x, 323 + y);
-            Grid[(int)MountSlot.Saddle].Location = new Point(144 + x, 323 + y);
-            Grid[(int)MountSlot.Ribbon].Location = new Point(198 + x, 323 + y);
-            Grid[(int)MountSlot.Mask].Location = new Point(252 + x, 323 + y);
         }
 
         private void DrawMountAnimation()
@@ -255,7 +241,7 @@ namespace Client.MirScenes.Dialogs
             if (Visible) return;
             if (GameScene.User.MountType < 0)
             {
-                MirMessageBox messageBox = new MirMessageBox(GameLanguage.NoMount, MirMessageBoxButtons.OK);
+                MirMessageBox messageBox = new MirMessageBox("You do not own a mount.", MirMessageBoxButtons.OK);
                 messageBox.Show();
                 return;
             }

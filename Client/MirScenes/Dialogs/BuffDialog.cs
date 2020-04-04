@@ -26,8 +26,8 @@ namespace Client.MirScenes.Dialogs
             Library = Libraries.Prguse2;
             Movable = false;
             Size = new Size(44, 34);
-            Location = new Point(Settings.ScreenWidth - 170, 0);
-            Sort = true;
+            Location = new Point(Settings.ScreenWidth - 220, 0);
+            Sort = false;
 
             Opacity = 0f;
             _fadedOut = true;

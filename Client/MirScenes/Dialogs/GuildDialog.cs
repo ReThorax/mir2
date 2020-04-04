@@ -40,6 +40,7 @@ namespace Client.MirScenes.Dialogs
         #region GuildRight
         public MirButton BuffButton, StatusButton;
         public MirImageControl BuffPage, StatusPage, StatusPageBase;
+        public MirLabel BuffLabel, StatusLabel;
 
         public GuildBuffButton[] Buffs;
         private bool RequestedList = false;
@@ -131,8 +132,8 @@ namespace Client.MirScenes.Dialogs
         #region GuildUI
         public GuildDialog()
         {
-            Index = 180;
-            Library = Libraries.Prguse;
+            Index = 280;
+            Library = Libraries.GameScene;
             Movable = true;
             Sort = true;
             Location = Center;
@@ -141,72 +142,82 @@ namespace Client.MirScenes.Dialogs
 
             #region TabUI
 
-            TitleLabel = new MirImageControl
-            {
-                Index = 25,
-                Library = Libraries.Title,
-                Location = new Point(18, 9),
-                Parent = this
-            };
+            //TitleLabel = new MirImageControl
+            //{
+            //    Index = 25,
+            //    Library = Libraries.Title,
+            //    Location = new Point(18, 9),
+            //    Parent = this
+            //};
 
             NoticeButton = new MirButton
             {
-                Library = Libraries.Title,
-                Index = 93,
-                PressedIndex = 94,
-                Sound = SoundList.ButtonA,
+                Index = 227,
+                Library = Libraries.GameScene,
+                Location = new Point(49, 59),
                 Parent = this,
-                Location = new Point(20, 38)
+                PressedIndex = 227,
+                Size = new Size(82, 21),
+                Sound = SoundList.ButtonA,
+                Visible = true,
             };
             NoticeButton.Click += (o, e) => LeftDialog(0);
             MembersButton = new MirButton
             {
-                Library = Libraries.Title,
-                Index = 99,
-                PressedIndex = 100,
-                Sound = SoundList.ButtonA,
+                Index = -1,
+                Library = Libraries.GameScene,
+                Location = new Point(122, 59),
                 Parent = this,
-                Location = new Point(91, 38),
+                PressedIndex = 227,
+                Size = new Size(82, 21),
+                Sound = SoundList.ButtonA,
             };
             MembersButton.Click += (o, e) => LeftDialog(1);
             StorageButton = new MirButton
             {
-                Library = Libraries.Title,
-                Index = 105,
-                PressedIndex = 106,
-                Sound = SoundList.ButtonA,
+                Index = -1,
+                Library = Libraries.GameScene,
+                Location = new Point(195, 59),
                 Parent = this,
-                Location = new Point(162, 38),
+                PressedIndex = 227,
+                Size = new Size(82, 21),
+                Sound = SoundList.ButtonA,
                 Visible = false
             };
             StorageButton.Click += (o, e) => LeftDialog(2);
             RankButton = new MirButton // Ranks
             {
-                Library = Libraries.Title,
-                Index = 101,
-                Sound = SoundList.ButtonA,
+                Index = -1,
+                Library = Libraries.GameScene,
+                Location = new Point(268, 59),
                 Parent = this,
-                Location = new Point(233, 38),
+                PressedIndex = 227,
+                Size = new Size(82, 21),
+                Sound = SoundList.ButtonA,
                 Visible = false,
             };
             RankButton.Click += (o, e) => LeftDialog(3);
 
             StatusButton = new MirButton
             {
-                Library = Libraries.Title,
+                Index = 227,
+                Library = Libraries.GameScene,
+                Location = new Point(508, 59),
                 Parent = this,
-                Index = 103,
-                Location = new Point(501, 38),
+                PressedIndex = 227,
+                Size = new Size(82, 21),
                 Sound = SoundList.ButtonA,
             };
             StatusButton.Click += (o, e) => RightDialog(0);
 
             BuffButton = new MirButton
             {
-                Library = Libraries.Title,
+                Index = -1,
+                Library = Libraries.GameScene,
+                Location = new Point(435, 59),
                 Parent = this,
-                Index = 95,
-                Location = new Point(430, 38),
+                PressedIndex = 227,
+                Size = new Size(82, 21),
                 Sound = SoundList.ButtonA,
                 Visible = false,
             };
@@ -214,13 +225,13 @@ namespace Client.MirScenes.Dialogs
 
             CloseButton = new MirButton
             {
-                HoverIndex = 361,
-                Index = 360,
-                Location = new Point(565, 4),
-                Library = Libraries.Prguse2,
+                HoverIndex = 186,
+                Index = 185,
+                Location = new Point(568, 24),
+                Library = Libraries.GameScene,
                 Parent = this,
-                PressedIndex = 362,
-                Sound = SoundList.ButtonA
+                PressedIndex = 187,
+                Sound = SoundList.ButtonA,
             };
             CloseButton.Click += (o, e) => Hide();
             #endregion
@@ -230,7 +241,7 @@ namespace Client.MirScenes.Dialogs
             {
                 Parent = this,
                 Size = new Size(352, 372),
-                Location = new Point(0, 60),
+                Location = new Point(0, 79),
                 Visible = true
             };
             Notice = new MirTextBox()
@@ -241,7 +252,7 @@ namespace Client.MirScenes.Dialogs
                 Visible = true,
                 Parent = NoticePage,
                 Size = new Size(322, 330),
-                Location = new Point(13, 1)
+                Location = new Point(26, 1)
             };
             Notice.MultiLine();
 
@@ -254,7 +265,7 @@ namespace Client.MirScenes.Dialogs
                 Library = Libraries.Prguse,
                 Sound = SoundList.ButtonA,
                 Parent = NoticePage,
-                Location = new Point(20, 342)
+                Location = new Point(27, 333)
             };
             NoticeEditButton.Click += (o, e) => EditNotice();
 
@@ -267,7 +278,7 @@ namespace Client.MirScenes.Dialogs
                 Library = Libraries.Prguse,
                 Sound = SoundList.ButtonA,
                 Parent = NoticePage,
-                Location = new Point(20, 342)
+                Location = new Point(27, 333)
             };
             NoticeSaveButton.Click += (o, e) => EditNotice();
 
@@ -277,7 +288,7 @@ namespace Client.MirScenes.Dialogs
                 Index = 197,
                 Visible = true,
                 Library = Libraries.Prguse2,
-                Location = new Point(337, 1),
+                Location = new Point(350, 1),
                 Size = new Size(16, 14),
                 Parent = NoticePage,
                 PressedIndex = 199,
@@ -297,7 +308,7 @@ namespace Client.MirScenes.Dialogs
                 Index = 207,
                 Visible = true,
                 Library = Libraries.Prguse2,
-                Location = new Point(337, 318),
+                Location = new Point(350, 318),
                 Size = new Size(16, 14),
                 Parent = NoticePage,
                 PressedIndex = 209,
@@ -316,7 +327,7 @@ namespace Client.MirScenes.Dialogs
             {
                 Index = 206,
                 Library = Libraries.Prguse2,
-                Location = new Point(337, 16),
+                Location = new Point(350, 16),
                 Parent = NoticePage,
                 Movable = true,
                 Visible = true,
@@ -333,7 +344,7 @@ namespace Client.MirScenes.Dialogs
             {
                 Parent = this,
                 Size = new Size(352, 372),
-                Location = new Point(0, 60),
+                Location = new Point(0, 79),
                 Visible = false
             };
             MembersPageBase = new MirImageControl()
@@ -341,7 +352,7 @@ namespace Client.MirScenes.Dialogs
                 Library = Libraries.Prguse,
                 Index = 1852,
                 Parent = MembersPage,
-                Location = new Point(13, 1),
+                Location = new Point(26, 1),
                 Visible = true
             };
             MembersPageBase.MouseWheel += MembersPanel_MouseWheel;
@@ -360,7 +371,7 @@ namespace Client.MirScenes.Dialogs
                     ForeColour = Color.White,
                     Parent = MembersPage,
                     Size = new Size(100, 14),
-                    Location = new Point(24, 30 + (i * 15)),
+                    Location = new Point(34, 30 + (i * 15)),
                     Visible = false,
                     Enabled = false
                 };
@@ -375,7 +386,7 @@ namespace Client.MirScenes.Dialogs
                     ForeColour = Color.White,
                     Parent = MembersPage,
                     Size = new Size(100, 14),
-                    Location = new Point(125, 30 + (i * 15)),
+                    Location = new Point(133, 30 + (i * 15)),
                     Visible = false,
                     Enabled = false,
                     Font = new Font(Settings.FontName, 7F)
@@ -391,7 +402,7 @@ namespace Client.MirScenes.Dialogs
                     ForeColour = Color.White,
                     Parent = MembersPage,
                     Size = new Size(100, 14),
-                    Location = new Point(225, 30 + (i * 15)),
+                    Location = new Point(235, 30 + (i * 15)),
                     Visible = false,
                     Enabled = false,
                     Font = new Font(Settings.FontName, 7F)
@@ -405,7 +416,7 @@ namespace Client.MirScenes.Dialogs
                 {
                     Enabled = true,
                     Visible = true,
-                    Location = new Point(210, 30 + (i * 15)),
+                    Location = new Point(218, 30 + (i * 15)),
                     Library = Libraries.Prguse,
                     Index = 917,
                     Parent = MembersPage
@@ -419,7 +430,7 @@ namespace Client.MirScenes.Dialogs
                 Index = 197,
                 Visible = true,
                 Library = Libraries.Prguse2,
-                Location = new Point(337, 1),
+                Location = new Point(350, 1),
                 Size = new Size(16, 14),
                 Parent = MembersPage,
                 PressedIndex = 199,
@@ -438,7 +449,7 @@ namespace Client.MirScenes.Dialogs
                 Index = 207,
                 Visible = true,
                 Library = Libraries.Prguse2,
-                Location = new Point(337, 318),
+                Location = new Point(350, 318),
                 Size = new Size(16, 14),
                 Parent = MembersPage,
                 PressedIndex = 209,
@@ -456,7 +467,7 @@ namespace Client.MirScenes.Dialogs
             {
                 Index = 206,
                 Library = Libraries.Prguse2,
-                Location = new Point(337, 16),
+                Location = new Point(350, 16),
                 Parent = MembersPage,
                 Movable = true,
                 Sound = SoundList.None
@@ -504,7 +515,7 @@ namespace Client.MirScenes.Dialogs
             {
                 Parent = this,
                 Size = new Size(230, 372),
-                Location = new Point(355, 60),
+                Location = new Point(373, 79),
                 Visible = true
             };
             StatusPageBase = new MirImageControl()
@@ -513,7 +524,7 @@ namespace Client.MirScenes.Dialogs
                 Library = Libraries.Prguse,
                 Index = 1850,
                 Visible = true,
-                Location = new Point(10, 2)
+                Location = new Point(10, 1)
             };
             StatusPage.BeforeDraw += (o, e) =>
             {
@@ -573,7 +584,7 @@ namespace Client.MirScenes.Dialogs
                 Visible = true,
                 Index = 423,
                 Library = Libraries.Prguse2,
-                Location = new Point(322, 403),
+                Location = new Point(330, 415),
                 DrawImage = false,
                 NotControl = true,
                 Parent = this,
@@ -584,7 +595,7 @@ namespace Client.MirScenes.Dialogs
             {
                 Visible = true,
                 DrawFormat = TextFormatFlags.VerticalCenter | TextFormatFlags.HorizontalCenter,
-                Location = new Point(322, 405),
+                Location = new Point(330, 415),
                 NotControl = true,
                 Parent = this,
                 Size = new Size(260, 15)
@@ -632,7 +643,7 @@ namespace Client.MirScenes.Dialogs
             {
                 Parent = this,
                 Size = new Size(352, 372),
-                Location = new Point(0, 60),
+                Location = new Point(0, 79),
                 Visible = false
             };
             StoragePageBase = new MirImageControl()
@@ -641,7 +652,7 @@ namespace Client.MirScenes.Dialogs
                 Parent = StoragePage,
                 Library = Libraries.Prguse,
                 Index = 1851,
-                Location = new Point(30, 19)
+                Location = new Point(35, 19)
             };
             StoragePage.BeforeDraw += (o, e) =>
             {
@@ -697,7 +708,7 @@ namespace Client.MirScenes.Dialogs
                             Library = Libraries.Items,
                             Parent = StoragePage,
                             Size = new Size(35, 35),
-                            Location = new Point(x * 35 + 31 + x, y * 35 + 20 + y),
+                            Location = new Point(x * 35 + 36 + x, y * 35 + 20 + y),
                         };
                         if (y > 7) StorageGrid[idx].Visible = false;
                         StorageGrid[idx].MouseWheel += StoragePanel_MouseWheel;
@@ -711,7 +722,7 @@ namespace Client.MirScenes.Dialogs
                 Index = 197,
                 Visible = true,
                 Library = Libraries.Prguse2,
-                Location = new Point(337, 1),
+                Location = new Point(350, 2),
                 Size = new Size(16, 14),
                 Parent = StoragePage,
                 PressedIndex = 199,
@@ -731,7 +742,7 @@ namespace Client.MirScenes.Dialogs
                 Index = 207,
                 Visible = true,
                 Library = Libraries.Prguse2,
-                Location = new Point(337, 318),
+                Location = new Point(350, 318),
                 Size = new Size(16, 14),
                 Parent = StoragePage,
                 PressedIndex = 209,
@@ -749,7 +760,7 @@ namespace Client.MirScenes.Dialogs
             {
                 Index = 206,
                 Library = Libraries.Prguse2,
-                Location = new Point(337, 16),
+                Location = new Point(350, 16),
                 Parent = StoragePage,
                 Movable = true,
                 Visible = true,
@@ -767,7 +778,7 @@ namespace Client.MirScenes.Dialogs
             {
                 Parent = this,
                 Size = new Size(352, 372),
-                Location = new Point(0, 60),
+                Location = new Point(0, 79),
                 Visible = false
             };
             RankPage.BeforeDraw += (o, e) => RequestUpdateMembers();
@@ -889,7 +900,7 @@ namespace Client.MirScenes.Dialogs
             {
                 Parent = this,
                 Size = new Size(352, 372),
-                Location = new Point(360, 61),
+                Location = new Point(373, 80),
                 Index = 1853,
                 Library = Libraries.Prguse,
                 Visible = false
@@ -1461,7 +1472,7 @@ namespace Client.MirScenes.Dialogs
         {
             int interval = 289 / (Notice.MultiText.Length - 25);
 
-            int x = 337;
+            int x = 350;
             int y = 16 + (NoticeScrollIndex * interval);
 
             if (y >= NoticeDownButton.Location.Y - 20) y = NoticeDownButton.Location.Y - 20;
@@ -1472,7 +1483,7 @@ namespace Client.MirScenes.Dialogs
 
         void NoticePositionBar_OnMoving(object sender, MouseEventArgs e)
         {
-            int x = 337;
+            int x = 350;
             int y = NoticePositionBar.Location.Y;
             int TempIndex = 0;
             bool forward;
@@ -2047,7 +2058,7 @@ namespace Client.MirScenes.Dialogs
 
         public void StoragePositionBar_OnMoving(object sender, MouseEventArgs e)
         {
-            int x = 337;
+            int x = 350;
             int y = StoragePositionBar.Location.Y;
 
             if (y >= StorageDownButton.Location.Y - 20) y = StorageDownButton.Location.Y - 20;
@@ -2088,7 +2099,7 @@ namespace Client.MirScenes.Dialogs
 
             int interval = 289 / 6;
 
-            int x = 337;
+            int x = 350;
             int y = 16 + (StorageIndex * interval);
 
             if (y >= StorageDownButton.Location.Y - 20) y = StorageDownButton.Location.Y - 20;
@@ -2106,7 +2117,7 @@ namespace Client.MirScenes.Dialogs
                     int idx = 8 * y + x;
                     if (StorageIndex <= y && (y < StorageIndex + 8))
                     {
-                        StorageGrid[idx].Location = new Point(x * 35 + 31 + x, (y - StorageIndex) * 35 + 20 + (y - StorageIndex));
+                        StorageGrid[idx].Location = new Point(x * 35 + 36 + x, (y - StorageIndex) * 35 + 20 + (y - StorageIndex));
                         StorageGrid[idx].Visible = true;
                     }
                     else
@@ -2178,18 +2189,18 @@ namespace Client.MirScenes.Dialogs
             StatusPage.Visible = false;
             BuffPage.Visible = false;
 
-            StatusButton.Index = 103;
-            BuffButton.Index = 95;
+            StatusButton.Index = -1;
+            BuffButton.Index = -1;
 
             switch (Rpageid)
             {
                 case 0:
                     StatusPage.Visible = true;
-                    StatusButton.Index = 104;
+                    StatusButton.Index = 227;
                     break;
                 case 1:
                     BuffPage.Visible = true;
-                    BuffButton.Index = 96;
+                    BuffButton.Index = 227;
                     break;
             }
         }
@@ -2200,31 +2211,31 @@ namespace Client.MirScenes.Dialogs
             StoragePage.Visible = false;
             RankPage.Visible = false;
 
-            NoticeButton.Index = 93;
-            MembersButton.Index = 99;
-            StorageButton.Index = 105;
-            RankButton.Index = 101;
+            NoticeButton.Index = -1;
+            MembersButton.Index = -1;
+            StorageButton.Index = -1;
+            RankButton.Index = -1;
 
             switch (Lpageid)
             {
                 case 0:
                     NoticePage.Visible = true;
-                    NoticeButton.Index = 94;
+                    NoticeButton.Index = 227;
                     RequestUpdateNotice();
                     break;
                 case 1:
                     MembersPage.Visible = true;
-                    MembersButton.Index = 100;
+                    MembersButton.Index = 227;
                     RequestUpdateMembers();
                     break;
                 case 2:
                     StoragePage.Visible = true;
-                    StorageButton.Index = 106;
+                    StorageButton.Index = 227;
                     Network.Enqueue(new C.GuildStorageItemChange() { Type = 3 });
                     break;
                 case 3:
                     RankPage.Visible = true;
-                    RankButton.Index = 102;
+                    RankButton.Index = 227;
                     RequestUpdateMembers();
                     break;
             }
@@ -2268,7 +2279,7 @@ namespace Client.MirScenes.Dialogs
 
             if (MapControl.User.GuildName == "")
             {
-                MirMessageBox messageBox = new MirMessageBox(GameLanguage.NotInGuild, MirMessageBoxButtons.OK);
+                MirMessageBox messageBox = new MirMessageBox("You are not in a guild.", MirMessageBoxButtons.OK);
                 messageBox.Show();
                 return;
             }
@@ -2281,10 +2292,10 @@ namespace Client.MirScenes.Dialogs
                     LastNoticeRequest = CMain.Time + 5000;
                     Network.Enqueue(new C.RequestGuildInfo() { Type = 0 });
                 }
-                NoticeButton.Index = 94;
+                NoticeButton.Index = 227;
             }
             if (StatusPage.Visible)
-                StatusButton.Index = 104;
+                StatusButton.Index = 227;
 
 
         }

@@ -18,13 +18,14 @@ namespace Client.MirScenes.Dialogs
 
         private readonly MirLabel _nameLabel, _rentalPeriodLabel;
         private readonly MirButton _lockButton, _setRentalPeriodButton, _confirmButton;
+        public MirLabel ConfirmLabel, PeriodLabel;
         
         public ItemRentingDialog()
         {
-            Index = 238;
-            Library = Libraries.Prguse;
+            Index = 268;
+            Library = Libraries.GameScene;
             Movable = true;
-            Size = new Size(204, 109);
+            Size = new Size(260, 141);
             Location = new Point(Settings.ScreenWidth - Size.Width - Size.Width / 2, Size.Height * 2 + Size.Height / 2 + 15);
             Sort = true;
 
@@ -32,13 +33,13 @@ namespace Client.MirScenes.Dialogs
 
             _confirmButton = new MirButton
             {
-                Index = 10,
-                HoverIndex = 11,
-                Location = new Point(130, 76),
-                Size = new Size(58, 28),
-                Library = Libraries.Prguse3,
+                Index = 228,
+                HoverIndex = 229,
+                Location = new Point(160, 96),
+                Size = new Size(78, 20),
+                Library = Libraries.GameScene,
                 Parent = this,
-                PressedIndex = 12,
+                PressedIndex = 230,
                 Sound = SoundList.ButtonA,
                 Enabled = false
             };
@@ -47,16 +48,26 @@ namespace Client.MirScenes.Dialogs
                 Network.Enqueue(new C.ConfirmItemRental());
             };
 
+            ConfirmLabel = new MirLabel
+            {
+                Location = new Point(0, -2),
+                Parent = _confirmButton,
+                Size = new Size(78, 20),
+                DrawFormat = TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter,
+                Text = "Confirm",
+                NotControl = true,
+            };
+
             // Close Button
 
             var closeButton = new MirButton
             {
-                HoverIndex = 361,
-                Index = 360,
-                Location = new Point(180, 3),
-                Library = Libraries.Prguse2,
+                HoverIndex = 186,
+                Index = 185,
+                Location = new Point(213, 24),
+                Library = Libraries.GameScene,
                 Parent = this,
-                PressedIndex = 362,
+                PressedIndex = 187,
                 Sound = SoundList.ButtonA,
             };
             closeButton.Click += (sender, args) =>
@@ -69,12 +80,12 @@ namespace Client.MirScenes.Dialogs
             _lockButton = new MirButton
             {
                 Index = 250,
-                HoverIndex = 251,
-                Location = new Point(18, 76),
+                HoverIndex = 252,
+                Location = new Point(210, 65),
                 Size = new Size(28, 25),
                 Library = Libraries.Prguse,
                 Parent = this,
-                PressedIndex = 252,
+                PressedIndex = 251,
                 Sound = SoundList.ButtonA,
             };
             _lockButton.Click += (o, e) =>
@@ -89,13 +100,13 @@ namespace Client.MirScenes.Dialogs
 
             _setRentalPeriodButton = new MirButton
             {
-                Index = 7,
-                HoverIndex = 8,
-                Location = new Point(46, 76),
-                Size = new Size(84, 28),
-                Library = Libraries.Prguse3,
+                Index = 228,
+                HoverIndex = 229,
+                Location = new Point(69, 96),
+                Size = new Size(78, 20),
+                Library = Libraries.GameScene,
                 Parent = this,
-                PressedIndex = 9,
+                PressedIndex = 230,
                 Sound = SoundList.ButtonA,
             };
             _setRentalPeriodButton.Click += (o, e) =>
@@ -103,13 +114,23 @@ namespace Client.MirScenes.Dialogs
                 InputRentalPeroid();
             };
 
+            PeriodLabel = new MirLabel
+            {
+                Location = new Point(0, -2),
+                Parent = _setRentalPeriodButton,
+                Size = new Size(78, 20),
+                DrawFormat = TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter,
+                Text = "Set Period",
+                NotControl = true,
+            };
+
             // Name Label
 
             _nameLabel = new MirLabel
             {
                 Parent = this,
-                Location = new Point(30, 8),
-                Size = new Size(150, 14),
+                Location = new Point(30, 22),
+                Size = new Size(170, 14),
                 DrawFormat = TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter,
                 NotControl = true,
             };
@@ -119,8 +140,8 @@ namespace Client.MirScenes.Dialogs
             _rentalPeriodLabel = new MirLabel
             {
                 Parent = this,
-                Location = new Point(60, 42),
-                Size = new Size(150, 14),
+                Location = new Point(70, 70),
+                Size = new Size(137, 18),
                 DrawFormat = TextFormatFlags.Left | TextFormatFlags.VerticalCenter,
                 NotControl = true,
             };
@@ -133,7 +154,7 @@ namespace Client.MirScenes.Dialogs
                 GridType = MirGridType.Renting,
                 Library = Libraries.Items,
                 Parent = this,
-                Location = new Point(16, 35),
+                Location = new Point(27, 61),
                 ItemSlot = 0,
             };
         }
@@ -239,22 +260,23 @@ namespace Client.MirScenes.Dialogs
         private readonly MirLabel _nameLabel, _rentalPeriodLabel;
         private readonly MirButton _lockButton, _setRentalPeriodButton, _confirmButton;
         private string _guestName;
+        public MirLabel ConfirmLabel, PeriodLabel;
 
         private MirItemCell _guestItemCell;
     
         public GuestItemRentingDialog()
         {
-            Index = 238;
-            Library = Libraries.Prguse;
+            Index = 268;
+            Library = Libraries.GameScene;
             Movable = true;
-            Size = new Size(204, 109);
+            Size = new Size(260, 141);
             Location = new Point(Settings.ScreenWidth - Size.Width - Size.Width / 2, Size.Height * 2 + Size.Height / 2 + 15);
             Sort = true;
 
             _lockButton = new MirButton
             {
                 Index = 250,
-                Location = new Point(18, 76),
+                Location = new Point(210, 65),
                 Size = new Size(28, 25),
                 Library = Libraries.Prguse,
                 Parent = this,
@@ -263,29 +285,52 @@ namespace Client.MirScenes.Dialogs
 
             _setRentalPeriodButton = new MirButton
             {
-                Index = 7,
-                Location = new Point(46, 76),
-                Size = new Size(84, 28),
-                Library = Libraries.Prguse3,
+                Index = 228,
+                Location = new Point(69, 96),
+                Size = new Size(78, 20),
+                Library = Libraries.GameScene,
                 Parent = this,
                 Enabled = false
             };
 
+            PeriodLabel = new MirLabel
+            {
+                Location = new Point(0, -2),
+                Parent = _setRentalPeriodButton,
+                Size = new Size(78, 20),
+                DrawFormat = TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter,
+                Text = "Set Period",
+                NotControl = true,
+            };
+
             _confirmButton = new MirButton
             {
-                Index = 10,
-                Location = new Point(130, 76),
-                Size = new Size(58, 28),
-                Library = Libraries.Prguse3,
+                Index = 228,
+                HoverIndex = 229,
+                Location = new Point(160, 96),
+                Size = new Size(78, 20),
+                Library = Libraries.GameScene,
                 Parent = this,
+                PressedIndex = 230,
+                Sound = SoundList.ButtonA,
                 Enabled = false
+            };
+
+            ConfirmLabel = new MirLabel
+            {
+                Location = new Point(0, -2),
+                Parent = _confirmButton,
+                Size = new Size(78, 20),
+                DrawFormat = TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter,
+                Text = "Confirm",
+                NotControl = true,
             };
 
             _nameLabel = new MirLabel
             {
                 Parent = this,
-                Location = new Point(30, 8),
-                Size = new Size(150, 14),
+                Location = new Point(30, 22),
+                Size = new Size(170, 14),
                 DrawFormat = TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter,
                 NotControl = true,
             };
@@ -293,8 +338,8 @@ namespace Client.MirScenes.Dialogs
             _rentalPeriodLabel = new MirLabel
             {
                 Parent = this,
-                Location = new Point(60, 42),
-                Size = new Size(150, 14),
+                Location = new Point(70, 70),
+                Size = new Size(137, 18),
                 DrawFormat = TextFormatFlags.Left | TextFormatFlags.VerticalCenter,
                 NotControl = true,
                 Text = "Rental Period: 0 Days"
@@ -306,7 +351,7 @@ namespace Client.MirScenes.Dialogs
                 GridType = MirGridType.GuestRenting,
                 Library = Libraries.Items,
                 Parent = this,
-                Location = new Point(16, 35),
+                Location = new Point(27, 61),
                 ItemSlot = 0,
             };
         }

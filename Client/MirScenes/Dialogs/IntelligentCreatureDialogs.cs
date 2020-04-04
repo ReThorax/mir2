@@ -23,6 +23,7 @@ namespace Client.MirScenes.Dialogs
         public CreatureButton[] CreatureButtons;
         public int SelectedCreatureSlot = -1;
         public MirControl HoverLabelParent = null;
+        public MirLabel RenameLabel, OptionsLabel, AutoLabel, SemiAutoLabel, SummonLabel, ReturnLabel, DismissLabel;
 
         private MirAnimatedControl CreatureImage;
         public long SwitchAnimTime;
@@ -35,8 +36,8 @@ namespace Client.MirScenes.Dialogs
 
         public IntelligentCreatureDialog()
         {
-            Index = 468;
-            Library = Libraries.Title;
+            Index = 282;
+            Library = Libraries.GameScene;
             Movable = true;
             Sort = true;
             Location = Center;
@@ -45,123 +46,193 @@ namespace Client.MirScenes.Dialogs
             #region CreatureButtons
             CloseButton = new MirButton
             {
-                HoverIndex = 361,
-                Index = 360,
-                Location = new Point(Size.Width - 25, 3),
-                Library = Libraries.Prguse2,
+                HoverIndex = 186,
+                Index = 185,
+                Location = new Point(432, 24),
+                Library = Libraries.GameScene,
                 Parent = this,
-                PressedIndex = 362,
+                PressedIndex = 187,
                 Sound = SoundList.ButtonA,
             };
             CloseButton.Click += (o, e) => Hide();
 
-            HelpPetButton = new MirButton
-            {
-                HoverIndex = 258,
-                Index = 257,
-                Location = new Point(Size.Width - 48, 3),
-                Library = Libraries.Prguse2,
-                Parent = this,
-                PressedIndex = 259,
-                Sound = SoundList.ButtonA,
-            };
+            //HelpPetButton = new MirButton
+            //{
+            //    HoverIndex = 258,
+            //    Index = 257,
+            //    Location = new Point(Size.Width - 48, 3),
+            //    Library = Libraries.Prguse2,
+            //    Parent = this,
+            //    PressedIndex = 259,
+            //    Sound = SoundList.ButtonA,
+            //};
 
             CreatureRenameButton = new MirButton
             {
-                HoverIndex = 571,
-                Index = 570,
-                Location = new Point(344, 50),
-                Library = Libraries.Title,
+                HoverIndex = 229,
+                Index = 228,
+                Location = new Point(352, 68),
+                Library = Libraries.GameScene,
                 Parent = this,
-                PressedIndex = 572,
+                PressedIndex = 230,
                 Sound = SoundList.ButtonA,
                 Visible = false,
             };
             CreatureRenameButton.Click += ButtonClick;
 
+            RenameLabel = new MirLabel
+            {
+                Location = new Point(0, -2),
+                Parent = CreatureRenameButton,
+                Size = new Size(78, 20),
+                DrawFormat = TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter,
+                Text = "Rename",
+                NotControl = true,
+            };
+
             SummonButton = new MirButton
             {
-                Index = 576,
-                HoverIndex = 577,
-                PressedIndex = 578,
-                Location = new Point(113, 217),
-                Library = Libraries.Title,
+                HoverIndex = 229,
+                Index = 228,
+                Location = new Point(24, 229),
+                Library = Libraries.GameScene,
                 Parent = this,
+                PressedIndex = 230,
                 Sound = SoundList.ButtonA,
             };
             SummonButton.Click += ButtonClick;
 
+            SummonLabel = new MirLabel
+            {
+                Location = new Point(0, -2),
+                Parent = SummonButton,
+                Size = new Size(78, 20),
+                DrawFormat = TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter,
+                Text = "Summon",
+                NotControl = true,
+            };
+
             DismissButton = new MirButton//Dismiss the summoned pet
             {
-                HoverIndex = 581,
-                Index = 580,
-                Location = new Point(113, 217),
-                Library = Libraries.Title,
+                HoverIndex = 229,
+                Index = 228,
+                Location = new Point(24, 229),
+                Library = Libraries.GameScene,
                 Parent = this,
-                PressedIndex = 582,
+                PressedIndex = 230,
                 Sound = SoundList.ButtonA,
             };
             DismissButton.Click += ButtonClick;
 
+            ReturnLabel = new MirLabel
+            {
+                Location = new Point(0, -2),
+                Parent = DismissButton,
+                Size = new Size(78, 20),
+                DrawFormat = TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter,
+                Text = "Return",
+                NotControl = true,
+            };
+
             ReleaseButton = new MirButton//Removes the selected pet
             {
-                HoverIndex = 584,
-                Index = 583,
-                Location = new Point(255, 217),
-                Library = Libraries.Title,
+                HoverIndex = 229,
+                Index = 228,
+                Location = new Point(105, 229),
+                Library = Libraries.GameScene,
                 Parent = this,
-                PressedIndex = 585,
+                PressedIndex = 230,
                 Sound = SoundList.ButtonA,
             };
             ReleaseButton.Click += ButtonClick;
 
+            DismissLabel = new MirLabel
+            {
+                Location = new Point(0, -2),
+                Parent = ReleaseButton,
+                Size = new Size(78, 20),
+                DrawFormat = TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter,
+                Text = "Release",
+                NotControl = true,
+            };
+
             OptionsMenuButton = new MirButton//Options
             {
-                HoverIndex = 574,
-                Index = 573,
-                Location = new Point(375, 160),
-                Library = Libraries.Title,
+                HoverIndex = 229,
+                Index = 228,
+                Location = new Point(377, 180),
+                Library = Libraries.GameScene,
                 Parent = this,
-                PressedIndex = 575,
+                PressedIndex = 230,
                 Sound = SoundList.ButtonA,
             };
             OptionsMenuButton.Click += ButtonClick;
 
+            OptionsLabel = new MirLabel
+            {
+                Location = new Point(0, -2),
+                Parent = OptionsMenuButton,
+                Size = new Size(78, 20),
+                DrawFormat = TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter,
+                Text = "Options",
+                NotControl = true,
+            };
+
             AutomaticModeButton = new MirButton//image is wrongly translated should be "Auto" instaid of "Enable"
             {
-                HoverIndex = 611,
-                Index = 610,
-                Location = new Point(375, 187),
-                Library = Libraries.Title,
+                HoverIndex = 229,
+                Index = 228,
+                Location = new Point(377, 203),
+                Library = Libraries.GameScene,
                 Parent = this,
-                PressedIndex = 612,
+                PressedIndex = 230,
                 Sound = SoundList.ButtonA,
             };
             AutomaticModeButton.Click += ButtonClick;
 
+            AutoLabel = new MirLabel
+            {
+                Location = new Point(0, -2),
+                Parent = AutomaticModeButton,
+                Size = new Size(78, 20),
+                DrawFormat = TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter,
+                Text = "Auto",
+                NotControl = true,
+            };
+
             SemiAutoModeButton = new MirButton//image is wrongly translated should be "SemiAuto" instaid of "Disable"
             {
-                HoverIndex = 614,
-                Index = 613,
-                Location = new Point(375, 187),
-                Library = Libraries.Title,
+                HoverIndex = 229,
+                Index = 228,
+                Location = new Point(377, 203),
+                Library = Libraries.GameScene,
                 Parent = this,
-                PressedIndex = 615,
+                PressedIndex = 230,
                 Sound = SoundList.ButtonA,
             };
             SemiAutoModeButton.Click += ButtonClick;
+
+            SemiAutoLabel = new MirLabel
+            {
+                Location = new Point(0, -2),
+                Parent = SemiAutoModeButton,
+                Size = new Size(78, 20),
+                DrawFormat = TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter,
+                Text = "SemiAuto",
+                NotControl = true,
+            };
 
             CreatureButtons = new CreatureButton[10];
             for (int i = 0; i < CreatureButtons.Length; i++)
             {
                 int offsetX = i * 81;
-                int offsetY = 259;
+                int offsetY = 257;
                 if (i >= 5)
                 {
                     offsetX = (i - 5) * 81;
                     offsetY += 40;
                 }
-                CreatureButtons[i] = new CreatureButton { idx = i, Parent = this, Visible = false, Location = new Point((44 + offsetX), offsetY) };
+                CreatureButtons[i] = new CreatureButton { idx = i, Parent = this, Visible = false, Location = new Point((25 + offsetX), offsetY) };
             }
             #endregion
 
@@ -177,14 +248,14 @@ namespace Client.MirScenes.Dialogs
                 Parent = this,
                 NotControl = true,
                 UseOffSet = true,
-                Location = new Point(50, 110),
+                Location = new Point(55, 92),
             };
 
             FullnessBG = new MirImageControl
             {
                 Index = 530,
                 Library = Libraries.Prguse2,
-                Location = new Point(185, 129),
+                Location = new Point(191, 144),
                 Parent = this,
                 NotControl = true,
             };
@@ -195,7 +266,7 @@ namespace Client.MirScenes.Dialogs
             {
                 Index = 531,
                 Library = Libraries.Prguse2,
-                Location = new Point(185, 129),
+                Location = new Point(191, 144),
                 Parent = this,
                 DrawImage = false,
                 //NotControl = true,
@@ -208,7 +279,7 @@ namespace Client.MirScenes.Dialogs
             {
                 Index = 532,
                 Library = Libraries.Prguse2,
-                Location = new Point(179, 118),
+                Location = new Point(280, 133),
                 Parent = this,
                 //Visible = false,
                 //NotControl = true,
@@ -220,7 +291,7 @@ namespace Client.MirScenes.Dialogs
             {
                 Index = 533,
                 Library = Libraries.Prguse2,
-                Location = new Point(179, 143),
+                Location = new Point(340, 158),
                 Parent = this,
                 //Visible = false,
                 NotControl = true,
@@ -230,7 +301,7 @@ namespace Client.MirScenes.Dialogs
             {
                 Index = 427,
                 Library = Libraries.Prguse2,
-                Location = new Point(29, 348),
+                Location = new Point(33, 335),
                 Parent = this,
                 NotControl = true,
             };
@@ -239,7 +310,7 @@ namespace Client.MirScenes.Dialogs
             {
                 Index = 428,
                 Library = Libraries.Prguse2,
-                Location = new Point(215, 348),
+                Location = new Point(245, 335),
                 Parent = this,
                 Visible = true,
                 NotControl = true,
@@ -251,7 +322,7 @@ namespace Client.MirScenes.Dialogs
             {
                 Index = 420,
                 Library = Libraries.Prguse2,
-                Location = new Point(242, 353),
+                Location = new Point(245, 335),
                 Parent = this,
                 Visible = true,
                 DrawImage = false,
@@ -267,7 +338,7 @@ namespace Client.MirScenes.Dialogs
             CreatureName = new MirLabel
             {
                 Parent = this,
-                Location = new Point(170, 50),
+                Location = new Point(175, 67),
                 DrawFormat = TextFormatFlags.VerticalCenter | TextFormatFlags.HorizontalCenter,
                 Size = new Size(166, 21),
                 NotControl = true,
@@ -276,7 +347,7 @@ namespace Client.MirScenes.Dialogs
             CreatureDeadline = new MirLabel
             {
                 Parent = this,
-                Location = new Point(140, 85),
+                Location = new Point(145, 102),
                 DrawFormat = TextFormatFlags.VerticalCenter,
                 Size = new Size(350, 21),
                 NotControl = true,
@@ -287,7 +358,7 @@ namespace Client.MirScenes.Dialogs
             {
                 AutoSize = true,
                 Parent = this,
-                Location = new Point(53, 348),
+                Location = new Point(59, 337),
                 DrawFormat = TextFormatFlags.VerticalCenter,
                 //Size = new Size(350, 21),
                 Text = "0",
@@ -297,7 +368,7 @@ namespace Client.MirScenes.Dialogs
             CreatureInfo = new MirLabel
             {
                 Parent = this,
-                Location = new Point(19, 161),
+                Location = new Point(25, 177),
                 DrawFormat = TextFormatFlags.VerticalCenter,
                 Size = new Size(350, 15),
                 NotControl = true,
@@ -306,7 +377,7 @@ namespace Client.MirScenes.Dialogs
             CreatureInfo1 = new MirLabel
             {
                 Parent = this,
-                Location = new Point(19, 176),
+                Location = new Point(25, 177 + 15),
                 DrawFormat = TextFormatFlags.VerticalCenter,
                 Size = new Size(350, 15),
                 NotControl = true,
@@ -315,7 +386,7 @@ namespace Client.MirScenes.Dialogs
             CreatureInfo2 = new MirLabel
             {
                 Parent = this,
-                Location = new Point(19, 191),
+                Location = new Point(25, 177 + 30),
                 DrawFormat = TextFormatFlags.VerticalCenter,
                 Size = new Size(350, 15),
                 NotControl = true,
@@ -643,9 +714,9 @@ namespace Client.MirScenes.Dialogs
                     }
                     else
                     {
-                        SummonButton.Index = 593;
-                        SummonButton.HoverIndex = 594;
-                        SummonButton.PressedIndex = 595;
+                        SummonButton.Index = 228;
+                        SummonButton.HoverIndex = 229;
+                        SummonButton.PressedIndex = 230;
                         SummonButton.Enabled = false;
                         DismissButton.Enabled = false;
                         DismissButton.Visible = false;
@@ -655,9 +726,9 @@ namespace Client.MirScenes.Dialogs
                 {
                     DismissButton.Enabled = false;
                     DismissButton.Visible = false;
-                    SummonButton.Index = 576;
-                    SummonButton.HoverIndex = 577;
-                    SummonButton.PressedIndex = 578;
+                    SummonButton.Index = 228;
+                    SummonButton.HoverIndex = 229;
+                    SummonButton.PressedIndex = 230;
                     SummonButton.Enabled = true;
                 }
             }
@@ -725,9 +796,9 @@ namespace Client.MirScenes.Dialogs
             CreatureInfo2.Text = GameScene.User.IntelligentCreatures[selectedCreature].CreatureRules.Info2;
             //Expire
             if (GameScene.User.IntelligentCreatures[selectedCreature].ExpireTime == -9999)
-                CreatureDeadline.Text = string.Format(GameLanguage.ExpireNever);
+                CreatureDeadline.Text = "Expire: Never";
             else
-                CreatureDeadline.Text = string.Format(GameLanguage.Expire, Functions.PrintTimeSpanFromSeconds(GameScene.User.IntelligentCreatures[selectedCreature].ExpireTime));
+                CreatureDeadline.Text = string.Format("Expire: {0}", Functions.PrintTimeSpanFromSeconds(GameScene.User.IntelligentCreatures[selectedCreature].ExpireTime));
             //
             if (GameScene.User.IntelligentCreatures[selectedCreature].MaintainFoodTime == 0)
                 CreatureMaintainFoodBuff.Text = "0";
@@ -816,7 +887,7 @@ namespace Client.MirScenes.Dialogs
 
             if (!GameScene.User.IntelligentCreatures.Any())
             {
-                MirMessageBox messageBox = new MirMessageBox(GameLanguage.NoCreatures, MirMessageBoxButtons.OK);
+                MirMessageBox messageBox = new MirMessageBox("You do not own any creatures.", MirMessageBoxButtons.OK);
                 messageBox.Show();
                 return;
             }
@@ -1100,15 +1171,15 @@ namespace Client.MirScenes.Dialogs
     {
         public readonly string[] OptionNames = { "All Items", "Gold", "Weapons", "Armours", "Helmets", "Boots", "Belts", "Jewelry", "Others" };
         public IntelligentCreatureItemFilter Filter;
-        public Point locationOffset = new Point(450, 63);
-
+        public Point locationOffset = new Point(480, 60);
+        public MirLabel OptionsCancelLabel, SaveLabel;
         public MirButton OptionsSaveButton, OptionsCancelButton;
         public MirCheckBox[] CreatureOptions;
 
         public IntelligentCreatureOptionsDialog()
         {
-            Index = 469;
-            Library = Libraries.Title;
+            Index = 283;
+            Library = Libraries.GameScene;
             Movable = false;
             Sort = true;
             Location = new Point(GameScene.Scene.IntelligentCreatureDialog.Location.X + locationOffset.X, GameScene.Scene.IntelligentCreatureDialog.Location.Y + locationOffset.Y);
@@ -1117,35 +1188,55 @@ namespace Client.MirScenes.Dialogs
             CreatureOptions = new MirCheckBox[9];
             for (int i = 0; i < CreatureOptions.Length; i++)
             {
-                int offsetY = i * 30;
-                CreatureOptions[i] = new MirCheckBox { Index = 2086, UnTickedIndex = 2086, TickedIndex = 2087, Parent = this, Location = new Point(16, (16 + offsetY)), Library = Libraries.Prguse };
+                int offsetY = i * 18;
+                CreatureOptions[i] = new MirCheckBox { Index = 2086, UnTickedIndex = 2086, TickedIndex = 2087, Parent = this, Location = new Point(28, (81 + offsetY)), Library = Libraries.Prguse };
                 CreatureOptions[i].LabelText = OptionNames[i];
                 CreatureOptions[i].Click += CheckBoxClick;
             }
 
             OptionsSaveButton = new MirButton
             {
-                HoverIndex = 587,
-                Index = 586,
-                Location = new Point(10, 280),
-                Library = Libraries.Title,
+                Index = 228,
+                HoverIndex = 229,
+                PressedIndex = 230,
+                Location = new Point(31, 255),
+                Library = Libraries.GameScene,
                 Parent = this,
-                PressedIndex = 588,
                 Sound = SoundList.ButtonA,
             };
             OptionsSaveButton.Click += ButtonClick;
 
+            SaveLabel = new MirLabel
+            {
+                Location = new Point(0, -2),
+                Parent = OptionsSaveButton,
+                Size = new Size(78, 20),
+                DrawFormat = TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter,
+                Text = "Save",
+                NotControl = true,
+            };
+
             OptionsCancelButton = new MirButton
             {
-                HoverIndex = 591,
-                Index = 590,
-                Location = new Point(60, 280),
-                Library = Libraries.Title,
+                Index = 228,
+                HoverIndex = 229,
+                PressedIndex = 230,
+                Location = new Point(115, 255),
+                Library = Libraries.GameScene,
                 Parent = this,
-                PressedIndex = 592,
                 Sound = SoundList.ButtonA,
             };
             OptionsCancelButton.Click += ButtonClick;
+
+            OptionsCancelLabel = new MirLabel
+            {
+                Location = new Point(0, -2),
+                Parent = OptionsCancelButton,
+                Size = new Size(78, 20),
+                DrawFormat = TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter,
+                Text = "Cancel",
+                NotControl = true,
+            };
         }
 
         private void ButtonClick(object sender, EventArgs e)
@@ -1247,7 +1338,7 @@ namespace Client.MirScenes.Dialogs
         public int SelectedGrade = 0;
         public ItemGrade GradeType;
 
-        public Point locationOffset = new Point(449, 39);
+        public Point locationOffset = new Point(480 + 54, 50);
 
         public IntelligentCreatureOptionsGradeDialog()
         {

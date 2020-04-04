@@ -25,41 +25,31 @@ namespace Client.MirScenes.Dialogs
 
         public FishingDialog()
         {
-            Index = 1340;
-            Library = Libraries.Prguse;
+            Index = 241;
+            Library = Libraries.GameScene;
             Movable = true;
             Sort = true;
             Location = Center;
             BeforeDraw += FishingDialog_BeforeDraw;
 
-            TitleLabel = new MirLabel
-            {
-                Location = new Point(10, 4),
-                DrawFormat = TextFormatFlags.VerticalCenter | TextFormatFlags.HorizontalCenter,
-                Parent = this,
-                NotControl = true,
-                Size = new Size(180, 20),
-            };
-
             FishingRod = new MirControl
             {
                 Parent = this,
-                Location = new Point(0, 30),
+                Location = new Point(40, 70),
                 NotControl = true,
             };
             FishingRod.BeforeDraw += FishingRod_BeforeDraw;
 
             CloseButton = new MirButton
             {
-                HoverIndex = 361,
-                Index = 360,
-                Location = new Point(175, 3),
-                Library = Libraries.Prguse2,
+                HoverIndex = 186,
+                Index = 185,
+                Location = new Point(203, 25),
+                Library = Libraries.GameScene,
                 Parent = this,
-                PressedIndex = 362,
+                PressedIndex = 187,
                 Sound = SoundList.ButtonA,
             };
-
             CloseButton.Click += (o, e) => Hide();
 
             Grid = new MirItemCell[Enum.GetNames(typeof(FishingSlot)).Length];
@@ -69,16 +59,16 @@ namespace Client.MirScenes.Dialogs
                 ItemSlot = (int)FishingSlot.Hook,
                 GridType = MirGridType.Fishing,
                 Parent = this,
-                Size = new Size(34, 30),
-                Location = new Point(17, 203),
+                Size = new Size(32, 32),
+                Location = new Point(25, 279),
             };
             Grid[(int)FishingSlot.Float] = new MirItemCell
             {
                 ItemSlot = (int)FishingSlot.Float,
                 GridType = MirGridType.Fishing,
                 Parent = this,
-                Size = new Size(34, 30),
-                Location = new Point(17, 241),
+                Size = new Size(32, 32),
+                Location = new Point(67, 279),
             };
 
             Grid[(int)FishingSlot.Bait] = new MirItemCell
@@ -86,8 +76,8 @@ namespace Client.MirScenes.Dialogs
                 ItemSlot = (int)FishingSlot.Bait,
                 GridType = MirGridType.Fishing,
                 Parent = this,
-                Size = new Size(34, 30),
-                Location = new Point(57, 241),
+                Size = new Size(32, 32),
+                Location = new Point(109, 279),
             };
 
             Grid[(int)FishingSlot.Finder] = new MirItemCell
@@ -95,8 +85,8 @@ namespace Client.MirScenes.Dialogs
                 ItemSlot = (int)FishingSlot.Finder,
                 GridType = MirGridType.Fishing,
                 Parent = this,
-                Size = new Size(34, 30),
-                Location = new Point(97, 241),
+                Size = new Size(32, 32),
+                Location = new Point(151, 279),
             };
 
             Grid[(int)FishingSlot.Reel] = new MirItemCell
@@ -104,8 +94,8 @@ namespace Client.MirScenes.Dialogs
                 ItemSlot = (int)FishingSlot.Reel,
                 GridType = MirGridType.Fishing,
                 Parent = this,
-                Size = new Size(34, 30),
-                Location = new Point(137, 241),
+                Size = new Size(32, 32),
+                Location = new Point(193, 279),
             };
         }
 
@@ -115,7 +105,7 @@ namespace Client.MirScenes.Dialogs
 
             if (MapObject.User.HasFishingRod && item != null)
             {
-                TitleLabel.Text = item.Name;
+                //Do nothing
             }
         }
 
@@ -137,7 +127,7 @@ namespace Client.MirScenes.Dialogs
                 }
             }
 
-            Libraries.StateItems.Draw(FishingImage, new Point(Location.X + 10, Location.Y + 40), Color.White, false);
+            Libraries.StateItems.Draw(FishingImage, new Point(Location.X + 30, Location.Y + 60), Color.White, false);
         }
 
 
@@ -152,7 +142,7 @@ namespace Client.MirScenes.Dialogs
 
             if (!GameScene.User.HasFishingRod)
             {
-                MirMessageBox messageBox = new MirMessageBox(GameLanguage.NoFishingRod, MirMessageBoxButtons.OK);
+                MirMessageBox messageBox = new MirMessageBox("You are not holding a fishing rod.", MirMessageBoxButtons.OK);
                 messageBox.Show();
                 return;
             }

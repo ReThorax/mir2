@@ -25,6 +25,7 @@ namespace Client.MirScenes.Dialogs
         public MirLabel ItemLabel, PriceLabel, SellerLabel, PageLabel;
         public MirLabel DateLabel, ExpireLabel;
         public MirLabel NameLabel, TotalPriceLabel, SplitPriceLabel;
+        public MirLabel RefreshButtonLabel, FindButtonLabel, BuyButtonLabel;
 
         public MirItemCell ItemCell;
 
@@ -37,22 +38,22 @@ namespace Client.MirScenes.Dialogs
 
         public TrustMerchantDialog()
         {
-            Index = 670;
-            Library = Libraries.Prguse;
+            Index = 204;
+            Library = Libraries.GameScene;
             Sort = true;
 
 
-            TitleLabel = new MirImageControl
-            {
-                Index = 24,
-                Library = Libraries.Title,
-                Location = new Point(18, 9),
-                Parent = this
-            };
+            //TitleLabel = new MirImageControl
+            //{
+            //    Index = 24,
+            //    Library = Libraries.Title,
+            //    Location = new Point(18, 9),
+            //    Parent = this
+            //};
 
             SearchTextBox = new MirTextBox
             {
-                Location = new Point(19, 329),
+                Location = new Point(31, 347),
                 Parent = this,
                 Size = new Size(104, 15),
                 MaxLength = 20,
@@ -64,12 +65,12 @@ namespace Client.MirScenes.Dialogs
 
             FindButton = new MirButton
             {
-                HoverIndex = 481,
-                Index = 480,
-                Location = new Point(130, 325),
-                Library = Libraries.Title,
+                HoverIndex = 229,
+                Index = 228,
+                Location = new Point(143, 344),
+                Library = Libraries.GameScene,
                 Parent = this,
-                PressedIndex = 482,
+                PressedIndex = 230,
                 Sound = SoundList.ButtonA,
             };
             FindButton.Click += (o, e) =>
@@ -88,14 +89,24 @@ namespace Client.MirScenes.Dialogs
                 });
             };
 
+            FindButtonLabel = new MirLabel
+            {
+                Location = new Point(0, -2),
+                Parent = FindButton,
+                Size = new Size(78, 20),
+                DrawFormat = TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter,
+                Text = "Find",
+                NotControl = true,
+            };
+
             RefreshButton = new MirButton
             {
-                HoverIndex = 664,
-                Index = 663,
-                Location = new Point(190, 325),
-                Library = Libraries.Prguse,
+                HoverIndex = 229,
+                Index = 228,
+                Location = new Point(227, 344),
+                Library = Libraries.GameScene,
                 Parent = this,
-                PressedIndex = 665,
+                PressedIndex = 230,
                 Sound = SoundList.ButtonA,
             };
             RefreshButton.Click += (o, e) =>
@@ -110,12 +121,21 @@ namespace Client.MirScenes.Dialogs
                 Network.Enqueue(new C.MarketRefresh());
             };
 
+            RefreshButtonLabel = new MirLabel
+            {
+                Location = new Point(0, -2),
+                Parent = RefreshButton,
+                Size = new Size(78, 20),
+                DrawFormat = TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter,
+                Text = "Refresh",
+                NotControl = true,
+            };
 
             MailButton = new MirButton
             {
                 HoverIndex = 667,
                 Index = 666,
-                Location = new Point(225, 325),
+                Location = new Point(225, 344),
                 Library = Libraries.Prguse,
                 Parent = this,
                 PressedIndex = 668,
@@ -125,12 +145,12 @@ namespace Client.MirScenes.Dialogs
 
             BuyButton = new MirButton
             {
-                HoverIndex = 484,
-                Index = 483,
-                Location = new Point(400, 325),
-                Library = Libraries.Title,
+                HoverIndex = 229,
+                Index = 228,
+                Location = new Point(401, 344),
+                Library = Libraries.GameScene,
                 Parent = this,
-                PressedIndex = 485,
+                PressedIndex = 230,
                 Sound = SoundList.ButtonA,
             };
             BuyButton.Click += (o, e) =>
@@ -168,11 +188,21 @@ namespace Client.MirScenes.Dialogs
                 }
             };
 
+            BuyButtonLabel = new MirLabel
+            {
+                Location = new Point(0, -2),
+                Parent = BuyButton,
+                Size = new Size(78, 20),
+                DrawFormat = TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter,
+                Text = "Buy",
+                NotControl = true,
+            };
+
 
             BackButton = new MirButton
             {
                 Index = 398,
-                Location = new Point(189, 298),
+                Location = new Point(199, 318),
                 Library = Libraries.Prguse,
                 Parent = this,
                 PressedIndex = 399,
@@ -189,7 +219,7 @@ namespace Client.MirScenes.Dialogs
             NextButton = new MirButton
             {
                 Index = 396,
-                Location = new Point(283, 298),
+                Location = new Point(293, 318),
                 Library = Libraries.Prguse,
                 Parent = this,
                 PressedIndex = 397,
@@ -211,19 +241,19 @@ namespace Client.MirScenes.Dialogs
 
             CloseButton = new MirButton
             {
-                HoverIndex = 361,
-                Index = 360,
-                Location = new Point(462, 3),
-                Library = Libraries.Prguse2,
+                Index = 185,
+                HoverIndex = 186,
+                PressedIndex = 187,
+                Location = new Point(461, 24),
+                Library = Libraries.GameScene,
                 Parent = this,
-                PressedIndex = 362,
                 Sound = SoundList.ButtonA,
             };
             CloseButton.Click += (o, e) => Hide();
 
             PageLabel = new MirLabel
             {
-                Location = new Point(207, 298),
+                Location = new Point(217, 318),
                 Size = new Size(70, 18),
                 DrawFormat = TextFormatFlags.HorizontalCenter,
                 Parent = this,
@@ -236,21 +266,21 @@ namespace Client.MirScenes.Dialogs
             {
                 AutoSize = true,
                 ForeColour = Color.Yellow,
-                Location = new Point(20, 240),
+                Location = new Point(40, 260),
                 Parent = this,
                 NotControl = true,
             };
             TotalPriceLabel = new MirLabel
             {
                 AutoSize = true,
-                Location = new Point(20, 256),
+                Location = new Point(40, 276),
                 Parent = this,
                 NotControl = true,
             };
             SplitPriceLabel = new MirLabel
             {
                 AutoSize = true,
-                Location = new Point(20, 272),
+                Location = new Point(40, 292),
                 Parent = this,
                 NotControl = true,
             };
@@ -258,7 +288,7 @@ namespace Client.MirScenes.Dialogs
             DateLabel = new MirLabel
             {
                 AutoSize = true,
-                Location = new Point(250, 245),
+                Location = new Point(262, 263),
                 Parent = this,
                 NotControl = true,
                 Text = "Start Date:"
@@ -267,7 +297,7 @@ namespace Client.MirScenes.Dialogs
             ExpireLabel = new MirLabel
             {
                 AutoSize = true,
-                Location = new Point(250, 265),
+                Location = new Point(262, 288),
                 Parent = this,
                 NotControl = true,
                 Text = "Expire Date:"
@@ -275,8 +305,8 @@ namespace Client.MirScenes.Dialogs
 
             ItemLabel = new MirLabel
             {
-                Location = new Point(7, 32),
-                Size = new Size(142, 22),
+                Location = new Point(20, 52),
+                Size = new Size(140, 20),
                 DrawFormat = TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter,
                 Parent = this,
                 NotControl = true,
@@ -285,8 +315,8 @@ namespace Client.MirScenes.Dialogs
 
             PriceLabel = new MirLabel
             {
-                Location = new Point(148, 32),
-                Size = new Size(180, 22),
+                Location = new Point(161, 52),
+                Size = new Size(178, 20),
                 DrawFormat = TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter,
                 Parent = this,
                 NotControl = true,
@@ -295,8 +325,8 @@ namespace Client.MirScenes.Dialogs
 
             SellerLabel = new MirLabel
             {
-                Location = new Point(327, 32),
-                Size = new Size(150, 22),
+                Location = new Point(340, 52),
+                Size = new Size(149, 20),
                 DrawFormat = TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter,
                 Parent = this,
                 NotControl = true,
@@ -307,7 +337,7 @@ namespace Client.MirScenes.Dialogs
             {
                 Rows[i] = new AuctionRow
                 {
-                    Location = new Point(8, 54 + i * 18),
+                    Location = new Point(20, 73 + i * 18),
                     Parent = this
                 };
                 Rows[i].Click += (o, e) =>
@@ -324,16 +354,18 @@ namespace Client.MirScenes.Dialogs
                 GridType = MirGridType.TrustMerchant,
                 Library = Libraries.Items,
                 Parent = this,
-                Location = new Point(195, 248),
+                Location = new Point(209, 267),
             };
         }
 
         public void UpdateInterface()
         {
             SellerLabel.Text = UserMode ? "Status" : "Seller";
-            BuyButton.Index = UserMode ? 400 : 483;
-            BuyButton.HoverIndex = UserMode ? 401 : 484;
-            BuyButton.PressedIndex = UserMode ? 402 : 485;
+            BuyButton.Index = UserMode ? 228 : 228;
+            BuyButton.HoverIndex = UserMode ? 229 : 229;
+            BuyButton.PressedIndex = UserMode ? 230 : 230;
+
+            BuyButtonLabel.Text = UserMode ? "Get" : "Buy";
 
             PageLabel.Text = string.Format("{0}/{1}", Page + 1, PageCount);
 

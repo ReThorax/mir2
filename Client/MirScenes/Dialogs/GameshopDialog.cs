@@ -43,19 +43,19 @@ namespace Client.MirScenes.Dialogs
         public GameShopDialog()
         {
             GameScene.GameShopInfoList.Clear();
-            Index = 749;
-            Library = Libraries.Title;
+            Index = 281;
+            Library = Libraries.GameScene;
             Movable = true;
             Location = Center;
             Sort = true;
 
-            TitleLabel = new MirImageControl
-            {
-                Index = 26,
-                Library = Libraries.Title,
-                Location = new Point(18, 9),
-                Parent = this
-            };
+            //TitleLabel = new MirImageControl
+            //{
+            //    Index = 26,
+            //    Library = Libraries.Title,
+            //    Location = new Point(18, 9),
+            //    Parent = this
+            //};
 
             Grid = new GameShopCell[4 * 2];
             for (int x = 0; x < 4; x++)
@@ -74,12 +74,12 @@ namespace Client.MirScenes.Dialogs
 
             CloseButton = new MirButton
             {
-                HoverIndex = 361,
-                Index = 360,
-                Location = new Point(671, 4),
-                Library = Libraries.Prguse2,
+                HoverIndex = 186,
+                Index = 185,
+                Location = new Point(684, 24),
+                Library = Libraries.GameScene,
                 Parent = this,
-                PressedIndex = 362,
+                PressedIndex = 187,
                 Sound = SoundList.ButtonA,
             };
             CloseButton.Click += (o, e) => Hide();
@@ -87,9 +87,9 @@ namespace Client.MirScenes.Dialogs
             totalGold = new MirLabel
             {
                 Size = new Size(100, 20),
-                DrawFormat = TextFormatFlags.RightToLeft | TextFormatFlags.Right,
+                DrawFormat = TextFormatFlags.RightToLeft | TextFormatFlags.Left,
 
-                Location = new Point(123, 449),
+                Location = new Point(42, 433),
                 Parent = this,
                 NotControl = true,
                 Font = new Font(Settings.FontName, 8F),
@@ -97,8 +97,8 @@ namespace Client.MirScenes.Dialogs
             totalCredits = new MirLabel
             {
                 Size = new Size(100, 20),
-                DrawFormat = TextFormatFlags.RightToLeft | TextFormatFlags.Right,
-                Location = new Point(5, 449),
+                DrawFormat = TextFormatFlags.RightToLeft | TextFormatFlags.Left,
+                Location = new Point(154, 433),
                 Parent = this,
                 NotControl = true,
                 Font = new Font(Settings.FontName, 8F)
@@ -112,7 +112,7 @@ namespace Client.MirScenes.Dialogs
                 Library = Libraries.Prguse2,
                 Parent = this,
                 Size = new Size(16, 14),
-                Location = new Point(120, 103),
+                Location = new Point(138, 93),
                 Sound = SoundList.ButtonA,
                 Visible = true
             };
@@ -134,7 +134,7 @@ namespace Client.MirScenes.Dialogs
                 PressedIndex = 209,
                 Parent = this,
                 Size = new Size(16, 14),
-                Location = new Point(120, 421),
+                Location = new Point(138, 411),
                 Sound = SoundList.ButtonA,
                 Visible = true
             };
@@ -154,7 +154,7 @@ namespace Client.MirScenes.Dialogs
                 HoverIndex = 206,
                 PressedIndex = 206,
                 Library = Libraries.Prguse2,
-                Location = new Point(120, 117),
+                Location = new Point(138, 107),
                 Parent = this,
                 Movable = true,
                 Sound = SoundList.None,
@@ -169,7 +169,7 @@ namespace Client.MirScenes.Dialogs
             {
                 Index = 769,
                 Library = Libraries.Title,
-                Location = new Point(11, 102),
+                Location = new Point(31, 92),
                 Parent = this,
             };
             FilterBackground.MouseWheel += FilterScrolling;
@@ -179,10 +179,10 @@ namespace Client.MirScenes.Dialogs
                 BackColour = Color.FromArgb(4, 4, 4),
                 ForeColour = Color.White,
                 Parent = this,
-                Size = new Size(140, 16),
-                Location = new Point(540, 69),
+                Size = new Size(101, 16),
+                Location = new Point(31, 65),
                 Font = new Font(Settings.FontName, 9F),
-                MaxLength = 23,
+                MaxLength = 15,
                 CanLoseFocus = true,
             };
             Search.TextBox.KeyUp += (o, e) =>
@@ -194,7 +194,7 @@ namespace Client.MirScenes.Dialogs
             {
                 Index = 770,
                 Library = Libraries.Title,
-                Location = new Point(138, 68),
+                Location = new Point(156, 68),
                 Visible = true,
                 Parent = this,
                 Sound = SoundList.ButtonA,
@@ -210,7 +210,7 @@ namespace Client.MirScenes.Dialogs
             {
                 Index = 776,
                 Library = Libraries.Title,
-                Location = new Point(209, 68),
+                Location = new Point(227, 68),
                 Visible = true,
                 Parent = this,
                 Sound = SoundList.ButtonA,
@@ -225,7 +225,7 @@ namespace Client.MirScenes.Dialogs
             {
                 Index = 772,
                 Library = Libraries.Title,
-                Location = new Point(280, 68),
+                Location = new Point(298, 68),
                 Visible = true,
                 Parent = this,
                 Sound = SoundList.ButtonA,
@@ -240,7 +240,7 @@ namespace Client.MirScenes.Dialogs
             {
                 Index = 774,
                 Library = Libraries.Title,
-                Location = new Point(351, 68),
+                Location = new Point(369, 68),
                 Visible = false,
                 Parent = this,
                 Sound = SoundList.ButtonA,
@@ -260,7 +260,7 @@ namespace Client.MirScenes.Dialogs
                 HoverIndex = 752,
                 PressedIndex = 753,
                 Library = Libraries.Title,
-                Location = new Point(539, 37),
+                Location = new Point(539 + 16, 37 + 24),
                 Visible = true,
                 Parent = this,
             };
@@ -277,7 +277,7 @@ namespace Client.MirScenes.Dialogs
                 HoverIndex = 755,
                 PressedIndex = 756,
                 Library = Libraries.Title,
-                Location = new Point(568, 38),
+                Location = new Point(568 + 16, 38 + 24),
                 Visible = true,
                 Parent = this,
             };
@@ -294,7 +294,7 @@ namespace Client.MirScenes.Dialogs
                 HoverIndex = 758,
                 PressedIndex = 759,
                 Library = Libraries.Title,
-                Location = new Point(591, 38),
+                Location = new Point(591 + 16, 38 + 24),
                 Visible = true,
                 Parent = this,
             };
@@ -311,7 +311,7 @@ namespace Client.MirScenes.Dialogs
                 HoverIndex = 761,
                 PressedIndex = 762,
                 Library = Libraries.Title,
-                Location = new Point(614, 38),
+                Location = new Point(614 + 16, 38 + 24),
                 Visible = true,
                 Parent = this,
             };
@@ -328,7 +328,7 @@ namespace Client.MirScenes.Dialogs
                 HoverIndex = 764,
                 PressedIndex = 765,
                 Library = Libraries.Title,
-                Location = new Point(637, 38),
+                Location = new Point(637 + 16, 38 + 24),
                 Visible = true,
                 Parent = this,
             };
@@ -345,7 +345,7 @@ namespace Client.MirScenes.Dialogs
                 HoverIndex = 767,
                 PressedIndex = 768,
                 Library = Libraries.Title,
-                Location = new Point(660, 38),
+                Location = new Point(660 + 16, 38 + 24),
                 Visible = true,
                 Parent = this,
             };
@@ -361,8 +361,8 @@ namespace Client.MirScenes.Dialogs
             {
                 Text = "",
                 Parent = this,
-                Size = new Size(83, 17),
-                Location = new Point(597, 446),
+                Size = new Size(40, 17),
+                Location = new Point(288, 431),
                 DrawFormat = TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter,
                 Font = new Font(Settings.FontName, 7F),
             };
@@ -374,7 +374,7 @@ namespace Client.MirScenes.Dialogs
                 PressedIndex = 242,
                 Library = Libraries.Prguse2,
                 Parent = this,
-                Location = new Point(600, 448),
+                Location = new Point(273, 433),
                 Sound = SoundList.ButtonA,
             };
             PreviousButton.Click += (o, e) =>
@@ -393,7 +393,7 @@ namespace Client.MirScenes.Dialogs
                 PressedIndex = 245,
                 Library = Libraries.Prguse2,
                 Parent = this,
-                Location = new Point(660, 448),
+                Location = new Point(324, 433),
                 Sound = SoundList.ButtonA,
             };
             NextButton.Click += (o, e) =>
@@ -410,7 +410,7 @@ namespace Client.MirScenes.Dialogs
                 {
                     Parent = this,
                     Size = new Size(90, 20),
-                    Location = new Point(15, 103 + (15 * i)),
+                    Location = new Point(32, 93 + (15 * i)),
                     Text = "Testing - " + i.ToString(),
                     ForeColour = Color.Gray,
                     Font = new Font(Settings.FontName, 7F),
@@ -543,26 +543,26 @@ namespace Client.MirScenes.Dialogs
 
             int interval = 290 / (CategoryList.Count - 22);
 
-            int x = 120;
-            int y = 117 + (CStartIndex * interval);
+            int x = 138;
+            int y = 107 + (CStartIndex * interval);
 
-            if (y >= 401) y = 401;
-            if (y <= 117) y = 117;
+            if (y >= 391) y = 391;
+            if (y <= 107) y = 107;
 
             PositionBar.Location = new Point(x, y);
         }
 
         void PositionBar_OnMoving(object sender, MouseEventArgs e)
         {
-            int x = 120;
+            int x = 138;
             int y = PositionBar.Location.Y;
 
-            if (y >= 401) y = 401;
-            if (y <= 117) y = 117;
+            if (y >= 391) y = 391;
+            if (y <= 107) y = 107;
 
             if (CategoryList.Count > 22)
             {
-                int location = y - 117;
+                int location = y - 107;
                 int interval = 284 / (CategoryList.Count - 22);
 
                 double yPoint = location / interval;
@@ -617,7 +617,7 @@ namespace Client.MirScenes.Dialogs
                 shopList = GameScene.GameShopInfoList;
 
             CategoryList.Clear();
-            PositionBar.Location = new Point(120, 117);
+            PositionBar.Location = new Point(138, 107);
             CategoryList.Add("Show All");
 
             for (int i = 0; i < shopList.Count; i++)
@@ -709,7 +709,7 @@ namespace Client.MirScenes.Dialogs
                     Visible = true,
                     Item = filteredShop[i + StartIndex],
                     Size = new Size(125, 146),
-                    Location = i < 4 ? new Point(152 + (i * 132), 115) : new Point(152 + ((i - 4) * 132), 275),
+                    Location = i < 4 ? new Point(165 + (i * 132), 105) : new Point(165 + ((i - 4) * 132), 255),
                     Parent = this,
                 };
             }

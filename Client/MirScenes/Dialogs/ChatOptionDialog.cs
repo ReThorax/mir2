@@ -21,8 +21,8 @@ namespace Client.MirScenes.Dialogs
 
         public ChatOptionDialog()
         {
-            Index = 466;
-            Library = Libraries.Title;
+            Index = 240;
+            Library = Libraries.GameScene;
             Size = new Size(224, 180);
             Movable = true;
             Sort = true;
@@ -37,7 +37,7 @@ namespace Client.MirScenes.Dialogs
                 Parent = this,
                 Library = Libraries.Title,
                 Sound = SoundList.ButtonA,
-                Location = new Point(8, 8)
+                Location = new Point(5008, 8)
             };
             FilterTabButton.Click += (o, e) => SwitchTab(0);
 
@@ -48,18 +48,18 @@ namespace Client.MirScenes.Dialogs
                 Parent = this,
                 Library = Libraries.Title,
                 Sound = SoundList.ButtonA,
-                Location = new Point(78, 8)
+                Location = new Point(5078, 8)
             };
             ChatTabButton.Click += (o, e) => SwitchTab(1);
 
             CloseButton = new MirButton
             {
-                HoverIndex = 361,
-                Index = 360,
-                Location = new Point(198, 3),
-                Library = Libraries.Prguse2,
+                HoverIndex = 186,
+                Index = 185,
+                Location = new Point(177, 25),
+                Library = Libraries.GameScene,
                 Parent = this,
-                PressedIndex = 362,
+                PressedIndex = 187,
                 Sound = SoundList.ButtonA,
             };
             CloseButton.Click += (o, e) => Hide();
@@ -71,7 +71,7 @@ namespace Client.MirScenes.Dialogs
                 Index = 2087,
                 Library = Libraries.Prguse,
                 Parent = this,
-                Location = new Point(74, 47),
+                Location = new Point(5074, 47),
                 Sound = SoundList.ButtonA,
                 Size = new Size(16, 12)
             };
@@ -243,13 +243,13 @@ namespace Client.MirScenes.Dialogs
             SystemButton.Index = Settings.FilterSystemChat ? 2084 : 2085;
             LoverButton.Index = Settings.FilterLoverChat ? 2076 : 2077;
             MentorButton.Index = Settings.FilterMentorChat ? 2078 : 2079;
-            GroupButton.Index = Settings.FilterGroupChat ? 2080 : 2081; 
+            GroupButton.Index = Settings.FilterGroupChat ? 2080 : 2081;
             GuildButton.Index = Settings.FilterGuildChat ? 2082 : 2083;
         }
 
         private void SwitchTab(int tab = 0)
         {
-            if(tab == 0)
+            if (tab == 0)
             {
                 FilterTabButton.Index = 463;
                 FilterTabButton.PressedIndex = 462;
@@ -272,7 +272,7 @@ namespace Client.MirScenes.Dialogs
                 TransparencyOffButton.Visible = false;
                 TransparencyOnButton.Visible = false;
             }
-            else if(tab == 1)
+            else if (tab == 1)
             {
                 FilterTabButton.Index = 462;
                 FilterTabButton.PressedIndex = 463;
@@ -299,9 +299,9 @@ namespace Client.MirScenes.Dialogs
 
         private void CheckAllFilters()
         {
-            if (!Settings.FilterNormalChat && !Settings.FilterWhisperChat 
+            if (!Settings.FilterNormalChat && !Settings.FilterWhisperChat
                 && !Settings.FilterShoutChat && !Settings.FilterSystemChat
-                && !Settings.FilterLoverChat && !Settings.FilterMentorChat 
+                && !Settings.FilterLoverChat && !Settings.FilterMentorChat
                 && !Settings.FilterGroupChat && !Settings.FilterGuildChat)
             {
                 AllFiltersOff = true;
@@ -315,7 +315,7 @@ namespace Client.MirScenes.Dialogs
         }
         private void ToggleAllFilters()
         {
-            if(AllFiltersOff)
+            if (AllFiltersOff)
             {
                 //turn all filters on
                 Settings.FilterNormalChat = true;

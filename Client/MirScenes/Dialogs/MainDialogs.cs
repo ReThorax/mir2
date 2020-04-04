@@ -4599,8 +4599,8 @@ namespace Client.MirScenes.Dialogs
 
         public OptionDialog()
         {
-            Index = 411;
-            Library = Libraries.Title;
+            Index = 96;
+            Library = Libraries.GameScene;
             Movable = true;
             Sort = true;
 
@@ -4610,13 +4610,13 @@ namespace Client.MirScenes.Dialogs
 
             CloseButton = new MirButton
             {
-                Index = 360,
-                HoverIndex = 361,
-                Library = Libraries.Prguse2,
-                Location = new Point(Size.Width - 26, 5),
+                HoverIndex = 186,
+                Index = 185,
+                Location = new Point(228, 25),
+                Library = Libraries.GameScene,
                 Parent = this,
+                PressedIndex = 187,
                 Sound = SoundList.ButtonA,
-                PressedIndex = 362,
             };
             CloseButton.Click += (o, e) => Hide();
 
@@ -5045,278 +5045,7 @@ namespace Client.MirScenes.Dialogs
         }
 
     }
-    public sealed class MenuDialog : MirImageControl
-    {
-        public MirButton ExitButton,
-                         LogOutButton,
-                         HelpButton,
-                         KeyboardLayoutButton,
-                         RankingButton,
-                         CraftingButton,
-                         IntelligentCreatureButton,
-                         RideButton,
-                         FishingButton,
-                         FriendButton,
-                         MentorButton,
-                         RelationshipButton,
-                         GroupButton,
-                         GuildButton;
 
-        public MenuDialog()
-        {
-            Index = 567;
-            Parent = GameScene.Scene;
-            Library = Libraries.Title;
-            Location = new Point(Settings.ScreenWidth - Size.Width, GameScene.Scene.MainDialog.Location.Y - this.Size.Height + 15);
-            Sort = true;
-            Visible = false;
-            Movable = true;
-
-            ExitButton = new MirButton
-            {
-                HoverIndex = 634,
-                Index = 633,
-                Parent = this,
-                Library = Libraries.Title,
-                Location = new Point(3, 12),
-                PressedIndex = 635,
-                Hint = string.Format(GameLanguage.Exit, CMain.InputKeys.GetKey(KeybindOptions.Exit))
-            };
-            ExitButton.Click += (o, e) => GameScene.Scene.QuitGame();
-
-            LogOutButton = new MirButton
-            {
-                HoverIndex = 637,
-                Index = 636,
-                Parent = this,
-                Library = Libraries.Title,
-                Location = new Point(3, 31),
-                PressedIndex = 638,
-                Hint = string.Format(GameLanguage.LogOut, CMain.InputKeys.GetKey(KeybindOptions.Logout))
-            };
-            LogOutButton.Click += (o, e) => GameScene.Scene.LogOut();
-
-
-            HelpButton = new MirButton
-            {
-                Index = 1970,
-                HoverIndex = 1971,
-                PressedIndex = 1972,
-                Parent = this,
-                Library = Libraries.Prguse,
-                Location = new Point(3, 50),
-                Hint = string.Format(GameLanguage.Help, CMain.InputKeys.GetKey(KeybindOptions.Help))
-            };
-            HelpButton.Click += (o, e) =>
-            {
-                if (GameScene.Scene.HelpDialog.Visible)
-                    GameScene.Scene.HelpDialog.Hide();
-                else GameScene.Scene.HelpDialog.Show();
-            };
-
-            KeyboardLayoutButton = new MirButton
-            {
-                Index = 1973,
-                HoverIndex = 1974,
-                PressedIndex = 1975,
-                Parent = this,
-                Library = Libraries.Prguse,
-                Location = new Point(3, 69),
-                Visible = false,
-                Hint = GameLanguage.Keybinds
-            };
-            KeyboardLayoutButton.Click += (o, e) =>
-            {
-                if (GameScene.Scene.KeyboardLayoutDialog.Visible)
-                    GameScene.Scene.KeyboardLayoutDialog.Hide();
-                else GameScene.Scene.KeyboardLayoutDialog.Show();
-            };
-
-            RankingButton = new MirButton
-            {
-                Index = 2000,
-                HoverIndex = 2001,
-                PressedIndex = 2002,
-                Parent = this,
-                Library = Libraries.Prguse,
-                Location = new Point(3, 88),
-                Hint = string.Format(GameLanguage.Ranking, CMain.InputKeys.GetKey(KeybindOptions.Ranking))
-                //Visible = false
-            };
-            RankingButton.Click += (o, e) =>
-            {
-                if (GameScene.Scene.RankingDialog.Visible)
-                    GameScene.Scene.RankingDialog.Hide();
-                else GameScene.Scene.RankingDialog.Show();
-            };
-
-            CraftingButton = new MirButton
-            {
-                Index = 2000,
-                HoverIndex = 2001,
-                PressedIndex = 2002,
-                Parent = this,
-                Library = Libraries.Prguse,
-                Location = new Point(3, 107),
-                Visible = false
-            };
-            CraftingButton.Click += (o, e) =>
-            {
-
-            };
-
-            IntelligentCreatureButton = new MirButton
-            {
-                Index = 431,
-                HoverIndex = 432,
-                PressedIndex = 433,
-                Parent = this,
-                Library = Libraries.Prguse2,
-                Location = new Point(3, 126),
-                Hint = string.Format(GameLanguage.Creatures, CMain.InputKeys.GetKey(KeybindOptions.Creature))
-            };
-            IntelligentCreatureButton.Click += (o, e) =>
-            {
-                if (GameScene.Scene.IntelligentCreatureDialog.Visible)
-                    GameScene.Scene.IntelligentCreatureDialog.Hide();
-                else GameScene.Scene.IntelligentCreatureDialog.Show();
-            };
-            RideButton = new MirButton
-            {
-                Index = 1976,
-                HoverIndex = 1977,
-                PressedIndex = 1978,
-                Parent = this,
-                Library = Libraries.Prguse,
-                Location = new Point(3, 145),
-                Hint = string.Format(GameLanguage.Mount, CMain.InputKeys.GetKey(KeybindOptions.MountWindow))
-            };
-            RideButton.Click += (o, e) =>
-            {
-                if (GameScene.Scene.MountDialog.Visible)
-                    GameScene.Scene.MountDialog.Hide();
-                else GameScene.Scene.MountDialog.Show();
-            };
-
-            FishingButton = new MirButton
-            {
-                Index = 1979,
-                HoverIndex = 1980,
-                PressedIndex = 1981,
-                Parent = this,
-                Library = Libraries.Prguse,
-                Location = new Point(3, 164),
-                Hint = string.Format(GameLanguage.Fishing, CMain.InputKeys.GetKey(KeybindOptions.Fishing))
-            };
-            FishingButton.Click += (o, e) =>
-            {
-                if (GameScene.Scene.FishingDialog.Visible)
-                    GameScene.Scene.FishingDialog.Hide();
-                else GameScene.Scene.FishingDialog.Show();
-            };
-
-            FriendButton = new MirButton
-            {
-                Index = 1982,
-                HoverIndex = 1983,
-                PressedIndex = 1984,
-                Parent = this,
-                Library = Libraries.Prguse,
-                Location = new Point(3, 183),
-                Visible = true,
-                Hint = string.Format(GameLanguage.Friends, CMain.InputKeys.GetKey(KeybindOptions.Friends))
-            };
-            FriendButton.Click += (o, e) =>
-            {
-                if (GameScene.Scene.FriendDialog.Visible)
-                    GameScene.Scene.FriendDialog.Hide();
-                else GameScene.Scene.FriendDialog.Show();
-            };
-
-            MentorButton = new MirButton
-            {
-                Index = 1985,
-                HoverIndex = 1986,
-                PressedIndex = 1987,
-                Parent = this,
-                Library = Libraries.Prguse,
-                Location = new Point(3, 202),
-                Visible = true,
-                Hint = string.Format(GameLanguage.Mentor, CMain.InputKeys.GetKey(KeybindOptions.Mentor))
-            };
-            MentorButton.Click += (o, e) =>
-            {
-                if (GameScene.Scene.MentorDialog.Visible)
-                    GameScene.Scene.MentorDialog.Hide();
-                else GameScene.Scene.MentorDialog.Show();
-            };
-
-
-            RelationshipButton = new MirButton  /* lover button */
-            {
-                Index = 1988,
-                HoverIndex = 1989,
-                PressedIndex = 1990,
-                Parent = this,
-                Library = Libraries.Prguse,
-                Location = new Point(3, 221),
-                Visible = true,
-                Hint = string.Format(GameLanguage.Relationship, CMain.InputKeys.GetKey(KeybindOptions.Relationship))
-            };
-            RelationshipButton.Click += (o, e) =>
-            {
-                if (GameScene.Scene.RelationshipDialog.Visible)
-                    GameScene.Scene.RelationshipDialog.Hide();
-                else GameScene.Scene.RelationshipDialog.Show();
-            };
-
-            GroupButton = new MirButton
-            {
-                Index = 1991,
-                HoverIndex = 1992,
-                PressedIndex = 1993,
-                Parent = this,
-                Library = Libraries.Prguse,
-                Location = new Point(3, 240),
-                Hint = string.Format(GameLanguage.Groups, CMain.InputKeys.GetKey(KeybindOptions.Group))
-            };
-            GroupButton.Click += (o, e) =>
-            {
-                if (GameScene.Scene.GroupDialog.Visible)
-                    GameScene.Scene.GroupDialog.Hide();
-                else GameScene.Scene.GroupDialog.Show();
-            };
-
-            GuildButton = new MirButton
-            {
-                Index = 1994,
-                HoverIndex = 1995,
-                PressedIndex = 1996,
-                Parent = this,
-                Library = Libraries.Prguse,
-                Location = new Point(3, 259),
-                Hint = string.Format(GameLanguage.Guild, CMain.InputKeys.GetKey(KeybindOptions.Guilds))
-            };
-            GuildButton.Click += (o, e) =>
-            {
-                if (GameScene.Scene.GuildDialog.Visible)
-                    GameScene.Scene.GuildDialog.Hide();
-                else GameScene.Scene.GuildDialog.Show();
-            };
-
-        }
-
-        public void Show()
-        {
-            Visible = true;
-        }
-
-        public void Hide()
-        {
-            Visible = false;
-        }
-
-    }
     public sealed class MagicButton : MirControl
     {
         public MirImageControl LevelImage, ExpImage;
@@ -5327,7 +5056,7 @@ namespace Client.MirScenes.Dialogs
 
         public MagicButton()
         {
-            Size = new Size(231, 33);
+            Size = new Size(300, 200);
 
             SkillButton = new MirButton
             {
@@ -5335,7 +5064,7 @@ namespace Client.MirScenes.Dialogs
                 PressedIndex = 1,
                 Library = Libraries.MagIcon2,
                 Parent = this,
-                Location = new Point(36, 0),
+                Location = new Point(0, 0),
                 Sound = SoundList.ButtonA,
             };
             SkillButton.Click += (o, e) => new AssignKeyPanel(Magic);
@@ -5386,7 +5115,7 @@ namespace Client.MirScenes.Dialogs
             {
                 AutoSize = true,
                 Parent = this,
-                Location = new Point(2, 2),
+                Location = new Point(38, 2),
                 NotControl = true,
             };
 
@@ -5482,7 +5211,7 @@ namespace Client.MirScenes.Dialogs
     {
         public MirButton SaveButton, NoneButton;
 
-        public MirLabel TitleLabel;
+        public MirLabel TitleLabel, SaveLabel, NoneLabel;
         public MirImageControl MagicImage;
         public MirButton[] FKeys;
 
@@ -5495,15 +5224,15 @@ namespace Client.MirScenes.Dialogs
             Key = magic.Key;
 
             Modal = true;
-            Index = 710;
-            Library = Libraries.Prguse;
+            Index = 87;
+            Library = Libraries.GameScene;
             Location = Center;
             Parent = GameScene.Scene;
             Visible = true;
 
             MagicImage = new MirImageControl
             {
-                Location = new Point(16, 16),
+                Location = new Point(20, 53),
                 Index = magic.Icon * 2,
                 Library = Libraries.MagIcon2,
                 Parent = this,
@@ -5511,7 +5240,7 @@ namespace Client.MirScenes.Dialogs
 
             TitleLabel = new MirLabel
             {
-                Location = new Point(49, 17),
+                Location = new Point(54, 57),
                 Parent = this,
                 Size = new Size(230, 32),
                 DrawFormat = TextFormatFlags.HorizontalCenter | TextFormatFlags.WordBreak,
@@ -5520,23 +5249,33 @@ namespace Client.MirScenes.Dialogs
 
             NoneButton = new MirButton
             {
-                Index = 287, //154
-                HoverIndex = 288,
-                PressedIndex = 289,
-                Library = Libraries.Title,
+                Index = 228, //154
+                HoverIndex = 229,
+                PressedIndex = 230,
+                Library = Libraries.GameScene,
                 Parent = this,
-                Location = new Point(284, 64),
+                Location = new Point(285, 98),
             };
             NoneButton.Click += (o, e) => Key = 0;
 
+            NoneLabel = new MirLabel
+            {
+                Location = new Point(0, -2),
+                Parent = NoneButton,
+                Size = new Size(78, 20),
+                DrawFormat = TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter,
+                Text = "None",
+                NotControl = true,
+            };
+
             SaveButton = new MirButton
             {
-                Library = Libraries.Title,
+                Library = Libraries.GameScene,
                 Parent = this,
-                Location = new Point(284, 101),
-                Index = 156,
-                HoverIndex = 157,
-                PressedIndex = 158,
+                Location = new Point(285, 135),
+                Index = 228,
+                HoverIndex = 229,
+                PressedIndex = 230,
             };
             SaveButton.Click += (o, e) =>
             {
@@ -5554,6 +5293,16 @@ namespace Client.MirScenes.Dialogs
                 Dispose();
             };
 
+            SaveLabel = new MirLabel
+            {
+                Location = new Point(0, -2),
+                Parent = SaveButton,
+                Size = new Size(78, 20),
+                DrawFormat = TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter,
+                Text = "Save",
+                NotControl = true,
+            };
+
 
             FKeys = new MirButton[16];
 
@@ -5563,7 +5312,7 @@ namespace Client.MirScenes.Dialogs
                 PressedIndex = 1,
                 Library = Libraries.Prguse,
                 Parent = this,
-                Location = new Point(17, 58),
+                Location = new Point(21, 92),
                 Sound = SoundList.ButtonA,
                 Text = "F1"
             };
@@ -5575,7 +5324,7 @@ namespace Client.MirScenes.Dialogs
                 PressedIndex = 1,
                 Library = Libraries.Prguse,
                 Parent = this,
-                Location = new Point(49, 58),
+                Location = new Point(53, 92),
                 Sound = SoundList.ButtonA,
                 Text = "F2"
             };
@@ -5587,7 +5336,7 @@ namespace Client.MirScenes.Dialogs
                 PressedIndex = 1,
                 Library = Libraries.Prguse,
                 Parent = this,
-                Location = new Point(81, 58),
+                Location = new Point(85, 92),
                 Sound = SoundList.ButtonA,
                 Text = "F3"
             };
@@ -5599,7 +5348,7 @@ namespace Client.MirScenes.Dialogs
                 PressedIndex = 1,
                 Library = Libraries.Prguse,
                 Parent = this,
-                Location = new Point(113, 58),
+                Location = new Point(117, 92),
                 Sound = SoundList.ButtonA,
                 Text = "F4"
             };
@@ -5611,7 +5360,7 @@ namespace Client.MirScenes.Dialogs
                 PressedIndex = 1,
                 Library = Libraries.Prguse,
                 Parent = this,
-                Location = new Point(150, 58),
+                Location = new Point(154, 92),
                 Sound = SoundList.ButtonA,
                 Text = "F5"
             };
@@ -5623,7 +5372,7 @@ namespace Client.MirScenes.Dialogs
                 PressedIndex = 1,
                 Library = Libraries.Prguse,
                 Parent = this,
-                Location = new Point(182, 58),
+                Location = new Point(186, 92),
                 Sound = SoundList.ButtonA,
                 Text = "F6",
             };
@@ -5635,7 +5384,7 @@ namespace Client.MirScenes.Dialogs
                 PressedIndex = 1,
                 Library = Libraries.Prguse,
                 Parent = this,
-                Location = new Point(214, 58),
+                Location = new Point(218, 92),
                 Sound = SoundList.ButtonA,
                 Text = "F7"
             };
@@ -5647,7 +5396,7 @@ namespace Client.MirScenes.Dialogs
                 PressedIndex = 1,
                 Library = Libraries.Prguse,
                 Parent = this,
-                Location = new Point(246, 58),
+                Location = new Point(250, 92),
                 Sound = SoundList.ButtonA,
                 Text = "F8"
             };
@@ -5660,7 +5409,7 @@ namespace Client.MirScenes.Dialogs
                 PressedIndex = 1,
                 Library = Libraries.Prguse,
                 Parent = this,
-                Location = new Point(17, 95),
+                Location = new Point(21, 129),
                 Sound = SoundList.ButtonA,
                 Text = "Ctrl" + Environment.NewLine + "F1"
             };
@@ -5672,7 +5421,7 @@ namespace Client.MirScenes.Dialogs
                 PressedIndex = 1,
                 Library = Libraries.Prguse,
                 Parent = this,
-                Location = new Point(49, 95),
+                Location = new Point(53, 129),
                 Sound = SoundList.ButtonA,
                 Text = "Ctrl" + Environment.NewLine + "F2"
             };
@@ -5684,7 +5433,7 @@ namespace Client.MirScenes.Dialogs
                 PressedIndex = 1,
                 Library = Libraries.Prguse,
                 Parent = this,
-                Location = new Point(81, 95),
+                Location = new Point(85, 129),
                 Sound = SoundList.ButtonA,
                 Text = "Ctrl" + Environment.NewLine + "F3"
             };
@@ -5696,7 +5445,7 @@ namespace Client.MirScenes.Dialogs
                 PressedIndex = 1,
                 Library = Libraries.Prguse,
                 Parent = this,
-                Location = new Point(113, 95),
+                Location = new Point(117, 129),
                 Sound = SoundList.ButtonA,
                 Text = "Ctrl" + Environment.NewLine + "F4"
             };
@@ -5708,7 +5457,7 @@ namespace Client.MirScenes.Dialogs
                 PressedIndex = 1,
                 Library = Libraries.Prguse,
                 Parent = this,
-                Location = new Point(150, 95),
+                Location = new Point(154, 129),
                 Sound = SoundList.ButtonA,
                 Text = "Ctrl" + Environment.NewLine + "F5"
             };
@@ -5720,7 +5469,7 @@ namespace Client.MirScenes.Dialogs
                 PressedIndex = 1,
                 Library = Libraries.Prguse,
                 Parent = this,
-                Location = new Point(182, 95),
+                Location = new Point(186, 129),
                 Sound = SoundList.ButtonA,
                 Text = "Ctrl" + Environment.NewLine + "F6"
             };
@@ -5732,7 +5481,7 @@ namespace Client.MirScenes.Dialogs
                 PressedIndex = 1,
                 Library = Libraries.Prguse,
                 Parent = this,
-                Location = new Point(214, 95),
+                Location = new Point(218, 129),
                 Sound = SoundList.ButtonA,
                 Text = "Ctrl" + Environment.NewLine + "F7"
             };
@@ -5744,7 +5493,7 @@ namespace Client.MirScenes.Dialogs
                 PressedIndex = 1,
                 Library = Libraries.Prguse,
                 Parent = this,
-                Location = new Point(246, 95),
+                Location = new Point(250, 129),
                 Sound = SoundList.ButtonA,
                 Text = "Ctrl" + Environment.NewLine + "F8"
             };
