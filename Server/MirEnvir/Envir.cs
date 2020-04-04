@@ -774,9 +774,9 @@ namespace Server.MirEnvir
             var hours = Now.Hour * 2 % 24;
             if (hours == 6 || hours == 7)
                 Lights = LightSetting.Dawn;
-            else if (hours >= 8 && hours <= 15)
+            else if (hours >= 8 && hours <= 19)
                 Lights = LightSetting.Day;
-            else if (hours == 16 || hours == 17)
+            else if (hours == 20 || hours == 21)
                 Lights = LightSetting.Evening;
             else
                 Lights = LightSetting.Night;

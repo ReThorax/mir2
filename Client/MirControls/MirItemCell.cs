@@ -177,7 +177,7 @@ namespace Client.MirControls
 
         public MirItemCell()
         {
-            Size = new Size(36, 32);
+            Size = new Size(32, 32);
             GridType = MirGridType.None;
             DrawImage = false;
 
@@ -444,7 +444,7 @@ namespace Client.MirControls
                         if (CMain.Time < GameScene.UseItemTime) return;
                         Network.Enqueue(new C.UseItem { UniqueID = Item.UniqueID });
 
-                        if (Item.Count == 1 && ItemSlot < 6)
+                        if (Item.Count == 1 && ItemSlot < 8)
                         {
                             for (int i = GameScene.User.BeltIdx; i < GameScene.User.Inventory.Length; i++)
                                 if (ItemArray[i] != null && ItemArray[i].Info == Item.Info)
@@ -756,7 +756,7 @@ namespace Client.MirControls
                                     return;
                                 }
 
-                                for (int x = 6; x < ItemArray.Length; x++)
+                                for (int x = 8; x < ItemArray.Length; x++)
                                     if (ItemArray[x] == null)
                                     {
                                         Network.Enqueue(new C.RemoveItem { Grid = GridType, UniqueID = GameScene.SelectedCell.Item.UniqueID, To = x });
@@ -816,7 +816,7 @@ namespace Client.MirControls
                                     return;
                                 }
 
-                                for (int x = 6; x < ItemArray.Length; x++)
+                                for (int x = 8; x < ItemArray.Length; x++)
                                     if (ItemArray[x] == null)
                                     {
                                         Network.Enqueue(new C.TakeBackItem { From = GameScene.SelectedCell.ItemSlot, To = x });
@@ -894,7 +894,7 @@ namespace Client.MirControls
                                     return;
                                 }
 
-                                for (int x = 6; x < ItemArray.Length; x++)
+                                for (int x = 8; x < ItemArray.Length; x++)
                                     if (ItemArray[x] == null)
                                     {
                                         Network.Enqueue(new C.RetrieveTradeItem { From = GameScene.SelectedCell.ItemSlot, To = x });
@@ -967,7 +967,7 @@ namespace Client.MirControls
                                     return;
                                 }
 
-                                for (int x = 6; x < ItemArray.Length; x++)
+                                for (int x = 8; x < ItemArray.Length; x++)
                                     if (ItemArray[x] == null)
                                     {
                                         Network.Enqueue(new C.RetrieveRefineItem { From = GameScene.SelectedCell.ItemSlot, To = x });

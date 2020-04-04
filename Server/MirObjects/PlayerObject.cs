@@ -1977,7 +1977,7 @@ namespace Server.MirObjects
 
             if (item.Info.Type == ItemType.Potion || item.Info.Type == ItemType.Scroll || (item.Info.Type == ItemType.Script && item.Info.Effect == 1))
             {
-                for (int i = 0; i < 4; i++)
+                for (int i = 0; i < 8; i++)
                 {
                     if (Info.Inventory[i] != null) continue;
                     Info.Inventory[i] = item;
@@ -1986,7 +1986,7 @@ namespace Server.MirObjects
             }
             else if (item.Info.Type == ItemType.Amulet)
             {
-                for (int i = 4; i < 6; i++)
+                for (int i = 6; i < 8; i++)
                 {
                     if (Info.Inventory[i] != null) continue;
                     Info.Inventory[i] = item;
@@ -1995,7 +1995,7 @@ namespace Server.MirObjects
             }
             else
             {
-                for (int i = 6; i < Info.Inventory.Length; i++)
+                for (int i = 8; i < Info.Inventory.Length; i++)
                 {
                     if (Info.Inventory[i] != null) continue;
                     Info.Inventory[i] = item;
@@ -2172,7 +2172,8 @@ namespace Server.MirObjects
                 Info.Magics[i].CastTime = Envir.Time > TimeSpend ? Envir.Time - TimeSpend : 0;
             }
             Enqueue(new S.StartGame { Result = 4, Resolution = Settings.AllowedResolution });
-            ReceiveChat(string.Format(GameLanguage.Welcome, GameLanguage.GameName), ChatType.Hint);
+            ReceiveChat("Welcome to Legend of Mir: Nexus.", ChatType.Hint);
+            ReceiveChat("Please inform an Admin of any bugs or post them on our forum at www.NexusOnline.co.uk/Forum", ChatType.Hint);
 
             if (Settings.TestServer)
             {
@@ -5072,7 +5073,7 @@ namespace Server.MirObjects
 
                     case "ADDINVENTORY":
                         {
-                            int openLevel = (int)((Info.Inventory.Length - 46) / 4);
+                            int openLevel = (int)((Info.Inventory.Length - 48) / 4);
                             uint openGold = (uint)(1000000 + openLevel * 1000000);
                             if (Account.Gold >= openGold)
                             {
@@ -11830,7 +11831,7 @@ namespace Server.MirObjects
             {
                 if (temp.Info.Type == ItemType.Potion || temp.Info.Type == ItemType.Scroll || (temp.Info.Type == ItemType.Script && temp.Info.Effect == 1))
                 {
-                    for (int i = 0; i < 4; i++)
+                    for (int i = 0; i < 6; i++)
                     {
                         if (array[i] != null) continue;
                         array[i] = temp;
@@ -11840,7 +11841,7 @@ namespace Server.MirObjects
                 }
                 else if (temp.Info.Type == ItemType.Amulet)
                 {
-                    for (int i = 4; i < 6; i++)
+                    for (int i = 6; i < 8; i++)
                     {
                         if (array[i] != null) continue;
                         array[i] = temp;
@@ -11850,7 +11851,7 @@ namespace Server.MirObjects
                 }
             }
 
-            for (int i = 6; i < array.Length; i++)
+            for (int i = 8; i < array.Length; i++)
             {
                 if (array[i] != null) continue;
                 array[i] = temp;
@@ -11858,7 +11859,7 @@ namespace Server.MirObjects
                 return;
             }
 
-            for (int i = 0; i < 6; i++)
+            for (int i = 0; i < 8; i++)
             {
                 if (array[i] != null) continue;
                 array[i] = temp;

@@ -56,7 +56,7 @@ namespace Client.MirScenes
         public MapControl MapControl;
         public MainDialog MainDialog;
         public ChatDialog ChatDialog;
-        public ChatControlBar ChatControl;
+        //public ChatControlBar ChatControl;
         public InventoryDialog InventoryDialog;
         public CharacterDialog CharacterDialog;
         public CraftDialog CraftDialog;
@@ -200,7 +200,7 @@ namespace Client.MirScenes
 
             MainDialog = new MainDialog { Parent = this };
             ChatDialog = new ChatDialog { Parent = this };
-            ChatControl = new ChatControlBar { Parent = this };
+            //ChatControl = new ChatControlBar { Parent = this };
             InventoryDialog = new InventoryDialog { Parent = this };
             CharacterDialog = new CharacterDialog { Parent = this, Visible = false };
             BeltDialog = new BeltDialog { Parent = this };
@@ -766,7 +766,7 @@ namespace Client.MirScenes
                             MainDialog.Show();
                             ChatDialog.Show();
                             BeltDialog.Show();
-                            ChatControl.Show();
+                            //ChatControl.Show();
                             MiniMapDialog.Show();
                             CharacterDuraPanel.Show();
                             DuraStatusPanel.Show();
@@ -776,7 +776,7 @@ namespace Client.MirScenes
                             MainDialog.Hide();
                             ChatDialog.Hide();
                             BeltDialog.Hide();
-                            ChatControl.Hide();
+                            //ChatControl.Hide();
                             MiniMapDialog.Hide();
                             CharacterDuraPanel.Hide();
                             DuraStatusPanel.Hide();
@@ -2581,7 +2581,7 @@ namespace Client.MirScenes
             {
                 if (p.Item.Info.Type == ItemType.Potion || p.Item.Info.Type == ItemType.Scroll || (p.Item.Info.Type == ItemType.Script && p.Item.Info.Effect == 1))
                 {
-                    for (int i = 0; i < 4; i++)
+                    for (int i = 0; i < 8; i++)
                     {
                         if (array[i] != null) continue;
                         array[i] = p.Item;
@@ -2591,7 +2591,7 @@ namespace Client.MirScenes
                 }
                 else if (p.Item.Info.Type == ItemType.Amulet)
                 {
-                    for (int i = 4; i < GameScene.User.BeltIdx; i++)
+                    for (int i = 6; i < GameScene.User.BeltIdx; i++)
                     {
                         if (array[i] != null) continue;
                         array[i] = p.Item;
@@ -2853,8 +2853,10 @@ namespace Client.MirScenes
                 SoundManager.StopSound(20000 + 126 * 10 + 5 + i);
 
             User = null;
-            if (Settings.Resolution != 800)
-                CMain.SetResolution(800, 600);
+            if (Settings.Resolution == 1024)
+                CMain.SetResolution(1024, 768);
+            if (Settings.Resolution >= 1366)
+                CMain.SetResolution(1366, 768);
             ActiveScene = new SelectScene(p.Characters);
 
             Dispose();
@@ -2866,8 +2868,10 @@ namespace Client.MirScenes
                 SoundManager.StopSound(20000 + 126 * 10 + 5 + i);
 
             Observer = null;
-            if (Settings.Resolution != 1024)
-                CMain.SetResolution(1024, 758);
+            if (Settings.Resolution == 1024)
+                CMain.SetResolution(1024, 768);
+            if (Settings.Resolution >= 1366)
+                CMain.SetResolution(1366, 768);
             ActiveScene = new LoginScene();
 
             if (MapControl != null && !MapControl.IsDisposed)
@@ -2887,16 +2891,16 @@ namespace Client.MirScenes
             {
                 case LightSetting.Day:
                 case LightSetting.Normal:
-                    MiniMapDialog.LightSetting.Index = 2093;
+                    //MiniMapDialog.LightSetting.Index = 2093;
                     break;
                 case LightSetting.Dawn:
-                    MiniMapDialog.LightSetting.Index = 2095;
+                    //MiniMapDialog.LightSetting.Index = 2095;
                     break;
                 case LightSetting.Evening:
-                    MiniMapDialog.LightSetting.Index = 2094;
+                    //MiniMapDialog.LightSetting.Index = 2094;
                     break;
                 case LightSetting.Night:
-                    MiniMapDialog.LightSetting.Index = 2092;
+                    //MiniMapDialog.LightSetting.Index = 2092;
                     break;
             }
         }
@@ -5826,7 +5830,7 @@ namespace Client.MirScenes
             }
             else if (item.Info.Type == ItemType.Amulet)
             {
-                for (int i = 4; i < User.BeltIdx; i++)
+                for (int i = 6; i < User.BeltIdx; i++)
                 {
                     if (User.Inventory[i] != null) continue;
                     User.Inventory[i] = item;
@@ -8812,7 +8816,7 @@ namespace Client.MirScenes
                 MapControl = null;
                 MainDialog = null;
                 ChatDialog = null;
-                ChatControl = null;
+                //ChatControl = null;
                 InventoryDialog = null;
                 CharacterDialog = null;
                 StorageDialog = null;

@@ -46,8 +46,8 @@ namespace Client.MirObjects
         public BaseStats CoreStats = new BaseStats(0);
 
 
-        public UserItem[] Inventory = new UserItem[46], Equipment = new UserItem[14], Trade = new UserItem[10], QuestInventory = new UserItem[40];
-        public int BeltIdx = 6;
+        public UserItem[] Inventory = new UserItem[48], Equipment = new UserItem[20], Trade = new UserItem[10], QuestInventory = new UserItem[40];
+        public int BeltIdx = 8;
         public bool HasExpandedStorage = false;
         public DateTime ExpandedStorageExpiryTime;
 
