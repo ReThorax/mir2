@@ -47,8 +47,6 @@ namespace Client
         Options,
         Options2,
         Group,
-        Belt,
-        BeltFlip,
         Pickup,
         Belt1,
         Belt1Alt,
@@ -237,10 +235,6 @@ namespace Client
             Keylist.Add(InputKey);
             InputKey = new KeyBind { function = KeybindOptions.Group, RequireAlt = 2, RequireShift = 2, RequireTilde = 2, RequireCtrl = 2, Key = Keys.P };
             Keylist.Add(InputKey);
-            InputKey = new KeyBind { function = KeybindOptions.Belt, RequireAlt = 2, RequireShift = 2, RequireTilde = 2, RequireCtrl = 0, Key = Keys.Z };
-            Keylist.Add(InputKey);
-            InputKey = new KeyBind { function = KeybindOptions.BeltFlip, RequireAlt = 2, RequireShift = 2, RequireTilde = 2, RequireCtrl = 1, Key = Keys.Z };
-            Keylist.Add(InputKey);
             InputKey = new KeyBind { function = KeybindOptions.Pickup, RequireAlt = 2, RequireShift = 2, RequireTilde = 2, RequireCtrl = 2, Key = Keys.Tab };
             Keylist.Add(InputKey);
             InputKey = new KeyBind { function = KeybindOptions.Belt1, RequireAlt = 2, RequireShift = 0, RequireTilde = 2, RequireCtrl = 2, Key = Keys.D1 };
@@ -279,7 +273,7 @@ namespace Client
             Keylist.Add(InputKey);
             InputKey = new KeyBind { function = KeybindOptions.Exit, RequireAlt = 1, RequireShift = 2, RequireTilde = 2, RequireCtrl = 2, Key = Keys.Q };
             Keylist.Add(InputKey);
-            InputKey = new KeyBind { function = KeybindOptions.CreaturePickup, RequireAlt = 0, RequireShift = 2, RequireTilde = 2, RequireCtrl = 2, Key = Keys.X };
+            InputKey = new KeyBind { function = KeybindOptions.CreaturePickup, RequireAlt = 0, RequireShift = 0, RequireTilde = 0, RequireCtrl = 2, Key = Keys.E };
             Keylist.Add(InputKey);
             InputKey = new KeyBind { function = KeybindOptions.CreatureAutoPickup, RequireAlt = 1, RequireShift = 0, RequireTilde = 2, RequireCtrl = 2, Key = Keys.A };
             Keylist.Add(InputKey);

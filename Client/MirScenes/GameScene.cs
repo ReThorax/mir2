@@ -624,13 +624,6 @@ namespace Client.MirScenes
                         if (!GroupDialog.Visible) GroupDialog.Show();
                         else GroupDialog.Hide();
                         break;
-                    case KeybindOptions.Belt:
-                        if (!BeltDialog.Visible) BeltDialog.Show();
-                        else BeltDialog.Hide();
-                        break;
-                    case KeybindOptions.BeltFlip:
-                        BeltDialog.Flip();
-                        break;
                     case KeybindOptions.Pickup:
                         if (CMain.Time > PickUpTime)
                         {
