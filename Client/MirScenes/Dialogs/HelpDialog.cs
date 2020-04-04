@@ -237,7 +237,6 @@ namespace Client.MirScenes.Dialogs
             Shortcuts.Add(new ShortcutInfo(CMain.InputKeys.GetKey(KeybindOptions.GameShop), "Gameshop window (open / close)"));
             //Shortcuts.Add(new ShortcutInfo("K", "Rental window (open / close)"));
             Shortcuts.Add(new ShortcutInfo(CMain.InputKeys.GetKey(KeybindOptions.Relationship), "Engagement window (open / close)"));
-            Shortcuts.Add(new ShortcutInfo(CMain.InputKeys.GetKey(KeybindOptions.Belt), "Belt window (open / close)"));
             Shortcuts.Add(new ShortcutInfo(CMain.InputKeys.GetKey(KeybindOptions.Options), "Option window (open / close)"));
             Shortcuts.Add(new ShortcutInfo(CMain.InputKeys.GetKey(KeybindOptions.Help), "Help window (open / close)"));
             Shortcuts.Add(new ShortcutInfo(CMain.InputKeys.GetKey(KeybindOptions.Mount), "Mount / Dismount ride"));
