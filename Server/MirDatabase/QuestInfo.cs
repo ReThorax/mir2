@@ -393,6 +393,104 @@ namespace Server.MirDatabase
             };
         }
 
+        public ClientQuestInfo UpdateQuestInfo()
+        {
+            return new ClientQuestInfo
+            {
+                Index = Index,
+                NPCIndex = NpcIndex,
+                FinishNPCIndex = FinishNpcIndex,
+                Name = Name,
+                Group = Group,
+                Description = Description,
+                TaskDescription = TaskDescription,
+                CompletionDescription = CompletionDescription,
+                MinLevelNeeded = RequiredMinLevel,
+                MaxLevelNeeded = RequiredMaxLevel,
+                ClassNeeded = RequiredClass,
+                QuestNeeded = RequiredQuest,
+                Type = Type,
+                RewardGold = GoldReward,
+                RewardExp = ExpReward,
+                RewardCredit = CreditReward,
+                RewardsFixedItem = FixedRewards,
+                RewardsSelectItem = SelectRewards,
+            };
+        }
+
+        public QuestInfo UpdateQuestInfo(QuestInfo m)
+        {
+            CarryItems = m.CarryItems;
+            CompletionDescription = m.CompletionDescription;
+            CreditReward = m.CreditReward;
+            Description = m.Description;
+            ExpReward = m.ExpReward;
+            FileName = m.FileName;
+            FixedRewards = m.FixedRewards;
+            FlagMessage = m.FlagMessage;
+            FlagTasks = m.FlagTasks;
+            GoldReward = m.GoldReward;
+            GotoMessage = m.GotoMessage;
+            Group = m.Group;
+            Index = m.Index;
+            ItemMessage = m.ItemMessage;
+            ItemTasks = m.ItemTasks;
+            KillMessage = m.KillMessage;
+            KillTasks = m.KillTasks;
+            Name = m.Name;
+            NpcIndex = m.NpcIndex;
+            NpcInfo = m.NpcInfo;
+            RequiredClass = m.RequiredClass;
+            RequiredMaxLevel = m.RequiredMaxLevel;
+            RequiredMinLevel = m.RequiredMinLevel;
+            RequiredQuest = m.RequiredQuest;
+            SelectRewards = m.SelectRewards;
+            TaskDescription = m.TaskDescription;
+            Type = m.Type;
+            _finishNpcIndex = m._finishNpcIndex;
+            _regexMessage = m._regexMessage;
+            return this;
+        }
+
+        public static QuestInfo CloneMonster(QuestInfo m)
+        {
+            QuestInfo newQuest = new QuestInfo();
+
+            newQuest.CarryItems = m.CarryItems;
+            newQuest.CompletionDescription = m.CompletionDescription;
+            newQuest.CreditReward = m.CreditReward;
+            newQuest.Description = m.Description;
+            newQuest.ExpReward = m.ExpReward;
+            newQuest.FileName = m.FileName;
+            newQuest.FixedRewards = m.FixedRewards;
+            newQuest.FlagMessage = m.FlagMessage;
+            newQuest.FlagTasks = m.FlagTasks;
+            newQuest.GoldReward = m.GoldReward;
+            newQuest.GotoMessage = m.GotoMessage;
+            newQuest.Group = m.Group;
+            newQuest.Index = m.Index;
+            newQuest.ItemMessage = m.ItemMessage;
+            newQuest.ItemTasks = m.ItemTasks;
+            newQuest.KillMessage = m.KillMessage;
+            newQuest.KillTasks = m.KillTasks;
+            newQuest.Name = m.Name;
+            newQuest.NpcIndex = m.NpcIndex;
+            newQuest.NpcInfo = m.NpcInfo;
+            newQuest.RequiredClass = m.RequiredClass;
+            newQuest.RequiredMaxLevel = m.RequiredMaxLevel;
+            newQuest.RequiredMinLevel = m.RequiredMinLevel;
+            newQuest.RequiredQuest = m.RequiredQuest;
+            newQuest.SelectRewards = m.SelectRewards;
+            newQuest.TaskDescription = m.TaskDescription;
+            newQuest.Type = m.Type;
+            newQuest._finishNpcIndex = m._finishNpcIndex;
+            newQuest._regexMessage = m._regexMessage;
+
+
+            return newQuest;
+
+        }
+
         public static void FromText(string text)
         {
             string[] data = text.Split(new[] { ',' });

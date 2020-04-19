@@ -152,6 +152,7 @@ namespace Server
                 HWeightTextBox.Text = string.Empty;
                 BWeightText.Text = string.Empty;
                 EffectTextBox.Text = string.Empty;
+                GlowTextBox.Text = string.Empty;
                 
                 PoisonRecoverytextBox.Text = string.Empty;
                 SpellRecoverytextBox.Text = string.Empty;
@@ -253,6 +254,7 @@ namespace Server
 
             StartItemCheckBox.Checked = info.StartItem;
             EffectTextBox.Text = info.Effect.ToString();
+            GlowTextBox.Text = info.GlowEffect.ToString();
 
             PoisonRecoverytextBox.Text = info.PoisonRecovery.ToString();
             SpellRecoverytextBox.Text = info.SpellRecovery.ToString();
@@ -361,6 +363,7 @@ namespace Server
 
                 if (StartItemCheckBox.Checked != info.StartItem) StartItemCheckBox.CheckState = CheckState.Indeterminate;
                 if (EffectTextBox.Text != info.Effect.ToString()) EffectTextBox.Text = string.Empty;
+                if (GlowTextBox.Text != info.GlowEffect.ToString()) GlowTextBox.Text = string.Empty;
 
                 if (PoisonRecoverytextBox.Text != info.PoisonRecovery.ToString()) PoisonRecoverytextBox.Text = string.Empty;
                 if (SpellRecoverytextBox.Text != info.SpellRecovery.ToString()) SpellRecoverytextBox.Text = string.Empty;
@@ -1795,6 +1798,24 @@ namespace Server
             for (int i = 0; i < _selectedItemInfos.Count; i++)
                 _selectedItemInfos[i].Bind =
                     (noMailBox.Checked ? _selectedItemInfos[i].Bind |= BindMode.NoMail : _selectedItemInfos[i].Bind ^= BindMode.NoMail);
+        }
+
+        private void GlowTextBox_TextChanged(object sender, EventArgs e)
+        {
+            if (ActiveControl != sender) return;
+
+            byte temp;
+
+            if (!byte.TryParse(ActiveControl.Text, out temp))
+            {
+                ActiveControl.BackColor = Color.Red;
+                return;
+            }
+            ActiveControl.BackColor = SystemColors.Window;
+
+
+            for (int i = 0; i < _selectedItemInfos.Count; i++)
+                _selectedItemInfos[i].GlowEffect = temp;
         }
     }
 }

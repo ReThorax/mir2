@@ -2090,6 +2090,26 @@ namespace Client.MirScenes
         }
         private void ReceiveChat(S.Chat p)
         {
+            #region Old PlayerCount Region
+            string message = p.Message; //Get the message
+            if (message.Contains("Online Players: ")) //Check if its the PlayerCount message
+            {
+                string String;
+                String = message;
+
+                string[] numbers = Regex.Split(String, @"\D+"); //Regex the numbers
+                foreach (string value in numbers)
+                {
+                    if (!string.IsNullOrEmpty(value))
+                    {
+                        int i = int.Parse(value);
+                        Program.discord.UpdateStage(StatusType.PlayerCount, i);
+                        Program.discord.UpdateActivity();
+                    }
+                }
+            }
+            #endregion
+
             ChatDialog.ReceiveChat(p.Message, p.Type);
         }
 

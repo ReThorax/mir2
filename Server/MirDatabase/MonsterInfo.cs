@@ -166,6 +166,81 @@ namespace Server.MirDatabase
             writer.Write(Undead);
         }
 
+        public static MonsterInfo CloneMonster(MonsterInfo m)
+        {
+            MonsterInfo newmob = new MonsterInfo()
+            {
+                Accuracy = m.Accuracy,
+                Agility = m.Agility,
+                AI = m.AI,
+                AttackSpeed = m.AttackSpeed,
+                AutoRev = m.AutoRev,
+                CanPush = m.CanPush,
+                CanTame = m.CanTame,
+                CoolEye = m.CoolEye,
+                Drops = m.Drops,
+                Effect = m.Effect,
+                Experience = m.Experience,
+                HP = m.HP,
+                Image = m.Image,
+                Index = m.Index,
+                Level = m.Level,
+                Light = m.Light,
+                MaxAC = m.MaxAC,
+                MaxDC = m.MaxDC,
+                MaxMAC = m.MaxMAC,
+                MaxMC = m.MaxMC,
+                MaxSC = m.MaxSC,
+                MinAC = m.MinAC,
+                MinDC = m.MinDC,
+                MinMAC = m.MinMAC,
+                MinMC = m.MinMC,
+                MinSC = m.MinSC,
+                MoveSpeed = m.MoveSpeed,
+                Name = m.Name,
+                Undead = m.Undead,
+                ViewRange = m.ViewRange
+            };
+            return newmob;
+
+        }
+        public void UpdateMonster(MonsterInfo m)
+        {
+
+            Accuracy = m.Accuracy;
+            Agility = m.Agility;
+            AI = m.AI;
+            AttackSpeed = m.AttackSpeed;
+            AutoRev = m.AutoRev;
+            CanPush = m.CanPush;
+            CanTame = m.CanTame;
+            CoolEye = m.CoolEye;
+            Effect = m.Effect;
+            Experience = m.Experience;
+            HP = m.HP;
+            Image = m.Image;
+            Index = m.Index;
+            Level = m.Level;
+            Light = m.Light;
+            MaxAC = m.MaxAC;
+            MaxDC = m.MaxDC;
+            MaxMAC = m.MaxMAC;
+            MaxMC = m.MaxMC;
+            MaxSC = m.MaxSC;
+            MinAC = m.MinAC;
+            MinDC = m.MinDC;
+            MinMAC = m.MinMAC;
+            MinMC = m.MinMC;
+            MinSC = m.MinSC;
+            MoveSpeed = m.MoveSpeed;
+            Name = m.Name;
+            Undead = m.Undead;
+            ViewRange = m.ViewRange;
+
+            LoadDrops();
+
+        }
+
         public void LoadDrops()
         {
             Drops.Clear();

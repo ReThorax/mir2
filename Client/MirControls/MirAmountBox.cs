@@ -8,7 +8,7 @@ namespace Client.MirControls
 {
     public sealed class MirAmountBox : MirImageControl
     {
-        public MirLabel TitleLabel, TextLabel;
+        public MirLabel TitleLabel, TextLabel, AcceptLabel, CancelLabel;
         public MirButton OKButton, CancelButton, CloseButton;
         public MirTextBox InputTextBox;
         public MirControl ItemImage;
@@ -24,15 +24,15 @@ namespace Client.MirControls
             Modal = true;
             Movable = false;
 
-            Index = 238;
-            Library = Libraries.Prguse;
+            Index = 246;
+            Library = Libraries.GameScene;
 
             Location = new Point((Settings.ScreenWidth - Size.Width) / 2, (Settings.ScreenHeight - Size.Height) / 2);
 
             TitleLabel = new MirLabel
             {
                 AutoSize = true,
-                Location = new Point(19, 8),
+                Location = new Point(73, 67),
                 Parent = this,
                 NotControl = true,
                 Text = title
@@ -40,53 +40,75 @@ namespace Client.MirControls
 
             CloseButton = new MirButton
             {
-                HoverIndex = 361,
-                Index = 360,
-                Location = new Point(180, 3),
-                Library = Libraries.Prguse2,
+                HoverIndex = 186,
+                Index = 185,
+                Location = new Point(171, 25),
+                Library = Libraries.GameScene,
                 Parent = this,
-                PressedIndex = 362,
+                PressedIndex = 187,
                 Sound = SoundList.ButtonA,
             };
             CloseButton.Click += (o, e) => Dispose();
 
             ItemImage = new MirControl
             {
-                Location = new Point(15, 34),
-                Size = new Size(38, 34),
+                Location = new Point(30, 65),
+                Size = new Size(32, 32),
                 Parent = this,
             };
             ItemImage.AfterDraw += (o, e) => DrawItem();
 
             OKButton = new MirButton
             {
-                HoverIndex = 201,
-                Index = 200,
-                Library = Libraries.Title,
-                Location = new Point(23, 76),
+                Index = 228,
+                HoverIndex = 229,
+                PressedIndex = 230,
+                Location = new Point(27, 109),
+                Library = Libraries.GameScene,
                 Parent = this,
-                PressedIndex = 202,
+                Sound = SoundList.ButtonA,
             };
             OKButton.Click += (o, e) => Dispose();
 
+            AcceptLabel = new MirLabel
+            {
+                Location = new Point(0, -2),
+                Parent = OKButton,
+                Size = new Size(78, 20),
+                DrawFormat = TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter,
+                Text = "Accept",
+                NotControl = true,
+            };
+
             CancelButton = new MirButton
             {
-                HoverIndex = 204,
-                Index = 203,
-                Library = Libraries.Title,
-                Location = new Point(110, 76),
+                Index = 228,
+                HoverIndex = 229,
+                PressedIndex = 230,
+                Location = new Point(113, 109),
+                Library = Libraries.GameScene,
                 Parent = this,
-                PressedIndex = 205,
+                Sound = SoundList.ButtonA,
             };
             CancelButton.Click += (o, e) => Dispose();
+
+            CancelLabel = new MirLabel
+            {
+                Location = new Point(0, -2),
+                Parent = CancelButton,
+                Size = new Size(78, 20),
+                DrawFormat = TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter,
+                Text = "Cancel",
+                NotControl = true,
+            };
 
             InputTextBox = new MirTextBox
             {
                 Parent = this,
                 Border = true,
                 BorderColour = Color.Lime,
-                Location = new Point(58, 43),
-                Size = new Size(132, 19),
+                Location = new Point(73, 83),
+                Size = new Size(117, 19),
             };
             InputTextBox.SetFocus();
             InputTextBox.TextBox.KeyPress += MirInputBox_KeyPress;
@@ -103,8 +125,8 @@ namespace Client.MirControls
             Modal = true;
             Movable = false;
 
-            Index = 238;
-            Library = Libraries.Prguse;
+            Index = 246;
+            Library = Libraries.GameScene;
 
             Location = new Point((800 - Size.Width) / 2, (600 - Size.Height) / 2);
 
@@ -113,7 +135,7 @@ namespace Client.MirControls
             TitleLabel = new MirLabel
             {
                 AutoSize = true,
-                Location = new Point(19, 8),
+                Location = new Point(73, 67),
                 Parent = this,
                 NotControl = true,
                 Text = title
@@ -122,7 +144,7 @@ namespace Client.MirControls
             TextLabel = new MirLabel
             {
                 AutoSize = true,
-                Location = new Point(60, 43),
+                Location = new Point(73, 83),
                 ForeColour = Color.Yellow,
                 Parent = this,
                 NotControl = true,
@@ -131,45 +153,67 @@ namespace Client.MirControls
 
             CloseButton = new MirButton
             {
-                HoverIndex = 361,
-                Index = 360,
-                Location = new Point(180, 3),
-                Library = Libraries.Prguse2,
+                HoverIndex = 186,
+                Index = 185,
+                Location = new Point(171, 25),
+                Library = Libraries.GameScene,
                 Parent = this,
-                PressedIndex = 362,
+                PressedIndex = 187,
                 Sound = SoundList.ButtonA,
             };
             CloseButton.Click += (o, e) => Dispose();
 
             ItemImage = new MirControl
             {
-                Location = new Point(15, 34),
-                Size = new Size(38, 34),
+                Location = new Point(30, 65),
+                Size = new Size(32, 32),
                 Parent = this,
             };
             ItemImage.AfterDraw += (o, e) => DrawItem();
 
             OKButton = new MirButton
             {
-                HoverIndex = 201,
-                Index = 200,
-                Library = Libraries.Title,
-                Location = new Point(23, 76),
+                Index = 228,
+                HoverIndex = 229,
+                PressedIndex = 230,
+                Location = new Point(27, 109),
+                Library = Libraries.GameScene,
                 Parent = this,
-                PressedIndex = 202,
+                Sound = SoundList.ButtonA,
             };
             OKButton.Click += (o, e) => Dispose();
 
+            AcceptLabel = new MirLabel
+            {
+                Location = new Point(0, -2),
+                Parent = OKButton,
+                Size = new Size(78, 20),
+                DrawFormat = TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter,
+                Text = "Accept",
+                NotControl = true,
+            };
+
             CancelButton = new MirButton
             {
-                HoverIndex = 204,
-                Index = 203,
-                Library = Libraries.Title,
-                Location = new Point(110, 76),
+                Index = 228,
+                HoverIndex = 229,
+                PressedIndex = 230,
+                Location = new Point(113, 109),
+                Library = Libraries.GameScene,
                 Parent = this,
-                PressedIndex = 205,
+                Sound = SoundList.ButtonA,
             };
             CancelButton.Click += (o, e) => Dispose();
+
+            CancelLabel = new MirLabel
+            {
+                Location = new Point(0, -2),
+                Parent = CancelButton,
+                Size = new Size(78, 20),
+                DrawFormat = TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter,
+                Text = "Cancel",
+                NotControl = true,
+            };
         }
 
         void TextBox_TextChanged(object sender, EventArgs e)
@@ -244,7 +288,7 @@ namespace Client.MirControls
                 if (T != null && T.Tag != null && T.Tag != null)
                     ((MirTextBox)T.Tag).DialogChanged();
             }
-            
+
             /*
             CMain.Shift = false;
             CMain.Ctrl = false;

@@ -620,6 +620,7 @@ namespace Client.MirScenes.Dialogs
                 Parent = this,
                 Location = new Point(0, 76),
                 NotControl = true,
+                //BorderColour = "Green",
             };
 
             HealthOrb.BeforeDraw += HealthOrb_BeforeDraw;
@@ -932,7 +933,7 @@ namespace Client.MirScenes.Dialogs
 
             Rectangle r = new Rectangle(0, 114 - height, hpOnly ? 114 : 57, height);
             Libraries.GameScene.Draw(orbImage, r, new Point((Settings.ScreenWidth / 2) - 474, HealthOrb.DisplayLocation.Y + 114 - height), Color.White, false);
-
+            //Libraries.Prguse. Draw(orbImage, r, new Point(((Settings.ScreenWidth / 2) - (Size.Width / 2)), HealthOrb.DisplayLocation.Y + 154 - height), Color.White, false); //  80
             if (hpOnly) return;
 
             if (User.MP != User.MaxMP)
@@ -2595,6 +2596,13 @@ namespace Client.MirScenes.Dialogs
                     {
                         switch (GameScene.User.WingEffect)
                         {
+                            case 12:
+                                ArmourEffect.Animated = true;
+                                ArmourEffect.Index = 1902 + genderOffset;
+                                ArmourEffect.AnimationCount = 1;
+                                ArmourEffect.Loop = true;
+                                ArmourEffect.Visible = true;
+                                break;
                             case 36:
                                 ArmourEffect.Animated = true;
                                 ArmourEffect.Index = 2405 + genderOffset;
@@ -4124,6 +4132,13 @@ namespace Client.MirScenes.Dialogs
 
                     switch (RealItem.Effect)
                     {
+                        case 12:
+                            ArmourEffect.Animated = true;
+                            ArmourEffect.Index = 1902 + genderOffset;
+                            ArmourEffect.AnimationCount = 1;
+                            ArmourEffect.Loop = true;
+                            ArmourEffect.Visible = true;
+                            break;
                         case 36:
                             ArmourEffect.Animated = true;
                             ArmourEffect.Index = 2405 + genderOffset;

@@ -475,7 +475,7 @@ namespace ServerPackets
         public IntelligentCreatureType SummonedCreatureType = IntelligentCreatureType.None;//IntelligentCreature
         public bool CreatureSummoned;//IntelligentCreature
 
-
+        public bool IsDev, IsGM;
 
         protected override void ReadPacket(BinaryReader reader)
         {
@@ -546,6 +546,9 @@ namespace ServerPackets
                 IntelligentCreatures.Add(new ClientIntelligentCreature(reader));
             SummonedCreatureType = (IntelligentCreatureType)reader.ReadByte();
             CreatureSummoned = reader.ReadBoolean();
+
+            IsGM = reader.ReadBoolean();
+            IsDev = reader.ReadBoolean();
         }
 
         protected override void WritePacket(BinaryWriter writer)
@@ -627,6 +630,9 @@ namespace ServerPackets
                 IntelligentCreatures[i].Save(writer);
             writer.Write((byte)SummonedCreatureType);
             writer.Write(CreatureSummoned);
+
+            writer.Write(IsGM);
+            writer.Write(IsDev);
         }
     }
     public sealed class UserLocation : Packet
@@ -692,6 +698,8 @@ namespace ServerPackets
 
         public LevelEffects LevelEffects;
 
+        public bool IsGM, IsDev;
+
         public List<BuffType> Buffs = new List<BuffType>();
 
         public bool Observing;
@@ -737,6 +745,9 @@ namespace ServerPackets
 
             LevelEffects = (LevelEffects)reader.ReadByte();
             Observing = reader.ReadBoolean();
+
+            IsGM = reader.ReadBoolean();
+            IsDev = reader.ReadBoolean();
         }
 
         protected override void WritePacket(BinaryWriter writer)
@@ -781,6 +792,9 @@ namespace ServerPackets
 
             writer.Write((byte)LevelEffects);
             writer.Write(Observing);
+
+            writer.Write(IsGM);
+            writer.Write(IsDev);
         }
     }
     public sealed class ObjectRemove : Packet
@@ -1408,6 +1422,42 @@ namespace ServerPackets
 			writer.Write(WeaponEffect);
 			writer.Write(Armour);
             writer.Write(WingEffect);
+        }
+    }
+
+    public sealed class UpdateItemInfo : Packet
+    {
+        public override short Index
+        {
+            get { return (short)ServerPacketIds.UpdateItemInfo; }
+        }
+
+        public ItemInfo Info;
+
+        protected override void ReadPacket(BinaryReader reader)
+        {
+            Info = new ItemInfo(reader);
+        }
+
+        protected override void WritePacket(BinaryWriter writer)
+        {
+            Info.Save(writer);
+        }
+    }
+
+    public sealed class RefreshStats : Packet
+    {
+        public override short Index
+        {
+            get { return (short)ServerPacketIds.RefreshStats; }
+        }
+
+        protected override void ReadPacket(BinaryReader reader)
+        {
+        }
+
+        protected override void WritePacket(BinaryWriter writer)
+        {
         }
     }
     public sealed class PlayerInspect : Packet

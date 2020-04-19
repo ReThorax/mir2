@@ -174,6 +174,10 @@ namespace Client.MirObjects
             //20 1 frame + animation(9 frames)
             NPCs.Add(frame = new FrameSet());
             frame.Frames.Add(MirAction.Standing, new Frame(0, 1, 0, 900, 1, 9, 0, 100));
+
+            //21 6 frames + direction
+            NPCs.Add(frame = new FrameSet());
+            frame.Frames.Add(MirAction.Standing, new Frame(0, 6, 0, 400));
             #endregion
 
             /*
@@ -187,7 +191,7 @@ namespace Client.MirObjects
             frame.Frames.Add(MirAction.Walking, new Frame(32, 6, 0, 100));
             frame.Frames.Add(MirAction.Attack1, new Frame(80, 6, 0, 100));
 
-            //1 - Hen, Deer, Sheep, Wolf, Pig, Bull, DarkBrownWolf
+            //1 - Hen, Deer, Sheep, Wolf, Pig, Bull, DarkBrownWolf, EventMob
             Monsters.Add(frame = new FrameSet());
             frame.Frames.Add(MirAction.Standing, new Frame(0, 4, 0, 500));
             frame.Frames.Add(MirAction.Walking, new Frame(32, 6, 0, 100));
@@ -2507,6 +2511,16 @@ namespace Client.MirObjects
             frame.Frames.Add(MirAction.Die, new Frame(224, 8, 0, 100));
             frame.Frames.Add(MirAction.Dead, new Frame(258, 1, 8, 1000));
 
+            //14 - Mouse
+            HelperPets.Add(frame = new FrameSet());
+            frame.Frames.Add(MirAction.Standing, new Frame(0, 8, 0, 500));
+            frame.Frames.Add(MirAction.Walking, new Frame(64, 6, 0, 100));          //
+            frame.Frames.Add(MirAction.Attack1, new Frame(112, 10, 0, 100));        // Pickup
+            frame.Frames.Add(MirAction.Attack2, new Frame(192, 10, 0, 100));        // Stab + Spray?
+            frame.Frames.Add(MirAction.Attack3, new Frame(272, 9, 0, 100));         // Dance?
+            frame.Frames.Add(MirAction.Attack4, new Frame(344, 9, 0, 100));         // Another Dance?
+            frame.Frames.Add(MirAction.Die, new Frame(224, 8, 0, 100));
+            frame.Frames.Add(MirAction.Dead, new Frame(258, 1, 8, 1000));
             #endregion
 
             /*

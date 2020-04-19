@@ -32,6 +32,7 @@ namespace Client.MirGraphics
             Magic2 = new MLibrary(Settings.DataPath + "Magic2"),
             Magic3 = new MLibrary(Settings.DataPath + "Magic3"),
             Effect = new MLibrary(Settings.DataPath + "Effect"),
+            Effect3 = new MLibrary(Settings.DataPath + "Effect3"),
             MagicC = new MLibrary(Settings.DataPath + "MagicC"),
             GuildSkill = new MLibrary(Settings.DataPath + "GuildSkill");
 
@@ -58,11 +59,11 @@ namespace Client.MirGraphics
         public static readonly MLibrary
             Deco = new MLibrary(Settings.DataPath + "Deco");
 
-        public static readonly MLibrary[] CArmours = new MLibrary[42],
-                                          CWeapons = new MLibrary[55],
-										  CWeaponEffect = new MLibrary[67],
+        public static readonly MLibrary[] CArmours = new MLibrary[200],
+                                          CWeapons = new MLibrary[200],
+										  CWeaponEffect = new MLibrary[200],
 										  CHair = new MLibrary[9],
-                                          CHumEffect = new MLibrary[6],
+                                          CHumEffect = new MLibrary[20],
                                           AArmours = new MLibrary[17],
                                           AWeaponsL = new MLibrary[14],
                                           AWeaponsR = new MLibrary[14],
@@ -73,13 +74,13 @@ namespace Client.MirGraphics
                                           ARWeaponsS = new MLibrary[19],
                                           ARHair = new MLibrary[9],
                                           ARHumEffect = new MLibrary[3],
-                                          Monsters = new MLibrary[406],
+                                          Monsters = new MLibrary[500],
                                           Gates = new MLibrary[2],
                                           Flags = new MLibrary[12],
                                           Mounts = new MLibrary[12],
-                                          NPCs = new MLibrary[200],
+                                          NPCs = new MLibrary[300],
                                           Fishing = new MLibrary[2],
-                                          Pets = new MLibrary[14],
+                                          Pets = new MLibrary[15],
                                           Transform = new MLibrary[28],
                                           TransformMounts = new MLibrary[28],
                                           TransformEffect = new MLibrary[2],

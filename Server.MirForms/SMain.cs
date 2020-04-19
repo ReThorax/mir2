@@ -1,8 +1,15 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Windows.Forms;
 using Server.MirEnvir;
+using System.IO;
+using System.Text.RegularExpressions;
+using System.Linq;
 using Server.MirDatabase;
 using Server.MirForms.Systems;
+using S = ServerPackets;
+using Server.MirForms;
+using System.Collections.Generic;
 
 namespace Server
 {
@@ -422,5 +429,126 @@ namespace Server
             form.ShowDialog();
         }
 
+        private void itemsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int u = 0;
+
+
+            foreach (var NewItem in EditEnvir.ItemInfoList)
+            {
+                ItemInfo OldItem = Envir.ItemInfoList.Find(x => x.Index == NewItem.Index);
+                if (OldItem != null)
+                {
+                    OldItem.UpdateItem(NewItem);
+                }
+                else
+                {
+                    ItemInfo CloneItem = ItemInfo.CloneItem(NewItem);
+                    Envir.ItemInfoList.Add(CloneItem);
+                    u++;
+                }
+            }
+
+            SMain.Enqueue("[Item DataBase] total items: " + Envir.ItemInfoList.Count.ToString());
+            SMain.Enqueue("[Item DataBase] " + (Envir.ItemInfoList.Count - u).ToString() + " have been updated");
+            SMain.Enqueue("[Item DataBase] " + u.ToString() + " have been added");
+
+            foreach (var c in Envir.Connections)// update all info on players items
+            {
+                if (!c.Connected) continue;
+
+                foreach (var i in c.SentItemInfo)
+                {
+                    c.Enqueue(new S.UpdateItemInfo { Info = i });
+                }
+            }
+
+            foreach (var p in Envir.Players) // refresh all existing players stats
+            {
+                if (p.Info == null) continue;
+
+                p.RefreshStats();
+                p.Enqueue(new S.RefreshStats());
+
+            }
+        }
+
+        private void monsterToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int u = 0;
+
+
+            foreach (var NewMob in EditEnvir.MonsterInfoList)
+            {
+                MonsterInfo OldMob = Envir.MonsterInfoList.Find(x => x.Index == NewMob.Index);
+                if (OldMob != null)
+                {
+                    OldMob.UpdateMonster(NewMob);
+                }
+                else
+                {
+                    MonsterInfo CloneMonster = MonsterInfo.CloneMonster(NewMob);
+                    Envir.MonsterInfoList.Add(CloneMonster);
+                    u++;
+                }
+            }
+
+            SMain.Enqueue("[Monster DataBase] total monsters: " + Envir.MonsterInfoList.Count.ToString());
+            SMain.Enqueue("[Monster DataBase] " + (Envir.MonsterInfoList.Count - u).ToString() + " have been updated");
+            SMain.Enqueue("[Monster DataBase] " + u.ToString() + " have been added");
+
+
+        }
+
+        private void dropsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            foreach (var t in Envir.MonsterInfoList)
+                t.LoadDrops();
+
+            Envir.LoadFishingDrops();
+            Envir.LoadAwakeningMaterials();
+            Envir.LoadStrongBoxDrops();
+            Envir.LoadBlackStoneDrops();
+            SMain.Enqueue("Monster Drops Reloaded");
+        }
+
+        private void questsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int updated = 0;
+            int added = 0;
+            List<QuestInfo> newList = new List<QuestInfo>();
+            foreach (var NewQuest in EditEnvir.QuestInfoList)
+            {
+                QuestInfo OldQuest = Envir.QuestInfoList.Find(x => x.Index == NewQuest.Index);
+                if (OldQuest != null)
+                {
+                    newList.Add(OldQuest.UpdateQuestInfo(NewQuest));
+                    updated++;
+                }
+                else if (OldQuest == null)
+                {
+                    QuestInfo CloneQuest = QuestInfo.CloneMonster(NewQuest);
+                    CloneQuest.LoadInfo();
+                    Envir.QuestInfoList.Add(CloneQuest);
+                    added++;
+                }
+            }
+            Enqueue("[Quest DataBase] total quests: " + Envir.QuestInfoList.Count.ToString());
+            Enqueue(string.Format("[Quest Database] {0} quests have been updated", updated));
+            Enqueue("[Quest DataBase] " + added.ToString() + " have been added");
+        }
+
+        private void nPCScriptsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < Envir.MapList.Count; i++)
+            {
+                for (int j = 0; j < Envir.MapList[i].NPCs.Count; j++)
+                    Envir.MapList[i].NPCs[j].LoadInfo(true);
+            }
+
+            Envir.DefaultNPC.LoadInfo(true);
+
+            Enqueue(String.Format("[{0}]: NPC Scripts reloaded" + Environment.NewLine, DateTime.Now));
+        }
     }
 }

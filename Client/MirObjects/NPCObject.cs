@@ -276,6 +276,7 @@ namespace Client.MirObjects
                 case 143:
                 case 174:
                 case 185:
+                case 212:
                     Frames = FrameSet.NPCs[10];
                     break;
                 #endregion

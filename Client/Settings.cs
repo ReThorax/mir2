@@ -64,7 +64,7 @@ namespace Client
         public static int RemainingErrorLogs = 100;
 
         //Graphics
-        public static bool FullScreen = true, TopMost = true;
+        public static bool FullScreen = true, TopMost = false;
         public static string FontName = "Tahoma"; //"MS Sans Serif"
         public static bool FPSCap = true;
         public static int MaxFPS = 100;
@@ -72,7 +72,7 @@ namespace Client
         public static bool DebugMode = false;
 
         //Network
-        public static bool UseConfig = false;
+        public static bool UseConfig = true;
         public static string IPAddress = "127.0.0.1";
         public static int Port = 7000;
         public const int TimeOut = 5000;
@@ -161,7 +161,7 @@ namespace Client
 
         //AutoPatcher
         public static bool P_Patcher = true;
-        public static string P_Host = @"http://mirfiles.co.uk/mir2/cmir/patch/"; //ftp://212.67.209.184
+        public static string P_Host = @"."; //ftp://212.67.209.184
         public static string P_PatchFileName = @"PList.gz";
         public static bool P_NeedLogin = false;
         public static string P_Login = string.Empty;

@@ -161,6 +161,7 @@ namespace Client.MirObjects
                 case Monster.BabyMonkey:
                 case Monster.AngryBird:
                 case Monster.Foxey:
+                case Monster.Mouse:
                     BodyLibrary = Libraries.Pets[((ushort)BaseImage) - 10000];
                     break;
                 case Monster.SabukGate:
@@ -319,6 +320,8 @@ namespace Client.MirObjects
                 case Monster.ArmingWeaver:
                 case Monster.SpiderWarrior:
                 case Monster.SpiderBarbarian:
+                case Monster.EventMob:
+                case Monster.TittyMonster:
                     Frames = FrameSet.Monsters[2];
                     break;
                 case Monster.CannibalPlant:
@@ -1018,6 +1021,7 @@ namespace Client.MirObjects
                 case Monster.BabyMonkey:
                 case Monster.AngryBird:
                 case Monster.Foxey:
+                case Monster.Mouse:
                     Frames = FrameSet.HelperPets[((ushort)BaseImage) - 10000];
                     break;
                 case Monster.SabukGate:
@@ -1241,6 +1245,7 @@ namespace Client.MirObjects
                 case Monster.BabyMonkey:
                 case Monster.AngryBird:
                 case Monster.Foxey:
+                case Monster.Mouse:
                     BodyLibrary = Libraries.Pets[((ushort)BaseImage) - 10000];
                     break;
                     break;
@@ -2978,6 +2983,7 @@ namespace Client.MirObjects
                 case Monster.BabyMonkey:
                 case Monster.AngryBird:
                 case Monster.Foxey:
+                case Monster.Mouse:
                     SoundManager.PlaySound(petSound);
                     break;
             }
@@ -3762,6 +3768,7 @@ namespace Client.MirObjects
                 case Monster.BabyMonkey:
                 case Monster.AngryBird:
                 case Monster.Foxey:
+                case Monster.Mouse:
                     yOffset = -20;
                     break;
             }
@@ -3836,6 +3843,7 @@ namespace Client.MirObjects
                 case Monster.BabyMonkey:
                 case Monster.AngryBird:
                 case Monster.Foxey:
+                case Monster.Mouse:
                     yOffset = 20;
                     break;
             }

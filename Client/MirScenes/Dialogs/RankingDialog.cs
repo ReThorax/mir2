@@ -309,7 +309,7 @@ namespace Client.MirScenes.Dialogs
 
                 ViewButton = new MirLabel
                 {
-                    Location = new Point(220, 0),
+                    Location = new Point(280, 0),
                     AutoSize = true,
                     DrawFormat = TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter,
                     Parent = this,

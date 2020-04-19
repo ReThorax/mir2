@@ -110,6 +110,9 @@ namespace Client.MirObjects
 
         public Point FishingPoint;
 
+        public bool IsGM;
+        public bool IsDev;
+
         public LevelEffects LevelEffects;
 
         public PlayerObject(uint objectID)
@@ -167,6 +170,9 @@ namespace Client.MirObjects
             Buffs = info.Buffs;
 
             LevelEffects = info.LevelEffects;
+
+            IsGM = info.IsGM;
+            IsDev = info.IsDev;
 
             ProcessBuffs();
 
@@ -687,6 +693,14 @@ namespace Client.MirObjects
                 if (Effects[i] is SpecialEffect) Effects[i].Remove();
             }
 
+            if (IsDev || IsGM)
+            {
+                if (IsDev)
+                    Effects.Add(new SpecialEffect(Libraries.Effect, 1290, 7, 3600, this, true, false, 0) { Repeat = true });
+                else if (IsGM)
+                    Effects.Add(new SpecialEffect(Libraries.Effect, 1271, 7, 3600, this, true, false, 0) { Repeat = true });
+            }
+
             if (RidingMount) return;
 
             if (CurrentEffect == SpellEffect.MagicShieldUp)
@@ -708,6 +722,33 @@ namespace Client.MirObjects
                     case 100: //Oma King Robe effect
                         Effects.Add(new SpecialEffect(Libraries.Effect, 352, 33, 3600, this, true, false, 0) { Repeat = true });
                         break;
+                    case 101: //Purple
+                        Effects.Add(new SpecialEffect(Libraries.Effect3, 0, 10, 1500, this, true, true, 0) { Repeat = true });
+                        break;
+                    case 102: //Green
+                        Effects.Add(new SpecialEffect(Libraries.Effect3, 352, 33, 1500, this, true, false, 0) { Repeat = true });
+                        break;
+                    case 103: //DarkPurple
+                        Effects.Add(new SpecialEffect(Libraries.Effect3, 352, 33, 1500, this, true, false, 0) { Repeat = true });
+                        break;
+                    case 104: //Pink
+                        Effects.Add(new SpecialEffect(Libraries.Effect3, 352, 33, 1500, this, true, false, 0) { Repeat = true });
+                        break;
+                    case 105: //Orange
+                        Effects.Add(new SpecialEffect(Libraries.Effect3, 352, 33, 1500, this, true, false, 0) { Repeat = true });
+                        break;
+                    case 106: //Blue
+                        Effects.Add(new SpecialEffect(Libraries.Effect3, 352, 33, 1500, this, true, false, 0) { Repeat = true });
+                        break;
+                    case 107: //YellowArrow
+                        Effects.Add(new SpecialEffect(Libraries.Effect3, 352, 33, 1500, this, true, false, 0) { Repeat = true });
+                        break;
+                    case 108: //PurplePulse
+                        Effects.Add(new SpecialEffect(Libraries.Effect3, 352, 33, 1500, this, true, false, 0) { Repeat = true });
+                        break;
+                    case 109: //YellowSpinny
+                        Effects.Add(new SpecialEffect(Libraries.Effect3, 352, 33, 1500, this, true, false, 0) { Repeat = true });
+                        break;
                 }
             }
 
@@ -719,7 +760,7 @@ namespace Client.MirObjects
             if (LevelEffects.HasFlag(LevelEffects.BlueDragon))
             {
                 Effects.Add(new SpecialEffect(Libraries.Effect, 1210, 20, 3200, this, true, true, 1) { Repeat = true });
-                SpecialEffect effect = new SpecialEffect(Libraries.Effect, 1240, 32, 4200, this, true, false, 1) { Repeat = true, Delay = delay };
+                SpecialEffect effect = new SpecialEffect(Libraries.Effect, 1240, 31, 4200, this, true, false, 1) { Repeat = true, Delay = delay };
                 effect.SetStart(CMain.Time + delay);
                 Effects.Add(effect);
             }

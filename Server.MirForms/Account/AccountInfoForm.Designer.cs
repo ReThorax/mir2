@@ -77,6 +77,7 @@
             this.expiryDateHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.MatchFilterCheckBox = new System.Windows.Forms.CheckBox();
             this.WipeCharButton = new System.Windows.Forms.Button();
+            this.DeveloperCheckBox = new System.Windows.Forms.CheckBox();
             this.AccountInfoPanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -120,6 +121,7 @@
             // 
             this.AccountInfoPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.AccountInfoPanel.Controls.Add(this.DeveloperCheckBox);
             this.AccountInfoPanel.Controls.Add(this.AdminCheckBox);
             this.AccountInfoPanel.Controls.Add(this.PermBanButton);
             this.AccountInfoPanel.Controls.Add(this.WeekBanButton);
@@ -530,6 +532,17 @@
             this.WipeCharButton.UseVisualStyleBackColor = true;
             this.WipeCharButton.Click += new System.EventHandler(this.WipeCharButton_Click);
             // 
+            // DeveloperCheckBox
+            // 
+            this.DeveloperCheckBox.AutoSize = true;
+            this.DeveloperCheckBox.Location = new System.Drawing.Point(207, 39);
+            this.DeveloperCheckBox.Name = "DeveloperCheckBox";
+            this.DeveloperCheckBox.Size = new System.Drawing.Size(75, 17);
+            this.DeveloperCheckBox.TabIndex = 33;
+            this.DeveloperCheckBox.Text = "Developer";
+            this.DeveloperCheckBox.UseVisualStyleBackColor = true;
+            this.DeveloperCheckBox.CheckedChanged += new System.EventHandler(this.DeveloperCheckBox_CheckedChanged);
+            // 
             // AccountInfoForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -606,5 +619,6 @@
         private System.Windows.Forms.TextBox FilterPlayerTextBox;
         private System.Windows.Forms.CheckBox MatchFilterCheckBox;
         private System.Windows.Forms.Button WipeCharButton;
+        private System.Windows.Forms.CheckBox DeveloperCheckBox;
     }
 }

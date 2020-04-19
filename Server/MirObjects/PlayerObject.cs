@@ -18,7 +18,7 @@ namespace Server.MirObjects
         private long NextGroupInviteTime;
 
         public string GMPassword = Settings.GMPassword;
-        public bool IsGM, GMLogin, GMNeverDie, GMGameMaster, EnableGroupRecall, EnableGuildInvite, AllowMarriage, AllowLoverRecall, AllowMentor, HasMapShout, HasServerShout;
+        public bool IsGM, IsDev, GMLogin, GMNeverDie, GMGameMaster, EnableGroupRecall, EnableGuildInvite, AllowMarriage, AllowLoverRecall, AllowMentor, HasMapShout, HasServerShout;
 
         public bool HasUpdatedBaseStats = true;
 
@@ -408,7 +408,13 @@ namespace Server.MirObjects
             if (Account.AdminAccount)
             {
                 IsGM = true;
-                MessageQueue.Enqueue(string.Format("{0} is now a GM", Name));
+                MessageQueue.Enqueue(string.Format("{0} has Logged In as a GameMaster", Name));
+            }
+            if (Account.DevAccount)
+            {
+                IsGM = true;
+                IsDev = true;
+                MessageQueue.Enqueue(string.Format("{0} has Logged In as a Developer", Name));
             }
 
             if (Level == 0) NewCharacter();
@@ -2323,8 +2329,11 @@ namespace Server.MirObjects
 
             Report.Connected(Connection.IPAddress);
 
-            MessageQueue.Enqueue(string.Format("{0} has connected.", Info.Name));
-            
+            if (IsGM || IsDev) return;
+            {
+                MessageQueue.Enqueue(string.Format("{0} has Logged In as a Player.", Info.Name));
+            }
+
             if (IsGM) return;
             LastRankUpdate = Envir.Time;
             if ((Level >= Envir.RankBottomLevel[0]) || (Level >= Envir.RankBottomLevel[(byte)Class + 1]))
@@ -2524,7 +2533,10 @@ namespace Server.MirObjects
                 Gold = Account.Gold,
                 Credit = Account.Credit,
                 HasExpandedStorage = Account.ExpandedStorageExpiryDate > Envir.Now ? true : false,
-                ExpandedStorageExpiryTime = Account.ExpandedStorageExpiryDate
+                ExpandedStorageExpiryTime = Account.ExpandedStorageExpiryDate,
+
+                IsGM = IsGM,
+                IsDev = Account.DevAccount,
             };
 
             //Copy this method to prevent modification before sending packet information.
@@ -10203,7 +10215,10 @@ namespace Server.MirObjects
 
                 Buffs = Buffs.Where(d => d.Visible).Select(e => e.Type).ToList(),
 
-                LevelEffects = LevelEffects
+                LevelEffects = LevelEffects,
+
+                IsGM = IsGM,
+                IsDev = Account.DevAccount,
             };
         }
         public Packet GetInfoEx(PlayerObject player)

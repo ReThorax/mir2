@@ -154,6 +154,7 @@
             this.label32 = new System.Windows.Forms.Label();
             this.WWeightTextBox = new System.Windows.Forms.TextBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.noMailBox = new System.Windows.Forms.CheckBox();
             this.unableToDisassemble_CheckBox = new System.Windows.Forms.CheckBox();
             this.unableToRent_CheckBox = new System.Windows.Forms.CheckBox();
             this.NoWeddingRingcheckbox = new System.Windows.Forms.CheckBox();
@@ -192,7 +193,8 @@
             this.ExportSelectedButton = new System.Windows.Forms.Button();
             this.ImportButton = new System.Windows.Forms.Button();
             this.Gameshop_button = new System.Windows.Forms.Button();
-            this.noMailBox = new System.Windows.Forms.CheckBox();
+            this.GlowTextBox = new System.Windows.Forms.TextBox();
+            this.GlowLabel = new System.Windows.Forms.Label();
             this.ItemInfoPanel.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -228,6 +230,8 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.GlowTextBox);
+            this.tabPage1.Controls.Add(this.GlowLabel);
             this.tabPage1.Controls.Add(this.globalDropNotify_CheckBox);
             this.tabPage1.Controls.Add(this.CanAwaken);
             this.tabPage1.Controls.Add(this.label56);
@@ -1499,6 +1503,17 @@
             this.tabPage3.Text = "Binding";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
+            // noMailBox
+            // 
+            this.noMailBox.AutoSize = true;
+            this.noMailBox.Location = new System.Drawing.Point(21, 343);
+            this.noMailBox.Name = "noMailBox";
+            this.noMailBox.Size = new System.Drawing.Size(98, 17);
+            this.noMailBox.TabIndex = 119;
+            this.noMailBox.Text = "Unable To Mail";
+            this.noMailBox.UseVisualStyleBackColor = true;
+            this.noMailBox.CheckedChanged += new System.EventHandler(this.noMailBox_CheckedChanged);
+            // 
             // unableToDisassemble_CheckBox
             // 
             this.unableToDisassemble_CheckBox.AutoSize = true;
@@ -1920,16 +1935,22 @@
             this.Gameshop_button.UseVisualStyleBackColor = true;
             this.Gameshop_button.Click += new System.EventHandler(this.Gameshop_button_Click);
             // 
-            // noMailBox
+            // GlowTextBox
             // 
-            this.noMailBox.AutoSize = true;
-            this.noMailBox.Location = new System.Drawing.Point(21, 343);
-            this.noMailBox.Name = "noMailBox";
-            this.noMailBox.Size = new System.Drawing.Size(98, 17);
-            this.noMailBox.TabIndex = 119;
-            this.noMailBox.Text = "Unable To Mail";
-            this.noMailBox.UseVisualStyleBackColor = true;
-            this.noMailBox.CheckedChanged += new System.EventHandler(this.noMailBox_CheckedChanged);
+            this.GlowTextBox.Location = new System.Drawing.Point(561, 43);
+            this.GlowTextBox.Name = "GlowTextBox";
+            this.GlowTextBox.Size = new System.Drawing.Size(30, 20);
+            this.GlowTextBox.TabIndex = 126;
+            this.GlowTextBox.TextChanged += new System.EventHandler(this.GlowTextBox_TextChanged);
+            // 
+            // GlowLabel
+            // 
+            this.GlowLabel.AutoSize = true;
+            this.GlowLabel.Location = new System.Drawing.Point(517, 46);
+            this.GlowLabel.Name = "GlowLabel";
+            this.GlowLabel.Size = new System.Drawing.Size(34, 13);
+            this.GlowLabel.TabIndex = 125;
+            this.GlowLabel.Text = "Glow:";
             // 
             // ItemInfoForm
             // 
@@ -2134,5 +2155,7 @@
         private System.Windows.Forms.CheckBox globalDropNotify_CheckBox;
         private System.Windows.Forms.CheckBox BlinkcheckBox;
         private System.Windows.Forms.CheckBox noMailBox;
+        private System.Windows.Forms.TextBox GlowTextBox;
+        private System.Windows.Forms.Label GlowLabel;
     }
 }

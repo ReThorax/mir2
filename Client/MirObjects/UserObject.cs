@@ -116,6 +116,9 @@ namespace Client.MirObjects
                     Magics[i].CastTime = CMain.Time - Magics[i].CastTime;
             }
 
+            IsGM = info.IsGM;
+            IsDev = info.IsDev;
+
             IntelligentCreatures = info.IntelligentCreatures;//IntelligentCreature
             SummonedCreatureType = info.SummonedCreatureType;//IntelligentCreature
             CreatureSummoned = info.CreatureSummoned;//IntelligentCreature

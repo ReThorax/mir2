@@ -173,7 +173,7 @@ namespace Server.MirObjects
                     {
                         if (ob is PlayerObject player)
                         {
-                            if (player.Account.AdminAccount && player.Observer)
+                            if (player.Account.AdminAccount && player.Observer || player.Account.DevAccount && player.Observer)
                                 return;
                             player.Struck(Value, DefenceType.MAC);
                         }

@@ -49,6 +49,7 @@ namespace Server.MirDatabase
         
         public LinkedList<AuctionInfo> Auctions = new LinkedList<AuctionInfo>();
         public bool AdminAccount;
+        public bool DevAccount;
 
         public AccountInfo()
         {
@@ -118,7 +119,8 @@ namespace Server.MirDatabase
             }
 
             if (Envir.LoadVersion >= 10) AdminAccount = reader.ReadBoolean();
-            if (!AdminAccount)
+            if (Envir.LoadCustomVersion >= 1) DevAccount = reader.ReadBoolean();
+            if (!AdminAccount || !DevAccount)
             {
                 for (int i = 0; i < Characters.Count; i++)
                 {
@@ -173,6 +175,7 @@ namespace Server.MirDatabase
                 Storage[i].Save(writer);
             }
             writer.Write(AdminAccount);
+            writer.Write(DevAccount);
         }
 
         public List<SelectInfo> GetSelectInfo()

@@ -64,6 +64,7 @@ namespace Server
             ListItem.SubItems[5].Text = account.Banned.ToString();
             ListItem.SubItems[6].Text = account.BanReason;
             ListItem.SubItems[7].Text = account.ExpiryDate.ToString();
+            ListItem.SubItems[8].Text = account.DevAccount.ToString();
         }
 
         private ListViewItem CreateListView(AccountInfo account)
@@ -77,6 +78,7 @@ namespace Server
             ListItem.SubItems.Add(account.Banned.ToString());
             ListItem.SubItems.Add(account.BanReason);
             ListItem.SubItems.Add(account.ExpiryDate.ToString());
+            ListItem.SubItems.Add(account.DevAccount.ToString());
 
             return ListItem;
         }
@@ -160,6 +162,7 @@ namespace Server
             BannedCheckBox.CheckState = info.Banned ? CheckState.Checked : CheckState.Unchecked;
             ExpiryDateTextBox.Text = info.ExpiryDate.ToString();
             AdminCheckBox.CheckState = info.AdminAccount ? CheckState.Checked : CheckState.Unchecked;
+            DeveloperCheckBox.CheckState = info.DevAccount ? CheckState.Checked : CheckState.Unchecked;
 
             for (int i = 0; i < _selectedAccountInfos.Count; i++)
             {
@@ -185,6 +188,7 @@ namespace Server
                 if (BannedCheckBox.Checked != info.Banned) BannedCheckBox.CheckState = CheckState.Indeterminate;
                 if (ExpiryDateTextBox.Text != info.ExpiryDate.ToString()) ExpiryDateTextBox.Text = string.Empty;
                 if (AdminCheckBox.Checked != info.AdminAccount) AdminCheckBox.CheckState = CheckState.Indeterminate;
+                if (DeveloperCheckBox.Checked != info.DevAccount) DeveloperCheckBox.CheckState = CheckState.Indeterminate;
             }
         }
 
@@ -422,9 +426,15 @@ namespace Server
         {
             if (ActiveControl != sender) return;
 
+            if (DeveloperCheckBox.Checked == true)
+            {
+                DeveloperCheckBox.Checked = false;
+            }
+
             AccountInfoListView.BeginUpdate();
             for (int i = 0; i < _selectedAccountInfos.Count; i++)
             {
+                _selectedAccountInfos[i].DevAccount = false;
                 _selectedAccountInfos[i].AdminAccount = AdminCheckBox.CheckState == CheckState.Checked ? true : false;
                 Update(AccountInfoListView.SelectedItems[i], _selectedAccountInfos[i]);
             }
@@ -457,6 +467,26 @@ namespace Server
                 MessageBox.Show("All characters and associated data has been cleared", "Notice",
                MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
+        }
+
+        private void DeveloperCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (ActiveControl != sender) return;
+
+            if (AdminCheckBox.Checked == true)
+            {
+                AdminCheckBox.Checked = false;
+            }
+
+            AccountInfoListView.BeginUpdate();
+            for (int i = 0; i < _selectedAccountInfos.Count; i++)
+            {
+                _selectedAccountInfos[i].DevAccount = DeveloperCheckBox.CheckState == CheckState.Checked ? true : false;
+                _selectedAccountInfos[i].AdminAccount = false;
+                Update(AccountInfoListView.SelectedItems[i], _selectedAccountInfos[i]);
+            }
+            AutoResize();
+            AccountInfoListView.EndUpdate();
         }
     }
 }

@@ -185,6 +185,7 @@ public enum IntelligentCreatureType : byte
     BabyMonkey = 11,
     AngryBird = 12,
     Foxey = 13,
+    Mouse = 14,
 }
 
 //1 blank mob files
@@ -603,6 +604,9 @@ public enum Monster : ushort
     Ram1 = 400,
     Ram2 = 401,
     Kite = 402,
+
+    EventMob = 423,
+    TittyMonster = 424,
     
 
     EvilMir = 900,
@@ -637,6 +641,7 @@ public enum Monster : ushort
     BabyMonkey = 10011,//unknown
     AngryBird = 10012,
     Foxey = 10013,
+    Mouse = 10014,
 }
 
 public enum MirAction : byte
@@ -1317,6 +1322,8 @@ public enum ServerPacketIds : short
     UseItem,
     DropItem,
     PlayerUpdate,
+    UpdateItemInfo,
+    RefreshStats,
     PlayerInspect,
     LogOutSuccess,
     LogOutFailed,
@@ -2645,6 +2652,7 @@ public class ItemInfo
 
     public bool StartItem;
     public byte Effect;
+    public byte GlowEffect;
 
     public byte Strong;
     public byte MagicResist, PoisonResist, HealthRecovery, SpellRecovery, PoisonRecovery, HPrate, MPrate;
@@ -2664,6 +2672,151 @@ public class ItemInfo
     public RandomItemStat RandomStats;
     public string ToolTip = string.Empty;
 
+    public static ItemInfo CloneItem(ItemInfo item)
+    {
+        ItemInfo Clone = new ItemInfo()
+        {
+            Index = item.Index,
+            Accuracy = item.Accuracy,
+            Agility = item.Agility,
+            AttackSpeed = item.AttackSpeed,
+            BagWeight = item.BagWeight,
+            Bind = item.Bind,
+            CanAwakening = item.CanAwakening,
+            CanFastRun = item.CanFastRun,
+            CanMine = item.CanMine,
+            ClassBased = item.ClassBased,
+            CriticalDamage = item.CriticalDamage,
+            CriticalRate = item.CriticalRate,
+            Durability = item.Durability,
+            Effect = item.Effect,
+            Freezing = item.Freezing,
+            Grade = item.Grade,
+            HandWeight = item.HandWeight,
+            HealthRecovery = item.HealthRecovery,
+            Holy = item.Holy,
+            HP = item.HP,
+            HpDrainRate = item.HpDrainRate,
+            HPrate = item.HPrate,
+            Image = item.Image,
+            LevelBased = item.LevelBased,
+            Light = item.Light,
+            Luck = item.Luck,
+            MagicResist = item.MagicResist,
+            MaxAC = item.MaxAC,
+            MaxAcRate = item.MaxAcRate,
+            MaxDC = item.MaxDC,
+            MaxMAC = item.MaxMAC,
+            MaxMacRate = item.MaxMacRate,
+            MaxMC = item.MaxMC,
+            MaxSC = item.MaxSC,
+            MinAC = item.MinAC,
+            MinDC = item.MinDC,
+            MinMAC = item.MinMAC,
+            MinMC = item.MinMC,
+            MinSC = item.MinSC,
+            MP = item.MP,
+            MPrate = item.MPrate,
+            Name = item.Name,
+            NeedIdentify = item.NeedIdentify,
+            PoisonAttack = item.PoisonAttack,
+            PoisonRecovery = item.PoisonRecovery,
+            PoisonResist = item.PoisonResist,
+            Price = item.Price,
+            RandomStats = item.RandomStats,
+            RandomStatsId = item.RandomStatsId,
+            Reflect = item.Reflect,
+            RequiredAmount = item.RequiredAmount,
+            RequiredClass = item.RequiredClass,
+            RequiredGender = item.RequiredGender,
+            RequiredType = item.RequiredType,
+            Set = item.Set,
+            Shape = item.Shape,
+            ShowGroupPickup = item.ShowGroupPickup,
+            SpellRecovery = item.SpellRecovery,
+            StackSize = item.StackSize,
+            StartItem = item.StartItem,
+            Strong = item.Strong,
+            ToolTip = item.ToolTip,
+            Type = item.Type,
+            Unique = item.Unique,
+            WearWeight = item.WearWeight,
+            Weight = item.Weight,
+            GlowEffect = item.GlowEffect
+        };
+        return Clone;
+    }
+    public void UpdateItem(ItemInfo item)
+    {
+
+        Accuracy = item.Accuracy;
+        Agility = item.Agility;
+        AttackSpeed = item.AttackSpeed;
+        BagWeight = item.BagWeight;
+        Bind = item.Bind;
+        CanAwakening = item.CanAwakening;
+        CanFastRun = item.CanFastRun;
+        CanMine = item.CanMine;
+        ClassBased = item.ClassBased;
+        CriticalDamage = item.CriticalDamage;
+        CriticalRate = item.CriticalRate;
+        Durability = item.Durability;
+        Effect = item.Effect;
+        Freezing = item.Freezing;
+        Grade = item.Grade;
+        HandWeight = item.HandWeight;
+        HealthRecovery = item.HealthRecovery;
+        Holy = item.Holy;
+        HP = item.HP;
+        HpDrainRate = item.HpDrainRate;
+        HPrate = item.HPrate;
+        Image = item.Image;
+        Index = item.Index;
+        LevelBased = item.LevelBased;
+        Light = item.Light;
+        Luck = item.Luck;
+        MagicResist = item.MagicResist;
+        MaxAC = item.MaxAC;
+        MaxAcRate = item.MaxAcRate;
+        MaxDC = item.MaxDC;
+        MaxMAC = item.MaxMAC;
+        MaxMacRate = item.MaxMacRate;
+        MaxMC = item.MaxMC;
+        MaxSC = item.MaxSC;
+        MinAC = item.MinAC;
+        MinDC = item.MinDC;
+        MinMAC = item.MinMAC;
+        MinMC = item.MinMC;
+        MinSC = item.MinSC;
+        MP = item.MP;
+        MPrate = item.MPrate;
+        Name = item.Name;
+        NeedIdentify = item.NeedIdentify;
+        PoisonAttack = item.PoisonAttack;
+        PoisonRecovery = item.PoisonRecovery;
+        PoisonResist = item.PoisonResist;
+        Price = item.Price;
+        RandomStats = item.RandomStats;
+        RandomStatsId = item.RandomStatsId;
+        Reflect = item.Reflect;
+        RequiredAmount = item.RequiredAmount;
+        RequiredClass = item.RequiredClass;
+        RequiredGender = item.RequiredGender;
+        RequiredType = item.RequiredType;
+        Set = item.Set;
+        Shape = item.Shape;
+        ShowGroupPickup = item.ShowGroupPickup;
+        SpellRecovery = item.SpellRecovery;
+        StackSize = item.StackSize;
+        StartItem = item.StartItem;
+        Strong = item.Strong;
+        ToolTip = item.ToolTip;
+        Type = item.Type;
+        Unique = item.Unique;
+        WearWeight = item.WearWeight;
+        Weight = item.Weight;
+        GlowEffect = item.GlowEffect;
+    }
 
     public bool IsConsumable
     {
@@ -2810,6 +2963,11 @@ public class ItemInfo
             if ((Type == ItemType.Ring) &&  (Unique != SpecialItemMode.None))
                 Bind |= BindMode.NoWeddingRing;
         }
+
+        if (version >= 80)
+        {
+            GlowEffect = reader.ReadByte();
+        }
     }
 
 
@@ -2894,6 +3052,7 @@ public class ItemInfo
         writer.Write(ToolTip != null);
         if (ToolTip != null)
             writer.Write(ToolTip);
+        writer.Write(GlowEffect);
     }
 
     public static ItemInfo FromText(string text)
@@ -2981,7 +3140,7 @@ public class ItemInfo
             info.ToolTip = data[63];
             info.ToolTip = info.ToolTip.Replace("&^&", "\r\n");
         }
-            
+        if (!byte.TryParse(data[64], out info.GlowEffect)) return null;
         return info;
 
     }
@@ -3002,12 +3161,12 @@ public class ItemInfo
 
         return string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19},{20},{21},{22},{23},{24},{25},{26}," +
                              "{27},{28},{29},{30},{31},{32},{33},{34},{35},{36},{37},{38},{39},{40},{41},{42},{43},{44},{45},{46},{47},{48},{49},{50},{51}," +
-                             "{52},{53},{54},{55},{56},{57},{58},{59},{60},{61},{62},{63}",
+                             "{52},{53},{54},{55},{56},{57},{58},{59},{60},{61},{62},{63},{64}",
             Name, (byte)Type, (byte)Grade, (byte)RequiredType, (byte)RequiredClass, (byte)RequiredGender, (byte)Set, Shape, Weight, Light, RequiredAmount, MinAC, MaxAC, MinMAC, MaxMAC, MinDC, MaxDC,
             MinMC, MaxMC, MinSC, MaxSC, Accuracy, Agility, HP, MP, AttackSpeed, Luck, BagWeight, HandWeight, WearWeight, StartItem, Image, Durability, Price,
             StackSize, Effect, Strong, MagicResist, PoisonResist, HealthRecovery, SpellRecovery, PoisonRecovery, HPrate, MPrate, CriticalRate, CriticalDamage, NeedIdentify,
             ShowGroupPickup, MaxAcRate, MaxMacRate, Holy, Freezing, PoisonAttack, ClassBased, LevelBased, (short)Bind, Reflect, HpDrainRate, (short)Unique,
-            RandomStatsId, CanMine, CanFastRun, CanAwakening, TransToolTip);
+            RandomStatsId, CanMine, CanFastRun, CanAwakening, TransToolTip, GlowEffect);
     }
 
     public override string ToString()
@@ -4878,6 +5037,10 @@ public abstract class Packet
                 return new S.DropItem();
             case (short)ServerPacketIds.PlayerUpdate:
                 return new S.PlayerUpdate();
+            case (short)ServerPacketIds.UpdateItemInfo:
+                return new S.UpdateItemInfo();
+            case (short)ServerPacketIds.RefreshStats:
+                return new S.RefreshStats();
             case (short)ServerPacketIds.PlayerInspect:
                 return new S.PlayerInspect();
             case (short)ServerPacketIds.LogOutSuccess:

@@ -1156,6 +1156,14 @@ namespace Client.MirScenes.Dialogs
                     AnimExCount = 8;
                     AnimExDelay = 300;
                     break;
+                case IntelligentCreatureType.Mouse:
+                    AnimDefaultIdx = 1332;
+                    AnimDefaultCount = 8;
+                    AnimDefaultDelay = 300;
+                    AnimExIdx = 1342;
+                    AnimExCount = 16;
+                    AnimExDelay = 300;
+                    break;
                 case IntelligentCreatureType.None:
                     AnimDefaultIdx = 539;
                     AnimDefaultCount = 1;

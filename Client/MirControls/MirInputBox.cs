@@ -2,12 +2,13 @@
 using System.Drawing;
 using System.Windows.Forms;
 using Client.MirGraphics;
+using Client.MirSounds;
 
 namespace Client.MirControls
 {
     public sealed class MirInputBox : MirImageControl
     {
-        public readonly MirLabel CaptionLabel;
+        public readonly MirLabel CaptionLabel, OKLabel, CancelLabel;
         public readonly MirButton OKButton, CancelButton;
         public readonly MirTextBox InputTextBox;
 
@@ -17,16 +18,16 @@ namespace Client.MirControls
             Modal = true;
             Movable = false;
 
-            Index = 660;
-            Library = Libraries.Prguse;
+            Index = 89;
+            Library = Libraries.GameScene;
 
             Location = new Point((Settings.ScreenWidth - Size.Width) / 2, (Settings.ScreenHeight - Size.Height) / 2);
 
             CaptionLabel = new MirLabel
             {
                 DrawFormat = TextFormatFlags.WordBreak,
-                Location = new Point(25, 25),
-                Size = new Size(235, 40),
+                Location = new Point(26, 63),
+                Size = new Size(292, 61),
                 Parent = this,
                 Text = message,
             };
@@ -36,8 +37,8 @@ namespace Client.MirControls
                 Parent = this,
                 Border = true,
                 BorderColour = Color.Lime,
-                Location = new Point(23, 86),
-                Size = new Size(240, 19),
+                Location = new Point(26, 133),
+                Size = new Size(296, 17),
                 MaxLength = 50,
             };
             InputTextBox.SetFocus();
@@ -45,24 +46,46 @@ namespace Client.MirControls
 
             OKButton = new MirButton
             {
-                HoverIndex = 201,
-                Index = 200,
-                Library = Libraries.Title,
-                Location = new Point(60, 123),
+                Index = 228,
+                Location = new Point(157, 160),
+                Library = Libraries.GameScene,
                 Parent = this,
-                PressedIndex = 202,
+                PressedIndex = 230,
+                HoverIndex = 229,
+                Sound = SoundList.ButtonA,
+            };
+
+            OKLabel = new MirLabel
+            {
+                Size = new Size(78, 20),
+                Parent = OKButton,
+                Location = new Point(0, -2),
+                NotControl = true,
+                Text = "Okay",
+                DrawFormat = TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter
             };
 
             CancelButton = new MirButton
             {
-                HoverIndex = 204,
-                Index = 203,
-                Library = Libraries.Title,
-                Location = new Point(160, 123),
+                Index = 228,
+                Location = new Point(243, 160),
+                Library = Libraries.GameScene,
                 Parent = this,
-                PressedIndex = 205,
+                PressedIndex = 230,
+                HoverIndex = 229,
+                Sound = SoundList.ButtonA,
             };
             CancelButton.Click += DisposeDialog;
+
+            CancelLabel = new MirLabel
+            {
+                Size = new Size(78, 20),
+                Parent = CancelButton,
+                Location = new Point(0, -2),
+                NotControl = true,
+                Text = "Cancel",
+                DrawFormat = TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter
+            };
         }
 
         void MirInputBox_KeyPress(object sender, KeyPressEventArgs e)

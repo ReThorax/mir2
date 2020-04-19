@@ -190,6 +190,12 @@ namespace Client.MirControls
                 case (short)ServerPacketIds.NewQuestInfo:
                     NewQuestInfo((S.NewQuestInfo)p);
                     break;
+                case (short)ServerPacketIds.UpdateItemInfo:
+                    UpdateItemInfo((S.UpdateItemInfo)p);
+                    break;
+                case (short)ServerPacketIds.RefreshStats:
+                    RefreshStats((S.RefreshStats)p);
+                    break;
                 case (short)ServerPacketIds.NewRecipeInfo:
                     NewRecipeInfo((S.NewRecipeInfo)p);
                     break;
@@ -204,6 +210,20 @@ namespace Client.MirControls
         private void NewQuestInfo(S.NewQuestInfo info)
         {
             GameScene.QuestInfoList.Add(info.Info);
+        }
+
+        private void RefreshStats(S.RefreshStats info)
+        {
+            GameScene.User.RefreshStats();
+        }
+
+        private void UpdateItemInfo(S.UpdateItemInfo info)
+        {
+            ItemInfo temp = GameScene.ItemInfoList.Find(x => x.Index == info.Info.Index);
+            if (temp != null)
+                temp.UpdateItem(info.Info);
+            else
+                GameScene.ItemInfoList.Add(info.Info);
         }
 
         private void NewRecipeInfo(S.NewRecipeInfo info)

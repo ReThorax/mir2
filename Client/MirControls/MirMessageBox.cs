@@ -9,7 +9,7 @@ namespace Client.MirControls
 
     public sealed class MirMessageBox : MirImageControl
     {
-        public MirLabel Label;
+        public MirLabel Label, OKLabel, YesLabel, NoLabel, CancelLabel;
         public MirButton OKButton, CancelButton, NoButton, YesButton;
         public MirMessageBoxButtons Buttons;
         public bool AllowKeyPress = true;
@@ -23,8 +23,8 @@ namespace Client.MirControls
             Movable = false;
             AllowKeyPress = allowKeys;
 
-            Index = 360;
-            Library = Libraries.Prguse;
+            Index = 88;
+            Library = Libraries.GameScene;
 
             Location = new Point((Settings.ScreenWidth - Size.Width) / 2, (Settings.ScreenHeight - Size.Height) / 2);
 
@@ -32,116 +32,237 @@ namespace Client.MirControls
             Label = new MirLabel
             {
                 AutoSize = false,
-               // DrawFormat = StringFormatFlags.FitBlackBox,
-                Location = new Point(35, 35),
-                Size = new Size(390, 110),
+                // DrawFormat = StringFormatFlags.FitBlackBox,
+                Location = new Point(35, 70),
+                Size = new Size(280, 50),
                 Parent = this,
                 Text = message
             };
 
-            
+
             switch (Buttons)
             {
+                #region Region "OK"
                 case MirMessageBoxButtons.OK:
                     OKButton = new MirButton
                     {
-                        HoverIndex = 201,
-                        Index = 200,
-                        Library = Libraries.Title,
-                        Location = new Point(360, 157),
+                        HoverIndex = 229,
+                        Index = 228,
+                        Library = Libraries.GameScene,
+                        Location = new Point(242, 134),
                         Parent = this,
-                        PressedIndex = 202,
+                        PressedIndex = 230
                     };
                     OKButton.Click += (o, e) => Dispose();
+
+                    OKLabel = new MirLabel
+                    {
+                        Location = new Point(0, -2),
+                        Parent = OKButton,
+                        NotControl = true,
+                        Size = new Size(78, 20),
+                        Text = "Ok",
+                        DrawFormat = TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter
+                    };
+
                     break;
+
+                #endregion
+
+                #region Region "OK"/"Cancel"
                 case MirMessageBoxButtons.OKCancel:
                     OKButton = new MirButton
                     {
-                        HoverIndex = 201,
-                        Index = 200,
-                        Library = Libraries.Title,
-                        Location = new Point(260, 157),
+                        HoverIndex = 229,
+                        Index = 228,
+                        Library = Libraries.GameScene,
+                        Location = new Point(156, 134),
                         Parent = this,
-                        PressedIndex = 202,
+                        PressedIndex = 230
                     };
                     OKButton.Click += (o, e) => Dispose();
+
+                    OKLabel = new MirLabel
+                    {
+                        Location = new Point(0, -2),
+                        Parent = OKButton,
+                        NotControl = true,
+                        Size = new Size(78, 20),
+                        Text = "Ok",
+                        DrawFormat = TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter
+                    };
+
+
                     CancelButton = new MirButton
                     {
-                        HoverIndex = 204,
-                        Index = 203,
-                        Library = Libraries.Title,
-                        Location = new Point(360, 157),
+                        HoverIndex = 229,
+                        Index = 228,
+                        Library = Libraries.GameScene,
+                        Location = new Point(242, 134),
                         Parent = this,
-                        PressedIndex = 205,
+                        PressedIndex = 230
                     };
                     CancelButton.Click += (o, e) => Dispose();
+
+                    CancelLabel = new MirLabel
+                    {
+                        Location = new Point(0, -2),
+                        Parent = CancelButton,
+                        NotControl = true,
+                        Size = new Size(78, 20),
+                        Text = "Cancel",
+                        DrawFormat = TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter
+                    };
+
                     break;
+
+                #endregion
+
+                #region Region "YES"/"NO"
                 case MirMessageBoxButtons.YesNo:
                     YesButton = new MirButton
                     {
-                        HoverIndex = 207,
-                        Index = 206,
-                        Library = Libraries.Title,
-                        Location = new Point(260, 157),
+                        HoverIndex = 229,
+                        Index = 228,
+                        Library = Libraries.GameScene,
+                        Location = new Point(156, 134),
                         Parent = this,
-                        PressedIndex = 208,
+                        PressedIndex = 230
                     };
                     YesButton.Click += (o, e) => Dispose();
+
+                    YesLabel = new MirLabel
+                    {
+                        Location = new Point(0, -2),
+                        Parent = YesButton,
+                        NotControl = true,
+                        Size = new Size(78, 20),
+                        Text = "Yes",
+                        DrawFormat = TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter
+                    };
+
+
                     NoButton = new MirButton
                     {
-                        HoverIndex = 211,
-                        Index = 210,
-                        Library = Libraries.Title,
-                        Location = new Point(360, 157),
+                        HoverIndex = 229,
+                        Index = 228,
+                        Library = Libraries.GameScene,
+                        Location = new Point(242, 134),
                         Parent = this,
-                        PressedIndex = 212,
+                        PressedIndex = 230
                     };
                     NoButton.Click += (o, e) => Dispose();
+
+                    NoLabel = new MirLabel
+                    {
+                        Location = new Point(0, -2),
+                        Parent = NoButton,
+                        NotControl = true,
+                        Size = new Size(78, 20),
+                        Text = "No",
+                        DrawFormat = TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter
+                    };
+
                     break;
+                #endregion
+
+                #region Region "YES"/"NO"/"Cancel"
                 case MirMessageBoxButtons.YesNoCancel:
                     YesButton = new MirButton
                     {
-                        HoverIndex = 207,
-                        Index = 206,
-                        Library = Libraries.Title,
-                        Location = new Point(160, 157),
+                        HoverIndex = 229,
+                        Index = 228,
+                        Library = Libraries.GameScene,
+                        Location = new Point(97, 103),
                         Parent = this,
-                        PressedIndex = 208,
+                        PressedIndex = 230
                     };
                     YesButton.Click += (o, e) => Dispose();
+
+                    YesLabel = new MirLabel
+                    {
+                        Location = new Point(0, -2),
+                        Parent = YesButton,
+                        NotControl = true,
+                        Size = new Size(78, 20),
+                        Text = "Yes",
+                        DrawFormat = TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter
+                    };
+
+
                     NoButton = new MirButton
                     {
-                        HoverIndex = 211,
-                        Index = 210,
-                        Library = Libraries.Title,
-                        Location = new Point(260, 157),
+                        HoverIndex = 229,
+                        Index = 228,
+                        Library = Libraries.GameScene,
+                        Location = new Point(156, 134),
                         Parent = this,
-                        PressedIndex = 212,
+                        PressedIndex = 230
                     };
                     NoButton.Click += (o, e) => Dispose();
+
+                    NoLabel = new MirLabel
+                    {
+                        Location = new Point(0, -2),
+                        Parent = NoButton,
+                        NotControl = true,
+                        Size = new Size(78, 20),
+                        Text = "No",
+                        DrawFormat = TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter
+                    };
+
+
                     CancelButton = new MirButton
                     {
-                        HoverIndex = 204,
-                        Index = 203,
-                        Library = Libraries.Title,
-                        Location = new Point(360, 157),
+                        HoverIndex = 229,
+                        Index = 228,
+                        Library = Libraries.GameScene,
+                        Location = new Point(242, 134),
                         Parent = this,
-                        PressedIndex = 205,
+                        PressedIndex = 230
                     };
                     CancelButton.Click += (o, e) => Dispose();
+
+                    CancelLabel = new MirLabel
+                    {
+                        Location = new Point(0, -2),
+                        Parent = CancelButton,
+                        NotControl = true,
+                        Size = new Size(78, 20),
+                        Text = "Cancel",
+                        DrawFormat = TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter
+                    };
+
                     break;
+
+                #endregion
+
+                #region Region "Cancel"
                 case MirMessageBoxButtons.Cancel:
                     CancelButton = new MirButton
                     {
-                        HoverIndex = 204,
-                        Index = 203,
-                        Library = Libraries.Title,
-                        Location = new Point(360, 157),
+                        HoverIndex = 229,
+                        Index = 228,
+                        Library = Libraries.GameScene,
+                        Location = new Point(242, 134),
                         Parent = this,
-                        PressedIndex = 205,
+                        PressedIndex = 230
                     };
                     CancelButton.Click += (o, e) => Dispose();
+
+                    CancelLabel = new MirLabel
+                    {
+                        Location = new Point(0, -2),
+                        Parent = CancelButton,
+                        NotControl = true,
+                        Size = new Size(78, 20),
+                        Text = "Cancel",
+                        DrawFormat = TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter
+                    };
+
                     break;
+
+                    #endregion
             }
         }
 
@@ -248,9 +369,9 @@ namespace Client.MirControls
 
             for (int i = 0; i < Program.Form.Controls.Count; i++)
             {
-                TextBox T = (TextBox) Program.Form.Controls[i];
+                TextBox T = (TextBox)Program.Form.Controls[i];
                 if (T != null && T.Tag != null)
-                    ((MirTextBox) T.Tag).DialogChanged();
+                    ((MirTextBox)T.Tag).DialogChanged();
             }
         }
 

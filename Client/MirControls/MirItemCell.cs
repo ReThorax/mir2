@@ -13,6 +13,7 @@ namespace Client.MirControls
 {
     public sealed class MirItemCell : MirImageControl
     {
+        public MirAnimatedControl SpecialEffect;
 
         public UserItem Item
         {
@@ -188,6 +189,21 @@ namespace Client.MirControls
             DrawControlTexture = true;
             Library = Libraries.Items;
 
+            SpecialEffect = new MirAnimatedControl
+            {
+                Animated = true,
+                Library = Libraries.GlowEffect,
+                GrayScale = false,
+                Parent = this,
+                Visible = false,
+                Loop = true,
+                Blending = true,
+                BlendingRate = 1,
+                Location = new Point(-23, -22),
+                UseOffSet = true,
+                NotControl = true,
+
+            };
         }
 
         public void SetEffect()
@@ -1663,7 +1679,7 @@ namespace Client.MirControls
                 case EquipmentSlot.BraceletL:
                     return i.Info.Type == ItemType.Bracelet;
                 case EquipmentSlot.BraceletR:
-                    return i.Info.Type == ItemType.Bracelet || i.Info.Type == ItemType.Amulet;
+                    return i.Info.Type == ItemType.Bracelet;
                 case EquipmentSlot.RingL:
                 case EquipmentSlot.RingR:
                     return type == ItemType.Ring;
@@ -2052,8 +2068,48 @@ namespace Client.MirControls
 
             if (Locked) return;
             */
-            if (Item != null && GameScene.SelectedCell != this && Locked != true)
+            SpecialEffect.Visible = false;
+
+            if (Item != null && Settings.Effect != false)
             {
+                switch (Item.Info.GlowEffect)
+                {
+                    case 10:
+                        SpecialEffect.Index = 28;
+                        SpecialEffect.AnimationCount = 6;
+                        SpecialEffect.AnimationDelay = 120;
+                        SpecialEffect.Visible = true;
+
+                        break;
+
+                    case 11:
+                        SpecialEffect.Index = 0;
+                        SpecialEffect.AnimationCount = 20;
+                        SpecialEffect.AnimationDelay = 100;
+                        SpecialEffect.Visible = true;
+                        break;
+
+                    case 12:
+                        SpecialEffect.Index = 20;
+                        SpecialEffect.AnimationCount = 8;
+                        SpecialEffect.AnimationDelay = 120;
+                        SpecialEffect.Visible = true;
+                        break;
+
+                    default:
+                        if (Item.Info.GlowEffect == 0 || Item.Info.GlowEffect > 9) break;
+
+                        SpecialEffect.Index = 34 + ((Item.Info.GlowEffect - 1) * 2);
+                        SpecialEffect.AnimationCount = 2;
+                        SpecialEffect.AnimationDelay = 300;
+                        SpecialEffect.Visible = true;
+
+                        break;
+                }
+            }
+
+                if (Item != null && GameScene.SelectedCell != this && Locked != true)
+                {
                 CreateDisposeLabel();
 
                 if (Library != null)
