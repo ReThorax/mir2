@@ -38,6 +38,8 @@ namespace Server.MirDatabase
         public List<MineZone> MineZones = new List<MineZone>();
         public List<Point> ActiveCoords = new List<Point>();
 
+        public List<PublicEventInfo> PublicEvents = new List<PublicEventInfo>();
+
         public InstanceInfo Instance;
 
         public MapInfo()
@@ -117,6 +119,13 @@ namespace Server.MirDatabase
             NoTownTeleport = reader.ReadBoolean();
             if (Envir.LoadVersion < 79) return;
             NoReincarnation = reader.ReadBoolean();
+
+            if (Envir.LoadCustomVersion >= 2)
+            {
+                count = reader.ReadInt32();
+                for (int i = 0; i < count; i++)
+                    PublicEvents.Add(new PublicEventInfo(reader));
+            }
         }
 
         public void Save(BinaryWriter writer)
@@ -172,6 +181,9 @@ namespace Server.MirDatabase
             writer.Write(NoTownTeleport);
             writer.Write(NoReincarnation);
 
+            writer.Write(PublicEvents.Count);
+            for (int i = 0; i < PublicEvents.Count; i++)
+                PublicEvents[i].Save(writer);
         }
 
 
@@ -198,6 +210,10 @@ namespace Server.MirDatabase
             for (int i = 0; i < SafeZones.Count; i++)
                 if (SafeZones[i].StartPoint)
                     Envir.StartPoints.Add(SafeZones[i]);
+        }
+        public void CreatePublicEvent()
+        {
+            PublicEvents.Add(new PublicEventInfo { Info = this, Index = ++EditEnvir.MapEventIndex });
         }
 
         public void CreateInstance()

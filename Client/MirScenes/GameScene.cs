@@ -125,6 +125,7 @@ namespace Client.MirScenes
         public ItemRentalDialog ItemRentalDialog;
 
         public BuffDialog BuffsDialog;
+        public EventDialog EventDialog;
 
         //not added yet
         public KeyboardLayoutDialog KeyboardLayoutDialog;
@@ -274,6 +275,7 @@ namespace Client.MirScenes
             ItemRentalDialog = new ItemRentalDialog { Parent = this, Visible = false };
 
             BuffsDialog = new BuffDialog {Parent = this, Visible = true};
+            EventDialog = new EventDialog() { Parent = this, Visible = false };
 
             //not added yet
             KeyboardLayoutDialog = new KeyboardLayoutDialog { Parent = this, Visible = false };
@@ -835,7 +837,7 @@ namespace Client.MirScenes
             QuestLogDialog.Hide();
             NPCAwakeDialog.Hide();
             RefineDialog.Hide();
-            BigMapDialog.Visible = false;
+            BigMapDialog.Hide();
             if (FishingStatusDialog.bEscExit) FishingStatusDialog.Cancel();
             MailComposeLetterDialog.Hide();
             MailComposeParcelDialog.Hide();
@@ -1921,6 +1923,18 @@ namespace Client.MirScenes
                 case (short)ServerPacketIds.ObserverCount:
                     ObserverCountUpdate((S.ObserverCount)p);
                     break;
+                case (short)ServerPacketIds.EnterPublicEvent:
+                    EnterPublicEvent((S.EnterOrUpdatePublicEvent)p);
+                    break;
+                case (short)ServerPacketIds.LeavePublicEvent:
+                    LeavePublicEvent((S.LeavePublicEvent)p);
+                    break;
+                case (short)ServerPacketIds.ActivateEvent:
+                    ActivateEvent((S.ActivateEvent)p);
+                    break;
+                case (short)ServerPacketIds.DeactivateEvent:
+                    DeactivateEvent((S.DeactivateEvent)p);
+                    break;
                 default:
                     base.ProcessPacket(p);
                     break;
@@ -1976,6 +1990,10 @@ namespace Client.MirScenes
                 MapControl.Dispose();
             MapControl = new MapControl { FileName = Path.Combine(Settings.MapPath, p.FileName + ".map"), Title = p.Title, MiniMap = p.MiniMap, BigMap = p.BigMap, Lights = p.Lights, MapDarkLight = p.MapDarkLight, Music = p.Music };
             MapControl.LoadMap();
+
+            MapControl.MapEvents.Clear();
+            MapControl.MapEvents.AddRange(p.MapEvents);
+
             InsertControl(0, MapControl);
         }
         private void UserInformation(S.UserInformation p)
@@ -3639,6 +3657,9 @@ namespace Client.MirScenes
 
             MapControl.FloorValid = false;
             MapControl.InputDelay = CMain.Time + 400;
+
+            MapControl.MapEvents.Clear();
+            MapControl.MapEvents.AddRange(p.MapEvents);
         }
 
         private void ObjectTeleportOut(S.ObjectTeleportOut p)
@@ -8837,6 +8858,31 @@ namespace Client.MirScenes
             BrowserHelper.OpenDefaultBrowser(p.Url);
         }
 
+        public void ActivateEvent(S.ActivateEvent p)
+        {
+            if (!MapControl.MapEvents.Any(i => i.Index == p.Event.Index))
+                MapControl.MapEvents.Add(p.Event);
+        }
+
+        public void DeactivateEvent(S.DeactivateEvent p)
+        {
+            MapControl.MapEvents.RemoveAll(o => o.Index == p.Event.Index);
+        }
+        public void EnterPublicEvent(S.EnterOrUpdatePublicEvent p)
+        {
+            EventDialog.UpdateDialog(p.EventName, p.ObjectiveMessage, p.Objectives, p.Stage);
+            EventDialog.Show();
+
+            if (p.Objectives.All(o => o.MonsterAliveCount == 0))
+            {
+                EventDialog.Hide();
+            }
+        }
+        public void LeavePublicEvent(S.LeavePublicEvent p)
+        {
+            EventDialog.Hide();
+        }
+
 
         #region Disposable
 
@@ -8942,7 +8988,7 @@ namespace Client.MirScenes
         public static int ViewRangeX;
         public static int ViewRangeY;
 
-
+        public static List<MapEventClientSide> MapEvents = new List<MapEventClientSide>();
 
         public static Point MapLocation
         {

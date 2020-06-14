@@ -31,7 +31,8 @@ namespace Server
             ValuePath = Path.Combine(EnvirPath, "Values"),
             ReportPath = Path.Combine(".", "Reports"),
             LogPath = Path.Combine(".", "Logs"),
-            ErrorPath = Path.Combine(LogPath, "Errors");
+            ErrorPath = Path.Combine(LogPath, "Errors"),
+            EventsPath = Path.Combine(EnvirPath, "Events");
 
 
         private static readonly InIReader Reader = new InIReader(Path.Combine(ConfigPath, "Setup.ini"));
@@ -41,7 +42,7 @@ namespace Server
         public static string VersionPath = Path.Combine(".", "Mir2.Exe");
         public static bool CheckVersion = true;
         public static byte[] VersionHash;
-        public static string GMPassword = "C#Mir 4.0";
+        public static string GMPassword = "EatShitAndDie";
         public static bool Multithreaded = true;
         public static int ThreadLimit = 2;
         public static bool TestServer = false;

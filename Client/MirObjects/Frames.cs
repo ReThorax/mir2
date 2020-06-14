@@ -2351,6 +2351,16 @@ namespace Client.MirObjects
             frame.Frames.Add(MirAction.Attack1, new Frame(999, 1, -1, 120) { Blend = true });
             frame.Frames.Add(MirAction.Struck, new Frame(88, 9, -9, 100) { Blend = true });
 
+            //208 - Like number 2 but with Spaces (I couldn't be arsed removing the blanks lol)
+            Monsters.Add(frame = new FrameSet());
+            frame.Frames.Add(MirAction.Standing, new Frame(0, 4, 6, 500));
+            frame.Frames.Add(MirAction.Walking, new Frame(80, 6, 4, 100));
+            frame.Frames.Add(MirAction.Attack1, new Frame(160, 6, 4, 100));
+            frame.Frames.Add(MirAction.Struck, new Frame(240, 2, 0, 200));
+            frame.Frames.Add(MirAction.Die, new Frame(260, 10, 0, 100));
+            frame.Frames.Add(MirAction.Dead, new Frame(269, 1, 9, 1000));
+            frame.Frames.Add(MirAction.Revive, new Frame(260, 10, 0, 100) { Reverse = true });
+
             #endregion
 
             /*

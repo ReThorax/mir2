@@ -12,6 +12,7 @@ using Server.MirDatabase;
 using Server.MirNetwork;
 using Server.MirObjects;
 using S = ServerPackets;
+using System.Threading.Tasks;
 
 namespace Server.MirEnvir
 {
@@ -55,10 +56,12 @@ namespace Server.MirEnvir
         public static object LoadLock = new object();
 
         public const int Version = 80;
-        public const int CustomVersion = 1;
+        public const int CustomVersion = 3;
         public static readonly string DatabasePath = Path.Combine(".", "Server.MirDB");
         public static readonly string AccountPath = Path.Combine(".", "Server.MirADB");
         public static readonly string BackUpPath = Path.Combine(".", "Back Up");
+        public const string RunTimeValuesDBPath = @".\Server.MirRTVDB";
+
         public bool ResetGS = false;
 
         private static readonly Regex AccountIDReg, PasswordReg, EMailReg, CharacterReg;
@@ -97,10 +100,10 @@ namespace Server.MirEnvir
         private TcpListener _StatusPort;
         private int _sessionID;
         public List<MirConnection> Connections = new List<MirConnection>();
-        
+
 
         //Server DB
-        public int MapIndex, ItemIndex, MonsterIndex, NPCIndex, QuestIndex, GameshopIndex, ConquestIndex, RespawnIndex;
+        public int MapIndex, ItemIndex, MonsterIndex, NPCIndex, QuestIndex, GameshopIndex, ConquestIndex, RespawnIndex, MapEventIndex;
         public List<MapInfo> MapInfoList = new List<MapInfo>();
         public List<ItemInfo> ItemInfoList = new List<ItemInfo>();
         public List<MonsterInfo> MonsterInfoList = new List<MonsterInfo>();
@@ -136,8 +139,9 @@ namespace Server.MirEnvir
 
         public List<ConquestInfo> ConquestInfos = new List<ConquestInfo>();
         public List<ConquestObject> Conquests = new List<ConquestObject>();
-        
 
+        public int CurrentWeekOfTheYear = 0;
+        public int CurrentDayOfTheYear = 0;
 
         //multithread vars
         readonly object _locker = new object();
@@ -197,7 +201,7 @@ namespace Server.MirEnvir
         public static long LastRunTime = 0;
         public int MonsterCount;
 
-        private long warTime, mailTime, guildTime, conquestTime, rentalItemsTime;
+        private long warTime, mailTime, guildTime, conquestTime, rentalItemsTime, runtimeValuesTime;
         private int DailyTime = DateTime.Now.Day;
 
         private bool MagicExists(Spell spell)
@@ -628,6 +632,7 @@ namespace Server.MirEnvir
                             SaveGuilds();
                             SaveGoods();
                             SaveConquests();
+                            SaveRunTimeValues();
                         }
 
                         if (Time >= userTime)
@@ -680,6 +685,7 @@ namespace Server.MirEnvir
                 SaveGuilds(true);
                 SaveConquests(true);
 
+                SaveRunTimeValues();
             }
             catch (Exception ex)
             {
@@ -840,9 +846,17 @@ namespace Server.MirEnvir
                     Conquests[i].Process();
             }
 
+            if (Time >= runtimeValuesTime)
+            {
+                runtimeValuesTime = Time + (Settings.Hour);
+                ProcessRunTimeValues();
+            }
+
             if (Time < rentalItemsTime) return;
             rentalItemsTime = Time + Settings.Minute * 5;
             ProcessRentedItems();
+
+
 
         }
 
@@ -907,6 +921,17 @@ namespace Server.MirEnvir
                     ConquestInfos[i].Save(writer);
 
                 RespawnTick.Save(writer);
+
+                writer.Write(MapEventIndex);
+            }
+        }
+        public void SaveRunTimeValues()
+        {
+            using (FileStream stream = File.Create(RunTimeValuesDBPath))
+            using (BinaryWriter writer = new BinaryWriter(stream))
+            {
+                writer.Write(CurrentWeekOfTheYear);
+                writer.Write(CurrentDayOfTheYear);
             }
         }
         public void SaveAccounts()
@@ -1271,9 +1296,25 @@ namespace Server.MirEnvir
                     if (LoadVersion > 67)
                         RespawnTick = new RespawnTimer(reader);
 
+                    if (LoadCustomVersion >= 2)
+                        MapEventIndex = reader.ReadInt32();
+
                 }
 
                 Settings.LinkGuildCreationItems(ItemInfoList);
+            }
+
+        }
+        public void LoadRunTimeValues()
+        {
+            if (!File.Exists(RunTimeValuesDBPath))
+                SaveRunTimeValues();
+
+            using (FileStream stream = File.OpenRead(RunTimeValuesDBPath))
+            using (BinaryReader reader = new BinaryReader(stream))
+            {
+                CurrentWeekOfTheYear = reader.ReadInt32();
+                CurrentDayOfTheYear = reader.ReadInt32();
             }
 
         }
@@ -1887,6 +1928,8 @@ namespace Server.MirEnvir
             LoadGuilds();
 
             LoadConquests();
+
+            LoadRunTimeValues();
 
             _listener = new TcpListener(IPAddress.Parse(Settings.IPAddress), Settings.Port);
             _listener.Start();
@@ -3076,6 +3119,59 @@ namespace Server.MirEnvir
             }
 
             info.Player?.GetCompletedQuests();
+        }
+
+        public void ProcessRunTimeValues()
+        {
+            var cal = System.Globalization.DateTimeFormatInfo.CurrentInfo.Calendar;
+
+            bool saveDB = false;
+            bool clearDailyValues = false;
+            bool clearWeeklyValues = false;
+
+            //If there is a mismatch with current week and saved week in the database we will clear values
+            int weekYear = cal.GetWeekOfYear(DateTime.Now, System.Globalization.CalendarWeekRule.FirstDay, DayOfWeek.Monday);
+            if (weekYear != CurrentWeekOfTheYear)
+            {
+                clearWeeklyValues = true;
+                CurrentWeekOfTheYear = weekYear;
+            }
+
+            int dayOfYear = cal.GetDayOfYear(DateTime.Now);
+            if (dayOfYear != CurrentDayOfTheYear)
+            {
+                clearDailyValues = true;
+                CurrentDayOfTheYear = dayOfYear;
+            }
+
+            if (clearDailyValues || clearWeeklyValues)
+            {
+                CleanCharacterRunTimeValues(clearWeeklyValues, clearDailyValues);
+                saveDB = true;
+            }
+
+            if (saveDB)
+                SaveRunTimeValues();
+        }
+        public void CleanCharacterRunTimeValues(bool clearWeekly, bool clearDaily)
+        {
+            if (clearWeekly)
+                MessageQueue.EnqueueDebugging(string.Format("{0}: Removing Players Weekly Completed Events", DateTime.Now));
+
+            if (clearDaily)
+                MessageQueue.EnqueueDebugging(string.Format("{0}: Removing Players Daily Completed Events", DateTime.Now));
+
+            Task.Run(() =>
+            {
+                foreach (var charInfo in CharacterList)
+                {
+                    if (clearDaily)
+                        charInfo.DailyEventsCompleted.Clear();
+
+                    if (clearWeekly)
+                        charInfo.WeeklyEventsCompleted.Clear();
+                }
+            });
         }
 
         public GuildBuffInfo FindGuildBuffInfo(int Id)
