@@ -617,6 +617,15 @@ public enum Monster : ushort
 
     EventMob = 423,
     TittyMonster = 424,
+
+    MiniDarkDevil = 551,
+
+    IsolatedBeast = 640,
+    IsolatedSwordman = 641,
+    IsolatedWarrior = 642,
+    IsolatedAxeman = 643,
+    IsolatedTaoist = 644,
+    IsolatedRider = 645,
     
 
     EvilMir = 900,
@@ -2164,7 +2173,7 @@ public static class Globals
 
         LogDelay = 10000,
 
-        DataRange = 16;//Was 24
+        DataRange = 24;//Was 24
 
     public static float Commission = 0.05F;
 

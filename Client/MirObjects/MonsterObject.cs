@@ -376,6 +376,7 @@ namespace Client.MirObjects
                     break;
                 case Monster.KingScorpion:
                 case Monster.DarkDevil:
+                case Monster.MiniDarkDevil:
                 case Monster.RightGuard:
                 case Monster.LeftGuard:
                 case Monster.MinotaurKing:
@@ -1005,6 +1006,9 @@ namespace Client.MirObjects
                 case Monster.HellBomb3:
                     Frames = FrameSet.Monsters[207];
                     break;
+                case Monster.IsolatedBeast:
+                    Frames = FrameSet.Monsters[209];
+                    break;
 
 
                 case Monster.BabyPig:
@@ -1564,6 +1568,9 @@ namespace Client.MirObjects
                             case Monster.DarkDevil:
                                 Effects.Add(new Effect(Libraries.Monsters[(ushort)Monster.DarkDevil], 272 + (int)Direction * 8, 8, Frame.Count * Frame.Interval, this));
                                 break;
+                            case Monster.MiniDarkDevil:
+                                Effects.Add(new Effect(Libraries.Monsters[(ushort)Monster.MiniDarkDevil], 272 + (int)Direction * 8, 8, Frame.Count * Frame.Interval, this));
+                                break;
                             case Monster.ShamanZombie:
                                 Effects.Add(new Effect(Libraries.Monsters[(ushort)Monster.ShamanZombie], 232 + (int)Direction * 12, 6, Frame.Count * Frame.Interval, this));
                                 Effects.Add(new Effect(Libraries.Monsters[(ushort)Monster.ShamanZombie], 328, 12, Frame.Count * Frame.Interval, this));
@@ -1668,6 +1675,9 @@ namespace Client.MirObjects
                                 break;
                             case Monster.DarkDevil:
                                 Effects.Add(new Effect(Libraries.Monsters[(ushort)Monster.DarkDevil], 336, 6, Frame.Count * Frame.Interval, this));
+                                break;
+                            case Monster.MiniDarkDevil:
+                                Effects.Add(new Effect(Libraries.Monsters[(ushort)Monster.MiniDarkDevil], 336, 6, Frame.Count * Frame.Interval, this));
                                 break;
                             case Monster.ShamanZombie:
                                 Effects.Add(new Effect(Libraries.Monsters[(ushort)Monster.ShamanZombie], 224, 8, Frame.Count * Frame.Interval, this));
@@ -2912,6 +2922,7 @@ namespace Client.MirObjects
                 case Monster.FrozenRedZuma:
                 case Monster.KingScorpion:
                 case Monster.DarkDevil:
+                case Monster.MiniDarkDevil:
                 case Monster.Khazard:
                 case Monster.BoneLord:
                 case Monster.LeftGuard:
@@ -3125,6 +3136,14 @@ namespace Client.MirObjects
                             break;
                     }
                     break;
+                case Monster.MiniDarkDevil:
+                    switch (CurrentAction)
+                    {
+                        case MirAction.Attack1:
+                            Libraries.Monsters[(ushort)Monster.MiniDarkDevil].DrawBlend(342 + FrameIndex + (int)Direction * 6, DrawLocation, Color.White, true);
+                            break;
+                    }
+                    break;
                 case Monster.BoneLord:
                     switch (CurrentAction)
                     {
@@ -3149,6 +3168,14 @@ namespace Client.MirObjects
                             break;
                         case MirAction.Die:
                             Libraries.Monsters[(ushort)Monster.BoneLord].DrawBlend(640 + FrameIndex + (int)Direction * 20, DrawLocation, Color.White, true);
+                            break;
+                    }
+                    break;
+                case Monster.IsolatedBeast:
+                    switch (CurrentAction)
+                    {
+                        case MirAction.AttackRange1:
+                            Libraries.Monsters[(ushort)Monster.IsolatedBeast].DrawBlend(504 + FrameIndex + (int)Direction * 6, DrawLocation, Color.White, true);
                             break;
                     }
                     break;

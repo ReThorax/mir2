@@ -305,6 +305,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="MIR2.ICO" />
+    <Content Include="Resources\340.bmp" />
     <None Include="Resources\Total.png" />
     <None Include="Resources\Start_Normal.png" />
     <None Include="Resources\Start_Hover.png" />

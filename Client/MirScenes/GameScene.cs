@@ -9703,7 +9703,7 @@ namespace Client.MirScenes
                     }
                     else if (ob.Race == ObjectType.Merchant)
                     {
-                        lightColour = Color.FromArgb(255, 120, 120, 120);
+                        lightColour = Color.FromArgb(200, 60, 180, 60);
                     }
                     else if (ob.Race == ObjectType.Observer)
                     {
@@ -9778,7 +9778,7 @@ namespace Client.MirScenes
 
                     light = (M2CellInfo[x, y].Light % 10) * 3;
 
-                    switch (M2CellInfo[x, y].Light / 10)
+                    switch (M2CellInfo[x, y].Light)
                     {
                         case 1:
                             lightIntensity = Color.FromArgb(255, 255, 255, 255);
@@ -9791,6 +9791,9 @@ namespace Client.MirScenes
                             break;
                         case 4:
                             lightIntensity = Color.FromArgb(255, 22, 160, 5);
+                            break;
+                        case 5:
+                            lightIntensity = Color.SkyBlue;
                             break;
                         default:
                             lightIntensity = Color.FromArgb(255, 255, 255, 255);

@@ -423,7 +423,7 @@ namespace Client.MirObjects
                         #region Weapons
                         if (HasClassWeapon)
                         {
-                            int Index = Weapon - 200;
+                            int Index = Weapon - 400;
 
                             if (altAnim)
                                 WeaponLibrary2 = Index < Libraries.ARWeaponsS.Length ? Libraries.ARWeaponsS[Index] : null;
@@ -556,7 +556,7 @@ namespace Client.MirObjects
                         #region Weapons
                         if (HasClassWeapon)
                         {
-                            int Index = Weapon - 100;
+                            int Index = Weapon - 200;
 
                             WeaponLibrary1 = Index < Libraries.AWeaponsL.Length ? Libraries.AWeaponsR[Index] : null;
                             WeaponLibrary2 = Index < Libraries.AWeaponsR.Length ? Libraries.AWeaponsL[Index] : null;

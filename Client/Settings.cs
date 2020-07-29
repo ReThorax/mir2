@@ -68,12 +68,12 @@ namespace Client
         public static string FontName = "Tahoma"; //"MS Sans Serif"
         public static bool FPSCap = true;
         public static int MaxFPS = 100;
-        public static int Resolution = 1024;
+        public static int Resolution = 1366;
         public static bool DebugMode = false;
 
         //Network
         public static bool UseConfig = true;
-        public static string IPAddress = "127.0.0.1";
+        public static string IPAddress = "nexusmir.servegame.com";
         public static int Port = 7000;
         public const int TimeOut = 5000;
 

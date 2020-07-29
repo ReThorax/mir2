@@ -311,7 +311,9 @@ namespace Server
             {
                 for (int j = 0; j < NPCs.Count; j++)
                 {
-                    sw.WriteLine(NPCs[j].ToText());
+                    string Output =
+                            $"{NPCs[j].FileName},{NPCs[j].MapIndex},{NPCs[j].Location.X},{NPCs[j].Location.Y},{NPCs[j].Name},{NPCs[j].Image},{NPCs[j].Rate}";
+                    sw.WriteLine(Output);
                 }
             }
             MessageBox.Show("NPC Export complete");
@@ -319,6 +321,7 @@ namespace Server
 
         private void ImportButton_Click(object sender, EventArgs e)
         {
+
             string Path = string.Empty;
 
             OpenFileDialog ofd = new OpenFileDialog();

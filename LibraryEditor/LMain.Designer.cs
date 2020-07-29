@@ -48,6 +48,10 @@
             this.skinToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.BRYLabel = new System.Windows.Forms.Label();
+            this.BRXLabel = new System.Windows.Forms.Label();
+            this.BRYtxtbox = new System.Windows.Forms.TextBox();
+            this.BRXtxtbox = new System.Windows.Forms.TextBox();
             this.ExportAllButton = new System.Windows.Forms.Button();
             this.OffSetButton = new System.Windows.Forms.Button();
             this.nudJump = new System.Windows.Forms.NumericUpDown();
@@ -70,8 +74,6 @@
             this.label6 = new System.Windows.Forms.Label();
             this.WidthLabel = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.panel = new System.Windows.Forms.Panel();
-            this.ImageBox = new System.Windows.Forms.PictureBox();
             this.PreviewListView = new LibraryEditor.FixedListView();
             this.ImageList = new System.Windows.Forms.ImageList(this.components);
             this.OpenLibraryDialog = new System.Windows.Forms.OpenFileDialog();
@@ -82,10 +84,10 @@
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripProgressBar = new System.Windows.Forms.ToolStripProgressBar();
-            this.BRXtxtbox = new System.Windows.Forms.TextBox();
-            this.BRYtxtbox = new System.Windows.Forms.TextBox();
-            this.BRXLabel = new System.Windows.Forms.Label();
-            this.BRYLabel = new System.Windows.Forms.Label();
+            this.BackgroundCheckBox = new System.Windows.Forms.CheckBox();
+            this.BackgroundBox = new System.Windows.Forms.PictureBox();
+            this.ImageBox = new System.Windows.Forms.PictureBox();
+            this.panel = new System.Windows.Forms.Panel();
             this.MainMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -98,9 +100,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudJump)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ZoomTrackBar)).BeginInit();
-            this.panel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ImageBox)).BeginInit();
             this.statusStrip.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.BackgroundBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ImageBox)).BeginInit();
+            this.panel.SuspendLayout();
             this.SuspendLayout();
             // 
             // MainMenu
@@ -286,6 +289,7 @@
             // 
             // splitContainer2.Panel1
             // 
+            this.splitContainer2.Panel1.Controls.Add(this.BackgroundCheckBox);
             this.splitContainer2.Panel1.Controls.Add(this.BRYLabel);
             this.splitContainer2.Panel1.Controls.Add(this.BRXLabel);
             this.splitContainer2.Panel1.Controls.Add(this.BRYtxtbox);
@@ -321,6 +325,40 @@
             this.splitContainer2.Size = new System.Drawing.Size(1008, 471);
             this.splitContainer2.SplitterDistance = 240;
             this.splitContainer2.TabIndex = 0;
+            // 
+            // BRYLabel
+            // 
+            this.BRYLabel.AutoSize = true;
+            this.BRYLabel.Location = new System.Drawing.Point(11, 398);
+            this.BRYLabel.Name = "BRYLabel";
+            this.BRYLabel.Size = new System.Drawing.Size(90, 13);
+            this.BRYLabel.TabIndex = 28;
+            this.BRYLabel.Text = "RemoveBlank Y :";
+            // 
+            // BRXLabel
+            // 
+            this.BRXLabel.AutoSize = true;
+            this.BRXLabel.Location = new System.Drawing.Point(11, 372);
+            this.BRXLabel.Name = "BRXLabel";
+            this.BRXLabel.Size = new System.Drawing.Size(90, 13);
+            this.BRXLabel.TabIndex = 26;
+            this.BRXLabel.Text = "RemoveBlank X :";
+            // 
+            // BRYtxtbox
+            // 
+            this.BRYtxtbox.Location = new System.Drawing.Point(107, 395);
+            this.BRYtxtbox.Name = "BRYtxtbox";
+            this.BRYtxtbox.Size = new System.Drawing.Size(100, 20);
+            this.BRYtxtbox.TabIndex = 25;
+            this.BRYtxtbox.TextChanged += new System.EventHandler(this.BRYtxtbox_TextChanged);
+            // 
+            // BRXtxtbox
+            // 
+            this.BRXtxtbox.Location = new System.Drawing.Point(107, 369);
+            this.BRXtxtbox.Name = "BRXtxtbox";
+            this.BRXtxtbox.Size = new System.Drawing.Size(100, 20);
+            this.BRXtxtbox.TabIndex = 24;
+            this.BRXtxtbox.TextChanged += new System.EventHandler(this.BRXtxtbox_TextChanged);
             // 
             // ExportAllButton
             // 
@@ -585,28 +623,6 @@
             this.label1.TabIndex = 7;
             this.label1.Text = "Width:";
             // 
-            // panel
-            // 
-            this.panel.AutoScroll = true;
-            this.panel.BackColor = System.Drawing.Color.Black;
-            this.panel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel.Controls.Add(this.ImageBox);
-            this.panel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel.Location = new System.Drawing.Point(0, 0);
-            this.panel.Name = "panel";
-            this.panel.Size = new System.Drawing.Size(762, 469);
-            this.panel.TabIndex = 1;
-            // 
-            // ImageBox
-            // 
-            this.ImageBox.BackColor = System.Drawing.Color.Transparent;
-            this.ImageBox.Location = new System.Drawing.Point(492, 173);
-            this.ImageBox.Name = "ImageBox";
-            this.ImageBox.Size = new System.Drawing.Size(64, 64);
-            this.ImageBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.ImageBox.TabIndex = 0;
-            this.ImageBox.TabStop = false;
-            // 
             // PreviewListView
             // 
             this.PreviewListView.Activation = System.Windows.Forms.ItemActivation.OneClick;
@@ -675,39 +691,52 @@
             this.toolStripProgressBar.Step = 1;
             this.toolStripProgressBar.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
             // 
-            // BRXtxtbox
+            // BackgroundCheckBox
             // 
-            this.BRXtxtbox.Location = new System.Drawing.Point(107, 369);
-            this.BRXtxtbox.Name = "BRXtxtbox";
-            this.BRXtxtbox.Size = new System.Drawing.Size(100, 20);
-            this.BRXtxtbox.TabIndex = 24;
-            this.BRXtxtbox.TextChanged += new System.EventHandler(this.BRXtxtbox_TextChanged);
+            this.BackgroundCheckBox.AutoSize = true;
+            this.BackgroundCheckBox.Location = new System.Drawing.Point(124, 213);
+            this.BackgroundCheckBox.Name = "BackgroundCheckBox";
+            this.BackgroundCheckBox.Size = new System.Drawing.Size(77, 17);
+            this.BackgroundCheckBox.TabIndex = 29;
+            this.BackgroundCheckBox.Text = "Toggle BG";
+            this.BackgroundCheckBox.UseVisualStyleBackColor = true;
+            this.BackgroundCheckBox.Visible = false;
+            this.BackgroundCheckBox.CheckedChanged += new System.EventHandler(this.BackgroundCheckBox_CheckedChanged);
             // 
-            // BRYtxtbox
+            // BackgroundBox
             // 
-            this.BRYtxtbox.Location = new System.Drawing.Point(107, 395);
-            this.BRYtxtbox.Name = "BRYtxtbox";
-            this.BRYtxtbox.Size = new System.Drawing.Size(100, 20);
-            this.BRYtxtbox.TabIndex = 25;
-            this.BRYtxtbox.TextChanged += new System.EventHandler(this.BRYtxtbox_TextChanged);
+            this.BackgroundBox.BackColor = System.Drawing.Color.Transparent;
+            this.BackgroundBox.Image = ((System.Drawing.Image)(resources.GetObject("BackgroundBox.Image")));
+            this.BackgroundBox.Location = new System.Drawing.Point(492, 173);
+            this.BackgroundBox.Name = "BackgroundBox";
+            this.BackgroundBox.Size = new System.Drawing.Size(248, 284);
+            this.BackgroundBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.BackgroundBox.TabIndex = 1;
+            this.BackgroundBox.TabStop = false;
+            this.BackgroundBox.Visible = false;
             // 
-            // BRXLabel
+            // ImageBox
             // 
-            this.BRXLabel.AutoSize = true;
-            this.BRXLabel.Location = new System.Drawing.Point(11, 372);
-            this.BRXLabel.Name = "BRXLabel";
-            this.BRXLabel.Size = new System.Drawing.Size(90, 13);
-            this.BRXLabel.TabIndex = 26;
-            this.BRXLabel.Text = "RemoveBlank X :";
+            this.ImageBox.BackColor = System.Drawing.Color.Transparent;
+            this.ImageBox.Location = new System.Drawing.Point(492, 173);
+            this.ImageBox.Name = "ImageBox";
+            this.ImageBox.Size = new System.Drawing.Size(64, 64);
+            this.ImageBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.ImageBox.TabIndex = 0;
+            this.ImageBox.TabStop = false;
             // 
-            // BRYLabel
+            // panel
             // 
-            this.BRYLabel.AutoSize = true;
-            this.BRYLabel.Location = new System.Drawing.Point(11, 398);
-            this.BRYLabel.Name = "BRYLabel";
-            this.BRYLabel.Size = new System.Drawing.Size(90, 13);
-            this.BRYLabel.TabIndex = 28;
-            this.BRYLabel.Text = "RemoveBlank Y :";
+            this.panel.AutoScroll = true;
+            this.panel.BackColor = System.Drawing.Color.Black;
+            this.panel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel.Controls.Add(this.ImageBox);
+            this.panel.Controls.Add(this.BackgroundBox);
+            this.panel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel.Location = new System.Drawing.Point(0, 0);
+            this.panel.Name = "panel";
+            this.panel.Size = new System.Drawing.Size(762, 469);
+            this.panel.TabIndex = 1;
             // 
             // LMain
             // 
@@ -741,11 +770,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudJump)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ZoomTrackBar)).EndInit();
-            this.panel.ResumeLayout(false);
-            this.panel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ImageBox)).EndInit();
             this.statusStrip.ResumeLayout(false);
             this.statusStrip.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.BackgroundBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ImageBox)).EndInit();
+            this.panel.ResumeLayout(false);
+            this.panel.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -790,8 +820,6 @@
         private System.Windows.Forms.Button ExportButton;
         private System.Windows.Forms.ToolTip toolTip;
         private System.Windows.Forms.TrackBar ZoomTrackBar;
-        private System.Windows.Forms.PictureBox ImageBox;
-        private System.Windows.Forms.Panel panel;
         private System.Windows.Forms.StatusStrip statusStrip;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel;
         private System.Windows.Forms.ToolStripProgressBar toolStripProgressBar;
@@ -809,6 +837,10 @@
         private System.Windows.Forms.TextBox BRXtxtbox;
         private System.Windows.Forms.Label BRYLabel;
         private System.Windows.Forms.Label BRXLabel;
+        private System.Windows.Forms.CheckBox BackgroundCheckBox;
+        private System.Windows.Forms.Panel panel;
+        private System.Windows.Forms.PictureBox ImageBox;
+        private System.Windows.Forms.PictureBox BackgroundBox;
     }
 }
 

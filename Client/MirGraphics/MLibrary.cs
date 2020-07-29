@@ -74,7 +74,7 @@ namespace Client.MirGraphics
                                           ARWeaponsS = new MLibrary[19],
                                           ARHair = new MLibrary[9],
                                           ARHumEffect = new MLibrary[3],
-                                          Monsters = new MLibrary[500],
+                                          Monsters = new MLibrary[700],
                                           Gates = new MLibrary[2],
                                           Flags = new MLibrary[12],
                                           Mounts = new MLibrary[12],
@@ -191,7 +191,7 @@ namespace Client.MirGraphics
                 MapLibs[110 + i] = new MLibrary(Settings.DataPath + "Map\\ShandaMir2\\SmTiles" + (i + 1));
             }
             MapLibs[120] = new MLibrary(Settings.DataPath + "Map\\ShandaMir2\\Objects");
-            for (int i = 1; i < 31; i++)
+            for (int i = 1; i < 80; i++)
             {
                 MapLibs[120 + i] = new MLibrary(Settings.DataPath + "Map\\ShandaMir2\\Objects" + (i + 1));
             }

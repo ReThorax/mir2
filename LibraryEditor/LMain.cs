@@ -16,6 +16,7 @@ namespace LibraryEditor
         private MLibraryV2 _library;
         private MLibraryV2.MImage _selectedImage, _exportImage;
         private Image _originalImage;
+        private bool BGVisible = false;
 
         uint X = 0;
         uint Y = 0;
@@ -119,6 +120,7 @@ namespace LibraryEditor
         {
             _selectedImage = null;
             ImageBox.Image = null;
+            BackgroundBox.Visible = BGVisible;
             ZoomTrackBar.Value = 1;
 
             WidthLabel.Text = "<No Image>";
@@ -722,7 +724,7 @@ namespace LibraryEditor
         {
             if (panel.BackColor == Color.Black)
             {
-                panel.BackColor = Color.GhostWhite;
+                panel.BackColor = Color.Transparent;
             }
             else
             {
@@ -911,8 +913,8 @@ namespace LibraryEditor
                 {
                     MLibraryV2.MImage image = _library.GetMImage(PreviewListView.SelectedIndices[i]);
                     
-                    image.X = image.X -= 58;
-                    image.Y = image.Y -= 23;
+                    image.X = image.X += 41;
+                    image.Y = image.Y += 172;
 
                     OffSetXTextBox.Text = (image.X.ToString(""));
                     OffSetYTextBox.Text = (image.Y.ToString(""));
@@ -983,6 +985,7 @@ namespace LibraryEditor
         {
             BRXtxtbox.Text = "0";
             BRYtxtbox.Text = "0";
+            BGVisible = false;
         }
 
         private void BRXtxtbox_TextChanged(object sender, EventArgs e)
@@ -1011,6 +1014,20 @@ namespace LibraryEditor
             BRYtxtbox.BackColor = SystemColors.Window;
 
             Y = y;
+        }
+
+        private void BackgroundCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (BGVisible == false)
+            {
+                BGVisible = true;
+                BackgroundBox.Visible = true;
+            }
+            else
+            {
+                BGVisible = false;
+                BackgroundBox.Visible = false;
+            }
         }
 
         private void nudJump_KeyDown(object sender, KeyEventArgs e)

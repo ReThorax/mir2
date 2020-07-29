@@ -148,17 +148,6 @@ namespace Server
             this.label32 = new System.Windows.Forms.Label();
             this.MZXtextBox = new System.Windows.Forms.TextBox();
             this.MZListlistBox = new System.Windows.Forms.ListBox();
-            this.RemoveButton = new System.Windows.Forms.Button();
-            this.AddButton = new System.Windows.Forms.Button();
-            this.MapInfoListBox = new System.Windows.Forms.ListBox();
-            this.PasteMapButton = new System.Windows.Forms.Button();
-            this.CopyMapButton = new System.Windows.Forms.Button();
-            this.ImportMapInfoButton = new System.Windows.Forms.Button();
-            this.ExportMapInfoButton = new System.Windows.Forms.Button();
-            this.ImportMongenButton = new System.Windows.Forms.Button();
-            this.ExportMongenButton = new System.Windows.Forms.Button();
-            this.VisualizerButton = new System.Windows.Forms.Button();
-            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.panelEventRespawn = new System.Windows.Forms.Panel();
             this.txtSpreadX = new System.Windows.Forms.TextBox();
@@ -192,6 +181,17 @@ namespace Server
             this.btnRemoveEvent = new System.Windows.Forms.Button();
             this.btnAddEvent = new System.Windows.Forms.Button();
             this.lstEventInfos = new System.Windows.Forms.ListBox();
+            this.RemoveButton = new System.Windows.Forms.Button();
+            this.AddButton = new System.Windows.Forms.Button();
+            this.MapInfoListBox = new System.Windows.Forms.ListBox();
+            this.PasteMapButton = new System.Windows.Forms.Button();
+            this.CopyMapButton = new System.Windows.Forms.Button();
+            this.ImportMapInfoButton = new System.Windows.Forms.Button();
+            this.ExportMapInfoButton = new System.Windows.Forms.Button();
+            this.ImportMongenButton = new System.Windows.Forms.Button();
+            this.ExportMongenButton = new System.Windows.Forms.Button();
+            this.VisualizerButton = new System.Windows.Forms.Button();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.MapTabs.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage6.SuspendLayout();
@@ -1434,107 +1434,6 @@ namespace Server
             this.MZListlistBox.TabIndex = 13;
             this.MZListlistBox.SelectedIndexChanged += new System.EventHandler(this.MZListlistBox_SelectedIndexChanged);
             // 
-            // RemoveButton
-            // 
-            this.RemoveButton.Location = new System.Drawing.Point(126, 33);
-            this.RemoveButton.Name = "RemoveButton";
-            this.RemoveButton.Size = new System.Drawing.Size(75, 23);
-            this.RemoveButton.TabIndex = 6;
-            this.RemoveButton.Text = "Remove";
-            this.RemoveButton.UseVisualStyleBackColor = true;
-            this.RemoveButton.Click += new System.EventHandler(this.RemoveButton_Click);
-            // 
-            // AddButton
-            // 
-            this.AddButton.Location = new System.Drawing.Point(12, 33);
-            this.AddButton.Name = "AddButton";
-            this.AddButton.Size = new System.Drawing.Size(75, 23);
-            this.AddButton.TabIndex = 5;
-            this.AddButton.Text = "Add";
-            this.AddButton.UseVisualStyleBackColor = true;
-            this.AddButton.Click += new System.EventHandler(this.AddButton_Click);
-            // 
-            // MapInfoListBox
-            // 
-            this.MapInfoListBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.MapInfoListBox.FormattingEnabled = true;
-            this.MapInfoListBox.Location = new System.Drawing.Point(12, 62);
-            this.MapInfoListBox.Name = "MapInfoListBox";
-            this.MapInfoListBox.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.MapInfoListBox.Size = new System.Drawing.Size(189, 264);
-            this.MapInfoListBox.TabIndex = 7;
-            this.MapInfoListBox.SelectedIndexChanged += new System.EventHandler(this.MapInfoListBox_SelectedIndexChanged);
-            // 
-            // PasteMapButton
-            // 
-            this.PasteMapButton.Location = new System.Drawing.Point(288, 33);
-            this.PasteMapButton.Name = "PasteMapButton";
-            this.PasteMapButton.Size = new System.Drawing.Size(75, 23);
-            this.PasteMapButton.TabIndex = 24;
-            this.PasteMapButton.Text = "Paste";
-            this.PasteMapButton.UseVisualStyleBackColor = true;
-            this.PasteMapButton.Click += new System.EventHandler(this.PasteMapButton_Click);
-            // 
-            // CopyMapButton
-            // 
-            this.CopyMapButton.Location = new System.Drawing.Point(207, 33);
-            this.CopyMapButton.Name = "CopyMapButton";
-            this.CopyMapButton.Size = new System.Drawing.Size(75, 23);
-            this.CopyMapButton.TabIndex = 23;
-            this.CopyMapButton.Text = "Copy";
-            this.CopyMapButton.UseVisualStyleBackColor = true;
-            // 
-            // ImportMapInfoButton
-            // 
-            this.ImportMapInfoButton.Location = new System.Drawing.Point(564, 4);
-            this.ImportMapInfoButton.Name = "ImportMapInfoButton";
-            this.ImportMapInfoButton.Size = new System.Drawing.Size(87, 23);
-            this.ImportMapInfoButton.TabIndex = 25;
-            this.ImportMapInfoButton.Text = "Import MapInfo";
-            this.ImportMapInfoButton.UseVisualStyleBackColor = true;
-            this.ImportMapInfoButton.Click += new System.EventHandler(this.ImportMapInfoButton_Click);
-            // 
-            // ExportMapInfoButton
-            // 
-            this.ExportMapInfoButton.Location = new System.Drawing.Point(564, 33);
-            this.ExportMapInfoButton.Name = "ExportMapInfoButton";
-            this.ExportMapInfoButton.Size = new System.Drawing.Size(87, 23);
-            this.ExportMapInfoButton.TabIndex = 26;
-            this.ExportMapInfoButton.Text = "Export MapInfo";
-            this.ExportMapInfoButton.UseVisualStyleBackColor = true;
-            this.ExportMapInfoButton.Click += new System.EventHandler(this.ExportMapInfoButton_Click);
-            // 
-            // ImportMongenButton
-            // 
-            this.ImportMongenButton.Location = new System.Drawing.Point(657, 3);
-            this.ImportMongenButton.Name = "ImportMongenButton";
-            this.ImportMongenButton.Size = new System.Drawing.Size(86, 23);
-            this.ImportMongenButton.TabIndex = 27;
-            this.ImportMongenButton.Text = "Import Spawns";
-            this.ImportMongenButton.UseVisualStyleBackColor = true;
-            this.ImportMongenButton.Click += new System.EventHandler(this.ImportMonGenButton_Click);
-            // 
-            // ExportMongenButton
-            // 
-            this.ExportMongenButton.Location = new System.Drawing.Point(657, 33);
-            this.ExportMongenButton.Name = "ExportMongenButton";
-            this.ExportMongenButton.Size = new System.Drawing.Size(86, 23);
-            this.ExportMongenButton.TabIndex = 28;
-            this.ExportMongenButton.Text = "Export Spawns";
-            this.ExportMongenButton.UseVisualStyleBackColor = true;
-            this.ExportMongenButton.Click += new System.EventHandler(this.ExportMonGenButton_Click);
-            // 
-            // VisualizerButton
-            // 
-            this.VisualizerButton.Location = new System.Drawing.Point(483, 4);
-            this.VisualizerButton.Name = "VisualizerButton";
-            this.VisualizerButton.Size = new System.Drawing.Size(75, 23);
-            this.VisualizerButton.TabIndex = 31;
-            this.VisualizerButton.Text = "Visualizer";
-            this.VisualizerButton.UseVisualStyleBackColor = true;
-            this.VisualizerButton.Click += new System.EventHandler(this.VisualizerButton_Click);
-            // 
             // tabPage5
             // 
             this.tabPage5.Controls.Add(this.panelEventRespawn);
@@ -1555,8 +1454,8 @@ namespace Server
             // 
             // panelEventRespawn
             // 
-            this.panelEventRespawn.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.panelEventRespawn.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panelEventRespawn.Controls.Add(this.txtSpreadX);
             this.panelEventRespawn.Controls.Add(this.label42);
@@ -1698,7 +1597,7 @@ namespace Server
             // 
             // lstEventRespawns
             // 
-            this.lstEventRespawns.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            this.lstEventRespawns.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.lstEventRespawns.FormattingEnabled = true;
             this.lstEventRespawns.Location = new System.Drawing.Point(375, 35);
@@ -1710,8 +1609,8 @@ namespace Server
             // 
             // panelEventInfo
             // 
-            this.panelEventInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.panelEventInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panelEventInfo.Controls.Add(this.label26);
             this.panelEventInfo.Controls.Add(this.txtObjectiveMsg);
@@ -1873,7 +1772,7 @@ namespace Server
             // 
             // lstEventInfos
             // 
-            this.lstEventInfos.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            this.lstEventInfos.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.lstEventInfos.FormattingEnabled = true;
             this.lstEventInfos.Location = new System.Drawing.Point(6, 41);
@@ -1902,6 +1801,89 @@ namespace Server
             this.AddButton.Text = "Add";
             this.AddButton.UseVisualStyleBackColor = true;
             this.AddButton.Click += new System.EventHandler(this.AddButton_Click);
+            // 
+            // MapInfoListBox
+            // 
+            this.MapInfoListBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.MapInfoListBox.FormattingEnabled = true;
+            this.MapInfoListBox.Location = new System.Drawing.Point(12, 62);
+            this.MapInfoListBox.Name = "MapInfoListBox";
+            this.MapInfoListBox.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
+            this.MapInfoListBox.Size = new System.Drawing.Size(189, 264);
+            this.MapInfoListBox.TabIndex = 7;
+            this.MapInfoListBox.SelectedIndexChanged += new System.EventHandler(this.MapInfoListBox_SelectedIndexChanged);
+            // 
+            // PasteMapButton
+            // 
+            this.PasteMapButton.Location = new System.Drawing.Point(288, 33);
+            this.PasteMapButton.Name = "PasteMapButton";
+            this.PasteMapButton.Size = new System.Drawing.Size(75, 23);
+            this.PasteMapButton.TabIndex = 24;
+            this.PasteMapButton.Text = "Paste";
+            this.PasteMapButton.UseVisualStyleBackColor = true;
+            this.PasteMapButton.Visible = false;
+            this.PasteMapButton.Click += new System.EventHandler(this.PasteMapButton_Click);
+            // 
+            // CopyMapButton
+            // 
+            this.CopyMapButton.Location = new System.Drawing.Point(207, 33);
+            this.CopyMapButton.Name = "CopyMapButton";
+            this.CopyMapButton.Size = new System.Drawing.Size(75, 23);
+            this.CopyMapButton.TabIndex = 23;
+            this.CopyMapButton.Text = "Reset Index";
+            this.CopyMapButton.UseVisualStyleBackColor = true;
+            this.CopyMapButton.Click += new System.EventHandler(this.CopyMapButton_Click);
+            // 
+            // ImportMapInfoButton
+            // 
+            this.ImportMapInfoButton.Location = new System.Drawing.Point(564, 4);
+            this.ImportMapInfoButton.Name = "ImportMapInfoButton";
+            this.ImportMapInfoButton.Size = new System.Drawing.Size(87, 23);
+            this.ImportMapInfoButton.TabIndex = 25;
+            this.ImportMapInfoButton.Text = "Import MapInfo";
+            this.ImportMapInfoButton.UseVisualStyleBackColor = true;
+            this.ImportMapInfoButton.Click += new System.EventHandler(this.ImportMapInfoButton_Click);
+            // 
+            // ExportMapInfoButton
+            // 
+            this.ExportMapInfoButton.Location = new System.Drawing.Point(564, 33);
+            this.ExportMapInfoButton.Name = "ExportMapInfoButton";
+            this.ExportMapInfoButton.Size = new System.Drawing.Size(87, 23);
+            this.ExportMapInfoButton.TabIndex = 26;
+            this.ExportMapInfoButton.Text = "Export MapInfo";
+            this.ExportMapInfoButton.UseVisualStyleBackColor = true;
+            this.ExportMapInfoButton.Click += new System.EventHandler(this.ExportMapInfoButton_Click);
+            // 
+            // ImportMongenButton
+            // 
+            this.ImportMongenButton.Location = new System.Drawing.Point(657, 3);
+            this.ImportMongenButton.Name = "ImportMongenButton";
+            this.ImportMongenButton.Size = new System.Drawing.Size(86, 23);
+            this.ImportMongenButton.TabIndex = 27;
+            this.ImportMongenButton.Text = "Import Spawns";
+            this.ImportMongenButton.UseVisualStyleBackColor = true;
+            this.ImportMongenButton.Click += new System.EventHandler(this.ImportMonGenButton_Click);
+            // 
+            // ExportMongenButton
+            // 
+            this.ExportMongenButton.Location = new System.Drawing.Point(657, 33);
+            this.ExportMongenButton.Name = "ExportMongenButton";
+            this.ExportMongenButton.Size = new System.Drawing.Size(86, 23);
+            this.ExportMongenButton.TabIndex = 28;
+            this.ExportMongenButton.Text = "Export Spawns";
+            this.ExportMongenButton.UseVisualStyleBackColor = true;
+            this.ExportMongenButton.Click += new System.EventHandler(this.ExportMonGenButton_Click);
+            // 
+            // VisualizerButton
+            // 
+            this.VisualizerButton.Location = new System.Drawing.Point(483, 4);
+            this.VisualizerButton.Name = "VisualizerButton";
+            this.VisualizerButton.Size = new System.Drawing.Size(75, 23);
+            this.VisualizerButton.TabIndex = 31;
+            this.VisualizerButton.Text = "Visualizer";
+            this.VisualizerButton.UseVisualStyleBackColor = true;
+            this.VisualizerButton.Click += new System.EventHandler(this.VisualizerButton_Click);
             // 
             // MapInfoForm
             // 

@@ -2125,5 +2125,19 @@ namespace Server
         {
 
         }
+
+        private void CopyMapButton_Click(object sender, EventArgs e)
+        {
+            ResetMapIndex();
+            UpdateInterface();
+        }
+
+        private void ResetMapIndex()
+        {
+            if (Envir.MapInfoList != null)
+            {
+                Envir.MapIndex = Envir.MapInfoList.Count;
+            }
+        }
     }
 }

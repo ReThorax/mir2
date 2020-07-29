@@ -1469,9 +1469,12 @@ namespace Server.MirObjects
                         break;
 
                     case "MAP":
+                        if (!IsGM) return;
+
                         var mapName = CurrentMap.Info.FileName;
                         var mapTitle = CurrentMap.Info.Title;
-                        ReceiveChat((string.Format("You are currently in {0}. Map ID: {1}", mapTitle, mapName)), ChatType.System);
+                        var mapInstance = CurrentMap.Info.Instance;
+                        ReceiveChat((string.Format("You are currently in {0}. Map ID: {1}. Instance: {2}.", mapTitle, mapName, mapInstance)), ChatType.System);
                         break;
 
                     case "SAVEPLAYER":

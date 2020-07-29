@@ -340,21 +340,21 @@ namespace Server.MirForms
 
                 var Line = System.Text.RegularExpressions.Regex.Replace(NPCList[i], @"\s+", " ").Split(' ');
 
-                if (Line.Length < 6) continue;
+                if (Line.Length == 5) continue;
 
                 try
                 {
-                    NPCInfo NPC = new NPCInfo
+                    NPCInfo NPCInfo = new NPCInfo
                     {
                         FileName = Line[0],
-                        Map = Line[1],
+                        MapIndex = Convert.ToInt32(Line[1]),
                         X = Convert.ToInt16(Line[2]),
                         Y = Convert.ToInt16(Line[3]),
                         Title = Line[4],
-                        Image = (Line.Length >= 8) ? Convert.ToInt16(Line[6]) : Convert.ToInt16(Line[5])
+                        Image = Convert.ToInt16(Line[5])
                     };
 
-                    NPCInfoList.Add(NPC);
+                    NPCInfoList.Add(NPCInfo);
                 }
                 catch (Exception)
                 {
@@ -373,10 +373,10 @@ namespace Server.MirForms
     {
         public string
             FileName = string.Empty,
-            Map = "0",
             Title = string.Empty;
 
         public int
+            MapIndex = 1,
             Index = 0,
             X = 0,
             Y = 0,

@@ -140,7 +140,7 @@ namespace Server.MirDatabase
             int x, y;
 
             info.FileName = data[0];
-            info.MapIndex = EditEnvir.MapInfoList.Where(d => d.FileName == data[1]).FirstOrDefault().Index;
+            info.MapIndex = int.Parse(data[1]);
 
             if (!int.TryParse(data[2], out x)) return;
             if (!int.TryParse(data[3], out y)) return;
